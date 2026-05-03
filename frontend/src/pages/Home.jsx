@@ -71,7 +71,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+      
       <section className="mx-auto max-w-6xl px-4 py-14 md:py-20">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
@@ -84,7 +84,6 @@ export default function Home() {
             View all events →
           </Link>
         </div>
-
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {preview.length === 0 ? (
             <p className="text-sm text-stone-600 md:col-span-3">

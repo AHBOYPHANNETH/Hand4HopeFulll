@@ -3,14 +3,15 @@ import { Link, NavLink } from 'react-router-dom'
 import { BACKEND_ORIGIN } from '../../config'
 import { useAuth } from '../../context/AuthContext'
 import Button from '../ui/Button'
+import logo from "../../assets/picture/hand4hope_logo.png";
 
 const links = [
   { to: '/', label: 'Home' },
-  { to: '/about', label: 'About' },
   { to: '/events', label: 'Events' },
   { to: '/impact', label: 'Impact' },
   { to: '/donate', label: 'Donate' },
   { to: '/contact', label: 'Contact' },
+  { to: '/about', label: 'About' },
 ]
 
 function linkClass({ isActive }) {
@@ -29,9 +30,11 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 border-b border-stone-100 bg-white/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:py-4">
         <Link to="/" className="flex items-center gap-2 font-semibold text-teal-800">
-          <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-teal-600 text-lg text-white shadow-sm">
-            H
-          </span>
+        <img
+          src={logo}
+          alt="Hand4Hope Logo"
+          className="h-9 w-9 object-contain"
+        />
           <span className="hidden text-lg sm:inline">Hand4Hope</span>
         </Link>
 
@@ -42,7 +45,6 @@ export default function Navbar() {
             </NavLink>
           ))}
         </nav>
-
         <div className="hidden items-center gap-2 lg:flex">
           <Button type="button" variant="outline" className="text-xs" onClick={googleRedirect}>
             Continue with Google

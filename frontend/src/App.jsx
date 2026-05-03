@@ -18,12 +18,12 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
         <Route path="events" element={<Events />} />
         <Route path="events/:id" element={<EventDetail />} />
         <Route path="impact" element={<Impact />} />
         <Route path="donate" element={<Donate />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="about" element={<About />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="auth/google/callback" element={<GoogleCallback />} />
