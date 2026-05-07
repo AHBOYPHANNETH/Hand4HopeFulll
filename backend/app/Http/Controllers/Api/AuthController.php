@@ -30,7 +30,18 @@ class AuthController extends Controller
 
         return response()->json([
             'token' => $token,
-            'user' => $user->only(['id', 'name', 'email', 'role']),
+            'user' => $user->only([
+                'id',
+                'name',
+                'email',
+                'role',
+                'provider',
+                'avatar_url',
+                'phone',
+                'address',
+                'is_profile_public',
+                'email_notifications',
+            ]),
         ], 201);
     }
 
@@ -53,7 +64,18 @@ class AuthController extends Controller
 
         return response()->json([
             'token' => $token,
-            'user' => $user->only(['id', 'name', 'email', 'role']),
+            'user' => $user->only([
+                'id',
+                'name',
+                'email',
+                'role',
+                'provider',
+                'avatar_url',
+                'phone',
+                'address',
+                'is_profile_public',
+                'email_notifications',
+            ]),
         ]);
     }
 
@@ -66,6 +88,17 @@ class AuthController extends Controller
 
     public function user(Request $request)
     {
-        return response()->json($request->user()->only(['id', 'name', 'email', 'role', 'provider']));
+        return response()->json($request->user()->only([
+            'id',
+            'name',
+            'email',
+            'role',
+            'provider',
+            'avatar_url',
+            'phone',
+            'address',
+            'is_profile_public',
+            'email_notifications',
+        ]));
     }
 }

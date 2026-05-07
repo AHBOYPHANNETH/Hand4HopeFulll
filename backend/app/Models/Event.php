@@ -15,6 +15,7 @@ class Event extends Model
         'starts_at',
         'location',
         'image_path',
+        'price',
     ];
 
     protected function casts(): array
@@ -27,7 +28,7 @@ class Event extends Model
     public function volunteers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'event_volunteers')
-            ->withPivot('notes')
+            ->withPivot('notes', 'status')
             ->withTimestamps();
     }
 

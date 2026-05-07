@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Mail\VolunteerRegistered;
 use App\Models\Event;
+use App\Services\NotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class EventVolunteerController extends Controller
 {
-    public function store(Request $request, Event $event)
+    public function store(Request $request, Event $event, NotificationService $notificationService)
     {
         $data = $request->validate([
             'notes' => ['nullable', 'string', 'max:1000'],
@@ -26,7 +27,17 @@ class EventVolunteerController extends Controller
             return response()->json(['message' => 'You are already registered for this event.'], 422);
         }
 
-        $event->volunteers()->attach($user->id, ['notes' => $data['notes'] ?? null]);
+        $event->volunteers()->attach($user->id, [
+            'notes' => $data['notes'] ?? null,
+            'status' => 'pending',
+        ]);
+
+        $notificationService->createForUser(
+            $user->id,
+            'Volunteer request received',
+            "Your volunteer request for {$event->title} has been received and is pending review.",
+            'volunteer_request_received'
+        );
 
         Mail::to($user->email)->send(new VolunteerRegistered($event, $user));
 

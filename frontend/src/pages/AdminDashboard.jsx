@@ -3,6 +3,8 @@ import Button from '../components/ui/Button'
 import Alert from '../components/ui/Alert'
 import Spinner from '../components/ui/Spinner'
 import {
+  adminFetchVolunteerRequests,
+  adminUpdateVolunteerRequestStatus,
   adminCreateEvent,
   adminDeleteEvent,
   adminFetchEvents,
@@ -16,6 +18,7 @@ const tabs = [
   { id: 'events', label: 'Events' },
   { id: 'donations', label: 'Donations' },
   { id: 'contacts', label: 'Contacts' },
+  { id: 'volunteers', label: 'Volunteer requests' },
   { id: 'content', label: 'Website content' },
 ]
 
@@ -26,6 +29,7 @@ export default function AdminDashboard() {
   const [donations, setDonations] = useState([])
   const [contacts, setContacts] = useState([])
   const [contents, setContents] = useState([])
+  const [volunteerRequests, setVolunteerRequests] = useState([])
   const [loading, setLoading] = useState(true)
   const [notice, setNotice] = useState(null)
 
@@ -52,6 +56,9 @@ export default function AdminDashboard() {
       }
       if (active === 'contacts') {
         setContacts(await fetchContacts())
+      }
+      if (active === 'volunteers') {
+        setVolunteerRequests(await adminFetchVolunteerRequests())
       }
       if (active === 'content') {
         setContents(await adminFetchContents())
@@ -91,6 +98,17 @@ export default function AdminDashboard() {
 
   function updateDraft(key, value) {
     setContents((rows) => rows.map((r) => (r.key === key ? { ...r, value } : r)))
+  }
+
+  async function updateVolunteerStatus(event_id, user_id, status) {
+    setNotice(null)
+    try {
+      const res = await adminUpdateVolunteerRequestStatus({ event_id, user_id, status })
+      setVolunteerRequests(await adminFetchVolunteerRequests())
+      setNotice({ type: 'success', text: res.message || 'Volunteer request updated.' })
+    } catch (e) {
+      setNotice({ type: 'error', text: e.response?.data?.message || 'Failed to update volunteer request.' })
+    }
   }
 
   async function submitEvent(e) {
@@ -366,6 +384,53 @@ export default function AdminDashboard() {
               </label>
             ))}
           </div>
+        </section>
+      ) : null}
+
+      {tab === 'volunteers' ? (
+        <section className="mt-8 overflow-hidden rounded-3xl border border-stone-100 bg-white shadow-sm">
+          <table className="min-w-full divide-y divide-stone-100 text-sm">
+            <thead className="bg-stone-50 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">
+              <tr>
+                <th className="px-4 py-3">Volunteer</th>
+                <th className="px-4 py-3">Event</th>
+                <th className="px-4 py-3">Requested</th>
+                <th className="px-4 py-3">Status</th>
+                <th className="px-4 py-3 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-stone-100">
+              {volunteerRequests.map((v) => (
+                <tr key={`${v.event_id}-${v.user_id}`}>
+                  <td className="px-4 py-3">
+                    <p className="font-semibold text-stone-900">{v.user_name}</p>
+                    <p className="text-xs text-stone-500">{v.user_email}</p>
+                  </td>
+                  <td className="px-4 py-3 text-stone-700">{v.event_title}</td>
+                  <td className="px-4 py-3 text-stone-600">{new Date(v.requested_at).toLocaleString()}</td>
+                  <td className="px-4 py-3">
+                    <span className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                      v.status === 'approved'
+                        ? 'bg-emerald-100 text-emerald-700'
+                        : v.status === 'rejected'
+                          ? 'bg-rose-100 text-rose-700'
+                          : 'bg-amber-100 text-amber-700'
+                    }`}>
+                      {v.status}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3 text-right space-x-2">
+                    <Button type="button" className="text-xs" onClick={() => updateVolunteerStatus(v.event_id, v.user_id, 'approved')}>
+                      Accept
+                    </Button>
+                    <Button type="button" variant="outline" className="text-xs" onClick={() => updateVolunteerStatus(v.event_id, v.user_id, 'rejected')}>
+                      Reject
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </section>
       ) : null}
 

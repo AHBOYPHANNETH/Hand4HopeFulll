@@ -27,6 +27,7 @@ class GoogleAuthController extends Controller
                     'provider' => 'google',
                     'provider_id' => $googleUser->getId(),
                     'name' => $user->name ?: $googleUser->getName(),
+                    'avatar_url' => $googleUser->getAvatar() ?: $user->avatar_url,
                 ]);
             }
         } else {
@@ -37,12 +38,24 @@ class GoogleAuthController extends Controller
                 'provider' => 'google',
                 'provider_id' => $googleUser->getId(),
                 'role' => 'user',
+                'avatar_url' => $googleUser->getAvatar(),
             ]);
         }
 
         $token = $user->createToken('auth')->plainTextToken;
         $frontend = rtrim(config('app.frontend_url'), '/');
-        $payload = base64_encode(json_encode($user->only(['id', 'name', 'email', 'role'])));
+        $payload = base64_encode(json_encode($user->only([
+            'id',
+            'name',
+            'email',
+            'role',
+            'provider',
+            'avatar_url',
+            'phone',
+            'address',
+            'is_profile_public',
+            'email_notifications',
+        ])));
 
         $url = $frontend.'/auth/google/callback?token='.rawurlencode($token).'&user='.rawurlencode($payload);
 

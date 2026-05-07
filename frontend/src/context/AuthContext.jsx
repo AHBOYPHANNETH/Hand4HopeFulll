@@ -7,6 +7,7 @@ import {
   useState,
 } from 'react'
 import client, { setAuthToken } from '../api/client'
+import { fetchNotifications } from '../services/notificationService'
 
 const AuthContext = createContext(null)
 
@@ -20,6 +21,7 @@ export function AuthProvider({ children }) {
   })
   const [token, setToken] = useState(() => localStorage.getItem('hand4hope_token'))
   const [bootstrapping, setBootstrapping] = useState(!!token)
+  const [unreadNotifications, setUnreadNotifications] = useState(0)
 
   useEffect(() => {
     setAuthToken(token || null)
@@ -45,6 +47,7 @@ export function AuthProvider({ children }) {
           setToken(null)
           localStorage.removeItem('hand4hope_token')
           localStorage.removeItem('hand4hope_user')
+          setUnreadNotifications(0)
         }
       })
       .finally(() => {
@@ -54,6 +57,29 @@ export function AuthProvider({ children }) {
       cancelled = true
     }
   }, [token])
+
+  useEffect(() => {
+    if (!token || !user) return undefined
+    let cancelled = false
+
+    async function pullNotifications() {
+      try {
+        const data = await fetchNotifications()
+        if (!cancelled) {
+          setUnreadNotifications(data.unread_count || 0)
+        }
+      } catch {
+        /* ignore polling errors */
+      }
+    }
+
+    pullNotifications()
+    const timer = window.setInterval(pullNotifications, 10000)
+    return () => {
+      cancelled = true
+      window.clearInterval(timer)
+    }
+  }, [token, user])
 
   const loginWithToken = (newToken, newUser) => {
     localStorage.setItem('hand4hope_token', newToken)
@@ -75,6 +101,7 @@ export function AuthProvider({ children }) {
     setAuthToken(null)
     setToken(null)
     setUser(null)
+    setUnreadNotifications(0)
     setBootstrapping(false)
   }
 
@@ -85,10 +112,20 @@ export function AuthProvider({ children }) {
       bootstrapping,
       isAuthenticated: !!user && !!token,
       isAdmin: user?.role === 'admin',
+      unreadNotifications,
+      refreshNotificationCount: async () => {
+        if (!token) return
+        try {
+          const data = await fetchNotifications()
+          setUnreadNotifications(data.unread_count || 0)
+        } catch {
+          /* ignore */
+        }
+      },
       loginWithToken,
       logout,
     }),
-    [user, token, bootstrapping]
+    [user, token, bootstrapping, unreadNotifications]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

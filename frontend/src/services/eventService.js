@@ -34,3 +34,18 @@ export async function adminDeleteEvent(id) {
   const { data } = await client.delete(`/admin/events/${id}`)
   return data
 }
+
+export async function fetchMyVolunteerRequests() {
+  const { data } = await client.get('/my-volunteer-requests')
+  return data
+}
+
+export async function adminFetchVolunteerRequests() {
+  const { data } = await client.get('/admin/volunteer-requests')
+  return data
+}
+
+export async function adminUpdateVolunteerRequestStatus(payload) {
+  const { data } = await client.post('/admin/volunteer-requests/update-status', payload)
+  return data
+}

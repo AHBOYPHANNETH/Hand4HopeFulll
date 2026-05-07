@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import AdminRoute from './routes/AdminRoute'
+import ProtectedRoute from './routes/ProtectedRoute'
 import About from './pages/About'
 import AdminDashboard from './pages/AdminDashboard'
 import Contact from './pages/Contact'
@@ -11,6 +12,9 @@ import GoogleCallback from './pages/GoogleCallback'
 import Home from './pages/Home'
 import Impact from './pages/Impact'
 import Login from './pages/Login'
+import MyVolunteerRequests from './pages/MyVolunteerRequests'
+import Notifications from './pages/Notifications'
+import Profile from './pages/Profile'
 import Register from './pages/Register'
 
 export default function App() {
@@ -27,6 +31,30 @@ export default function App() {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="auth/google/callback" element={<GoogleCallback />} />
+        <Route
+          path="profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="notifications"
+          element={
+            <ProtectedRoute>
+              <Notifications />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="my-volunteer-requests"
+          element={
+            <ProtectedRoute>
+              <MyVolunteerRequests />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="admin"
           element={
