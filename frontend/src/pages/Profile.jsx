@@ -33,72 +33,98 @@ export default function Profile() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12">
-      <h1 className="text-3xl font-semibold text-stone-900">My Account</h1>
-      <p className="mt-2 text-sm text-stone-600">Manage your profile details and privacy settings.</p>
-      {notice ? <div className="mt-4"><Alert type={notice.type}>{notice.text}</Alert></div> : null}
+      <h1 className="text-3xl font-semibold text-slate-900 dark:text-slate-100">My Account</h1>
+      <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">Manage your profile details and privacy settings.</p>
 
-      <form onSubmit={submit} className="mt-6 space-y-4 rounded-3xl border border-stone-100 bg-white p-6 shadow-sm">
-        <div className="flex items-center gap-3">
+      {notice && (
+        <div className="mt-4">
+          <Alert type={notice.type}>{notice.text}</Alert>
+        </div>
+      )}
+
+      <form
+        onSubmit={submit}
+        className="mt-6 space-y-5 rounded-3xl border border-slate-100 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800 sm:p-8"
+      >
+        {/* Avatar + name */}
+        <div className="flex items-center gap-4">
           {user?.avatar_url ? (
-            <img src={user.avatar_url} alt={user.name || 'User'} className="h-14 w-14 rounded-full object-cover" />
+            <img
+              src={user.avatar_url}
+              alt={user.name || 'User'}
+              className="h-14 w-14 rounded-full object-cover ring-2 ring-primary-100 dark:ring-primary-800"
+            />
           ) : (
-            <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-teal-100 text-xl font-semibold text-teal-700">
+            <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary-100 text-xl font-semibold text-primary-700 dark:bg-primary-900/40 dark:text-primary-300">
               {(user?.name || 'U').slice(0, 1).toUpperCase()}
             </div>
           )}
           <div>
-            <p className="font-semibold text-stone-800">{user?.name}</p>
-            <p className="text-xs text-stone-500">{user?.email}</p>
+            <p className="font-semibold text-slate-800 dark:text-slate-100">{user?.name}</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">{user?.email}</p>
           </div>
         </div>
 
         <Field label="Name">
-          <input className="input" value={form.name} onChange={(e) => setForm((v) => ({ ...v, name: e.target.value }))} required />
+          <input
+            className="input-field"
+            value={form.name}
+            onChange={(e) => setForm((v) => ({ ...v, name: e.target.value }))}
+            required
+          />
         </Field>
+
         <Field label="Email">
-          <input className="input bg-stone-50" value={user?.email || ''} disabled />
+          <input
+            className="input-field cursor-not-allowed opacity-60"
+            value={user?.email || ''}
+            disabled
+          />
         </Field>
+
         <Field label="Phone (optional)">
-          <input className="input" value={form.phone} onChange={(e) => setForm((v) => ({ ...v, phone: e.target.value }))} />
+          <input
+            className="input-field"
+            value={form.phone}
+            onChange={(e) => setForm((v) => ({ ...v, phone: e.target.value }))}
+            placeholder="+855 xx xxx xxx"
+          />
         </Field>
+
         <Field label="Address (optional)">
-          <input className="input" value={form.address} onChange={(e) => setForm((v) => ({ ...v, address: e.target.value }))} />
+          <input
+            className="input-field"
+            value={form.address}
+            onChange={(e) => setForm((v) => ({ ...v, address: e.target.value }))}
+            placeholder="City, Country"
+          />
         </Field>
 
-        <label className="flex items-center gap-2 text-sm text-stone-700">
-          <input
-            type="checkbox"
-            checked={form.is_profile_public}
-            onChange={(e) => setForm((v) => ({ ...v, is_profile_public: e.target.checked }))}
-          />
-          Show my profile publicly
-        </label>
-        <label className="flex items-center gap-2 text-sm text-stone-700">
-          <input
-            type="checkbox"
-            checked={form.email_notifications}
-            onChange={(e) => setForm((v) => ({ ...v, email_notifications: e.target.checked }))}
-          />
-          Receive email notifications
-        </label>
+        <div className="space-y-3 pt-2">
+          <label className="flex cursor-pointer items-center gap-3 text-sm text-slate-700 dark:text-slate-300">
+            <input
+              type="checkbox"
+              checked={form.is_profile_public}
+              onChange={(e) => setForm((v) => ({ ...v, is_profile_public: e.target.checked }))}
+              className="h-4 w-4 rounded border-slate-300 accent-primary-600"
+            />
+            Show my profile publicly
+          </label>
+          <label className="flex cursor-pointer items-center gap-3 text-sm text-slate-700 dark:text-slate-300">
+            <input
+              type="checkbox"
+              checked={form.email_notifications}
+              onChange={(e) => setForm((v) => ({ ...v, email_notifications: e.target.checked }))}
+              className="h-4 w-4 rounded border-slate-300 accent-primary-600"
+            />
+            Receive email notifications
+          </label>
+        </div>
 
-        <Button type="submit" disabled={saving}>{saving ? 'Saving…' : 'Save settings'}</Button>
+        <Button type="submit" disabled={saving} isLoading={saving}>
+          {saving ? 'Saving…' : 'Save settings'}
+        </Button>
       </form>
-
-      <style>{`
-        .input {
-          width: 100%;
-          border-radius: 0.85rem;
-          border: 1px solid #e7e5e4;
-          padding: 0.65rem 0.85rem;
-          font-size: 0.92rem;
-          outline: none;
-        }
-        .input:focus {
-          border-color: #0f766e;
-          box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.15);
-        }
-      `}</style>
     </div>
   )
 }
@@ -106,7 +132,7 @@ export default function Profile() {
 function Field({ label, children }) {
   return (
     <label className="block space-y-2">
-      <span className="text-sm font-semibold text-stone-700">{label}</span>
+      <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">{label}</span>
       {children}
     </label>
   )

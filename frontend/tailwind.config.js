@@ -5,6 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      sans: ['Inter', 'system-ui', 'sans-serif'],
+      display: ['Poppins', 'system-ui', 'sans-serif'],
+      mono: ['Fira Code', 'monospace'],
+    },
     extend: {
       colors: {
         primary: {
@@ -43,11 +48,6 @@ export default {
           800: '#9a3412',
           900: '#7c2d12',
         },
-      },
-      fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Poppins', 'system-ui', 'sans-serif'],
-        mono: ['Fira Code', 'monospace'],
       },
       spacing: {
         '128': '32rem',
