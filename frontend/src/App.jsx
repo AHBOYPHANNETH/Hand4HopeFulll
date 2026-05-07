@@ -1,9 +1,9 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Layout from './components/layout/Layout'
+import AdminLayout from './components/admin/AdminLayout'
 import AdminRoute from './routes/AdminRoute'
 import ProtectedRoute from './routes/ProtectedRoute'
 import About from './pages/About'
-import AdminDashboard from './pages/AdminDashboard'
 import Contact from './pages/Contact'
 import Donate from './pages/Donate'
 import EventDetail from './pages/EventDetail'
@@ -16,10 +16,37 @@ import MyVolunteerRequests from './pages/MyVolunteerRequests'
 import Notifications from './pages/Notifications'
 import Profile from './pages/Profile'
 import Register from './pages/Register'
+import Overview from './pages/admin/Overview'
+import EventsAdmin from './pages/admin/EventsAdmin'
+import DonationsAdmin from './pages/admin/DonationsAdmin'
+import ContactsAdmin from './pages/admin/ContactsAdmin'
+import VolunteersAdmin from './pages/admin/VolunteersAdmin'
+import ContentAdmin from './pages/admin/ContentAdmin'
 
 export default function App() {
   return (
     <Routes>
+      {/* Admin section — dedicated layout (sidebar + topbar), separate from public site */}
+      <Route
+        path="admin"
+        element={
+          <AdminRoute>
+            <AdminLayout />
+          </AdminRoute>
+        }
+      >
+        <Route index element={<Navigate to="overview" replace />} />
+        <Route path="dashboard" element={<Navigate to="../overview" replace />} />
+        <Route path="overview" element={<Overview />} />
+        <Route path="events" element={<EventsAdmin />} />
+        <Route path="donations" element={<DonationsAdmin />} />
+        <Route path="contacts" element={<ContactsAdmin />} />
+        <Route path="volunteers" element={<VolunteersAdmin />} />
+        <Route path="content" element={<ContentAdmin />} />
+        <Route path="*" element={<Navigate to="overview" replace />} />
+      </Route>
+
+      {/* Public site — wrapped in shared Layout (Navbar + Footer) */}
       <Route element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="events" element={<Events />} />
@@ -53,14 +80,6 @@ export default function App() {
             <ProtectedRoute>
               <MyVolunteerRequests />
             </ProtectedRoute>
-          }
-        />
-        <Route
-          path="admin"
-          element={
-            <AdminRoute>
-              <AdminDashboard />
-            </AdminRoute>
           }
         />
         <Route path="*" element={<Navigate to="/" replace />} />

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin } from 'lucide-react'
+import logo from '../../assets/picture/hand4hope_logo.png'
 
 const SocialFacebook = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
@@ -58,7 +59,8 @@ export default function Footer() {
               to="/"
               className="inline-flex items-center gap-2 font-display font-bold text-xl text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
             >
-              🤝 Hand4Hope
+              <img src={logo} alt="Hand4Hope" className="h-7 w-7 object-contain" />
+              Hand4Hope
             </Link>
             <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
               Building inclusive communities where every child thrives. Supporting children with intellectual disabilities through daycare, education, and advocacy.

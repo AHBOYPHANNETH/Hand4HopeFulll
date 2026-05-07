@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Calendar, MapPin, ArrowRight } from 'lucide-react'
+import { Calendar, MapPin, ArrowRight, Check } from 'lucide-react'
 
 function formatDate(iso) {
   try {
@@ -57,7 +57,7 @@ export default function EventCard({ event }) {
             animate={{ scale: 1 }}
             transition={{ delay: 0.3, type: 'spring' }}
           >
-            {isFree ? '✓ Free' : `$${parseFloat(event.price).toFixed(2)}`}
+            {isFree ? <><Check className="h-3.5 w-3.5" /> Free</> : `$${parseFloat(event.price).toFixed(2)}`}
           </motion.span>
         </div>
       </Link>

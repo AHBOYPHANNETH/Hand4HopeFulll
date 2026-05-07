@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Bell } from 'lucide-react'
 import Button from './ui/Button'
 import { fetchNotifications, markNotificationsRead } from '../services/notificationService'
 import { useAuth } from '../context/AuthContext'
@@ -53,7 +54,7 @@ export default function NotificationDropdown() {
         }}
         aria-label="Notifications"
       >
-        🔔
+        <Bell className="h-5 w-5" />
         {unreadNotifications > 0 ? (
           <span className="absolute -right-1 -top-1 inline-flex min-w-5 items-center justify-center rounded-full bg-rose-600 px-1.5 py-0.5 text-[10px] font-bold text-white">
             {unreadNotifications > 99 ? '99+' : unreadNotifications}

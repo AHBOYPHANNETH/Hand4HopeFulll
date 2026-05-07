@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Bell, ChevronDown } from 'lucide-react'
+import { Menu, X, Bell, LogOut, Target, User } from 'lucide-react'
 import { BACKEND_ORIGIN } from '../../config'
 import { useAuth } from '../../context/AuthContext'
 import { ThemeToggle } from '../../context/ThemeContext'
@@ -22,6 +22,10 @@ export default function Navbar() {
   const [accountOpen, setAccountOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { isAuthenticated, isAdmin, user, logout } = useAuth()
+
+  // Admins are intentionally invisible on the public navbar — their account
+  // belongs to the admin panel, not the user-facing site.
+  const showUserSession = isAuthenticated && !isAdmin
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -98,42 +102,32 @@ export default function Navbar() {
           <div className="hidden items-center gap-3 lg:flex">
             <ThemeToggle />
 
-            {isAuthenticated ? (
+            {showUserSession ? (
               <>
                 <NotificationDropdown />
-                {isAdmin && (
-                  <Link to="/admin">
-                    <Button variant="ghost" size="sm" className="dark:text-slate-300 dark:hover:bg-slate-800">
-                      Admin
-                    </Button>
-                  </Link>
-                )}
 
                 {/* Account dropdown */}
                 <div className="relative">
                   <motion.button
                     type="button"
                     onClick={() => setAccountOpen((v) => !v)}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:border-slate-600 dark:hover:bg-slate-800"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    aria-label="Account menu"
+                    aria-expanded={accountOpen}
+                    className="rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 dark:focus:ring-offset-slate-900"
                   >
                     {user?.avatar_url ? (
                       <img
                         src={user.avatar_url}
                         alt={user.name || 'User'}
-                        className="h-7 w-7 rounded-full object-cover"
+                        className="h-10 w-10 rounded-full object-cover ring-2 ring-white shadow-sm dark:ring-slate-800"
                       />
                     ) : (
-                      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-primary-200 to-primary-300 text-sm font-bold text-primary-700">
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-br from-primary-200 to-primary-300 text-sm font-bold text-primary-700 ring-2 ring-white shadow-sm dark:ring-slate-800">
                         {initials}
                       </span>
                     )}
-                    <span className="hidden max-w-25 truncate sm:inline">{user?.name}</span>
-                    <ChevronDown
-                      className="h-4 w-4 transition-transform duration-200"
-                      style={{ transform: accountOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                    />
                   </motion.button>
 
                   <AnimatePresence>
@@ -146,32 +140,32 @@ export default function Navbar() {
                         className="absolute right-0 z-50 mt-3 w-56 overflow-hidden rounded-2xl border border-slate-200/50 bg-white/95 shadow-2xl backdrop-blur-sm dark:border-slate-700/50 dark:bg-slate-900/95"
                       >
                         {[
-                          { to: '/profile', emoji: '👤', label: 'Profile' },
-                          { to: '/my-volunteer-requests', emoji: '🎯', label: 'My Events' },
-                          { to: '/notifications', emoji: '🔔', label: 'Notifications' },
+                          { to: '/profile', icon: User, label: 'Profile' },
+                          { to: '/my-volunteer-requests', icon: Target, label: 'My Events' },
+                          { to: '/notifications', icon: Bell, label: 'Notifications' },
                         ].map((item) => (
                           <Link
                             key={item.to}
                             to={item.to}
-                            className="block border-b border-slate-100 px-4 py-3 text-sm text-slate-700 transition-colors hover:bg-primary-50 hover:text-primary-700 dark:border-slate-800 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-primary-400"
+                            className="flex items-center gap-2 border-b border-slate-100 px-4 py-3 text-sm text-slate-700 transition-colors hover:bg-primary-50 hover:text-primary-700 dark:border-slate-800 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-primary-400"
                             onClick={() => setAccountOpen(false)}
                           >
-                            {item.emoji} {item.label}
+                            <item.icon className="h-4 w-4" /> {item.label}
                           </Link>
                         ))}
                         <button
                           type="button"
-                          className="block w-full px-4 py-3 text-left text-sm font-semibold text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20"
+                          className="flex w-full items-center gap-2 px-4 py-3 text-left text-sm font-semibold text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20"
                           onClick={() => { setAccountOpen(false); logout() }}
                         >
-                          🚪 Logout
+                          <LogOut className="h-4 w-4" /> Logout
                         </button>
                       </motion.div>
                     )}
                   </AnimatePresence>
                 </div>
               </>
-            ) : (
+            ) : !isAdmin ? (
               <>
                 <Button variant="outline" size="sm" onClick={googleRedirect}>
                   Google
@@ -185,7 +179,7 @@ export default function Navbar() {
                   <Button size="sm">Sign Up</Button>
                 </Link>
               </>
-            )}
+            ) : null}
           </div>
 
           {/* Mobile: theme toggle + hamburger */}
@@ -237,39 +231,32 @@ export default function Navbar() {
               </div>
 
               <div className="my-4 border-t border-slate-200 pt-4 dark:border-slate-700">
-                {isAuthenticated ? (
+                {showUserSession ? (
                   <div className="space-y-2">
-                    {isAdmin && (
-                      <Link to="/admin" onClick={() => setOpen(false)}>
-                        <Button variant="ghost" className="w-full justify-start dark:text-slate-300 dark:hover:bg-slate-800">
-                          Admin Dashboard
-                        </Button>
-                      </Link>
-                    )}
                     <Link to="/profile" onClick={() => setOpen(false)}>
-                      <Button variant="ghost" className="w-full justify-start dark:text-slate-300 dark:hover:bg-slate-800">
-                        👤 My Profile
+                      <Button variant="ghost" className="w-full justify-start gap-2 dark:text-slate-300 dark:hover:bg-slate-800">
+                        <User className="h-4 w-4" /> My Profile
                       </Button>
                     </Link>
                     <Link to="/my-volunteer-requests" onClick={() => setOpen(false)}>
-                      <Button variant="ghost" className="w-full justify-start dark:text-slate-300 dark:hover:bg-slate-800">
-                        🎯 My Events
+                      <Button variant="ghost" className="w-full justify-start gap-2 dark:text-slate-300 dark:hover:bg-slate-800">
+                        <Target className="h-4 w-4" /> My Events
                       </Button>
                     </Link>
                     <Link to="/notifications" onClick={() => setOpen(false)}>
-                      <Button variant="ghost" className="w-full justify-start dark:text-slate-300 dark:hover:bg-slate-800">
-                        🔔 Notifications
+                      <Button variant="ghost" className="w-full justify-start gap-2 dark:text-slate-300 dark:hover:bg-slate-800">
+                        <Bell className="h-4 w-4" /> Notifications
                       </Button>
                     </Link>
                     <Button
                       variant="danger"
-                      className="w-full justify-start"
+                      className="w-full justify-start gap-2"
                       onClick={() => { setOpen(false); logout() }}
                     >
-                      🚪 Logout
+                      <LogOut className="h-4 w-4" /> Logout
                     </Button>
                   </div>
-                ) : (
+                ) : !isAdmin ? (
                   <div className="space-y-2">
                     <Button variant="outline" className="w-full" onClick={googleRedirect}>
                       Sign in with Google
@@ -283,7 +270,7 @@ export default function Navbar() {
                       <Button className="w-full">Sign Up</Button>
                     </Link>
                   </div>
-                )}
+                ) : null}
               </div>
             </div>
           </motion.div>

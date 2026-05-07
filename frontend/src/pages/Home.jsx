@@ -1,7 +1,7 @@
 ﻿import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ChevronRight, ArrowRight, Zap, Users, Heart, TrendingUp } from 'lucide-react'
+import { ChevronRight, ArrowRight, Zap, Users, Heart, TrendingUp, Star, BookOpen, Target, GraduationCap, Check } from 'lucide-react'
 import EventCard from '../components/EventCard'
 import Button from '../components/ui/Button'
 import Spinner from '../components/ui/Spinner'
@@ -111,7 +111,7 @@ export default function Home() {
                     ))}
                   </div>
                   <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">+1,200 Volunteers</span>
-                  <div className="text-sm font-semibold text-slate-700 dark:text-slate-300">⭐ 4.9/5 Rating</div>
+                  <div className="flex items-center gap-1 text-sm font-semibold text-slate-700 dark:text-slate-300"><Star className="h-4 w-4 fill-accent-400 text-accent-400" /> 4.9/5 Rating</div>
                 </div>
                 
               </motion.div>
@@ -243,16 +243,16 @@ export default function Home() {
                 </p>
                 <StaggerContainer delay={0.2}>
                   {[
-                    { icon: '✓', title: 'Flexible Volunteering', desc: 'Choose roles that fit your schedule' },
-                    { icon: '✓', title: 'Free Training',          desc: 'Comprehensive safeguarding & skills training' },
-                    { icon: '✓', title: 'Supportive Team',        desc: 'Work alongside passionate community members' },
-                    { icon: '✓', title: 'Make an Impact',         desc: "See the real difference you're making" },
+                    { icon: Check, title: 'Flexible Volunteering', desc: 'Choose roles that fit your schedule' },
+                    { icon: Check, title: 'Free Training',         desc: 'Comprehensive safeguarding & skills training' },
+                    { icon: Check, title: 'Supportive Team',       desc: 'Work alongside passionate community members' },
+                    { icon: Check, title: 'Make an Impact',        desc: "See the real difference you're making" },
                   ].map((item, i) => (
                     <StaggerItem key={i}>
                       <div className="flex gap-4">
                         <div className="flex-shrink-0">
-                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 text-sm font-bold text-white">
-                            {item.icon}
+                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-secondary-500">
+                            <item.icon className="h-4 w-4 text-white" />
                           </div>
                         </div>
                         <div>
@@ -283,9 +283,9 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-secondary-500/10" />
                 <div className="relative flex h-full flex-col justify-center space-y-4 p-8">
                   {[
-                    { emoji: '👥', title: 'Community Events',  desc: 'Monthly meetups and training' },
-                    { emoji: '🎓', title: 'Skills Development', desc: 'Learn while helping others' },
-                    { emoji: '🌟', title: 'Recognition',        desc: 'Celebrate your contributions' },
+                    { icon: Users,         title: 'Community Events',  desc: 'Monthly meetups and training' },
+                    { icon: GraduationCap, title: 'Skills Development', desc: 'Learn while helping others' },
+                    { icon: Star,          title: 'Recognition',        desc: 'Celebrate your contributions' },
                   ].map((item, i) => (
                     <motion.div
                       key={i}
@@ -294,7 +294,9 @@ export default function Home() {
                       transition={{ type: 'spring', stiffness: 300 }}
                     >
                       <div className="flex items-center gap-3">
-                        <span className="text-3xl">{item.emoji}</span>
+                        <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-100 dark:bg-primary-900/40">
+                          <item.icon className="h-5 w-5 text-primary-600 dark:text-primary-400" />
+                        </span>
                         <div>
                           <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{item.title}</p>
                           <p className="text-xs text-slate-600 dark:text-slate-400">{item.desc}</p>
@@ -325,9 +327,9 @@ export default function Home() {
           <StaggerContainer>
             <div className="grid gap-8 md:grid-cols-3">
               {[
-                { price: 25,  title: 'Supplies Pack',    desc: 'Educational materials for one month', icon: '📚' },
-                { price: 100, title: 'Program Support',  desc: 'Weekly enrichment activities',        icon: '🎯', popular: true },
-                { price: 500, title: 'Sponsor',          desc: 'Comprehensive support for a child',   icon: '❤️' },
+                { price: 25,  title: 'Supplies Pack',   desc: 'Educational materials for one month', icon: BookOpen },
+                { price: 100, title: 'Program Support', desc: 'Weekly enrichment activities',        icon: Target, popular: true },
+                { price: 500, title: 'Sponsor',         desc: 'Comprehensive support for a child',   icon: Heart },
               ].map((plan, i) => (
                 <StaggerItem key={i}>
                   <motion.div
@@ -341,7 +343,9 @@ export default function Home() {
                         </span>
                       </div>
                     )}
-                    <div className="mb-4 text-5xl">{plan.icon}</div>
+                    <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-100 dark:bg-primary-900/40">
+                      <plan.icon className="h-8 w-8 text-primary-600 dark:text-primary-400" />
+                    </div>
                     <div className="text-4xl font-bold text-slate-900 dark:text-slate-100">${plan.price}</div>
                     <p className="mt-2 font-semibold text-slate-900 dark:text-slate-100">{plan.title}</p>
                     <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{plan.desc}</p>
@@ -426,7 +430,7 @@ export default function Home() {
                 <StaggerItem key={i}>
                   <motion.div className="card p-8" whileHover={{ y: -5 }}>
                     <div className="mb-4 flex gap-1 text-accent-400">
-                      {[...Array(5)].map((_, j) => <span key={j}>⭐</span>)}
+                      {[...Array(5)].map((_, j) => <Star key={j} className="h-4 w-4 fill-accent-400 text-accent-400" />)}
                     </div>
                     <p className="mb-6 text-lg italic text-slate-700 dark:text-slate-300">"{t.quote}"</p>
                     <p className="font-semibold text-slate-900 dark:text-slate-100">{t.name}</p>

@@ -19,8 +19,8 @@ export default function Events() {
     <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
       <header className="max-w-3xl space-y-4">
         <p className="text-sm font-semibold uppercase tracking-wide text-teal-700">Events</p>
-        <h1 className="text-4xl font-semibold text-stone-900">Gatherings that welcome everyone</h1>
-        <p className="text-lg text-stone-600">
+        <h1 className="text-4xl font-semibold text-white-900">Gatherings that welcome everyone</h1>
+        <p className="text-lg text-white-600">
           Browse orientation sessions, inclusive activities, and advocacy clinics. Volunteers can RSVP after signing in.
         </p>
       </header>

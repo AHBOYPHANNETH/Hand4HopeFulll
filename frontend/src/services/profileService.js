@@ -9,3 +9,15 @@ export async function updateProfile(payload) {
   const { data } = await client.put('/profile', payload)
   return data
 }
+
+export async function uploadAvatar(file) {
+  const fd = new FormData()
+  fd.append('avatar', file)
+  const { data } = await client.post('/profile/avatar', fd)
+  return data
+}
+
+export async function removeAvatar() {
+  const { data } = await client.delete('/profile/avatar')
+  return data
+}
