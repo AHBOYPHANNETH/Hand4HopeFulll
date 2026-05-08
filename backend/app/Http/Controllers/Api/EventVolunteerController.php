@@ -14,6 +14,10 @@ class EventVolunteerController extends Controller
     public function store(Request $request, Event $event, NotificationService $notificationService)
     {
         $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'phone' => ['required', 'string', 'max:40'],
+            'date_of_birth' => ['required', 'date', 'before:today'],
             'notes' => ['nullable', 'string', 'max:1000'],
         ]);
 
@@ -27,7 +31,17 @@ class EventVolunteerController extends Controller
             return response()->json(['message' => 'You are already registered for this event.'], 422);
         }
 
+        if ($event->is_full) {
+            return response()->json([
+                'message' => 'This event has reached its volunteer capacity.',
+            ], 422);
+        }
+
         $event->volunteers()->attach($user->id, [
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'date_of_birth' => $data['date_of_birth'],
             'notes' => $data['notes'] ?? null,
             'status' => 'pending',
         ]);

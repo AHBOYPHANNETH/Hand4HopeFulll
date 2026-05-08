@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Users } from 'lucide-react'
 import EventCountdown from '../components/EventCountdown'
 import Button from '../components/ui/Button'
 import Alert from '../components/ui/Alert'
 import Spinner from '../components/ui/Spinner'
 import { useAuth } from '../context/AuthContext'
-import { fetchEvent, volunteerForEvent } from '../services/eventService'
+import { fetchEvent } from '../services/eventService'
 
 function formatLong(iso) {
   try {
@@ -27,10 +28,7 @@ export default function EventDetail() {
   const navigate = useNavigate()
   const { isAuthenticated } = useAuth()
   const [event, setEvent] = useState(null)
-  const [notes, setNotes] = useState('')
   const [loading, setLoading] = useState(true)
-  const [submitting, setSubmitting] = useState(false)
-  const [msg, setMsg] = useState(null)
   const [err, setErr] = useState('')
 
   useEffect(() => {
@@ -40,23 +38,12 @@ export default function EventDetail() {
       .finally(() => setLoading(false))
   }, [id])
 
-  async function joinVolunteer() {
-    setErr('')
-    setMsg(null)
+  function handleVolunteerClick() {
     if (!isAuthenticated) {
-      navigate('/login', { state: { from: `/events/${id}` } })
+      navigate('/login', { state: { from: `/events/${id}/volunteer` } })
       return
     }
-    setSubmitting(true)
-    try {
-      const data = await volunteerForEvent(id, notes || undefined)
-      setMsg(data.message)
-      setNotes('')
-    } catch (e) {
-      setErr(e.response?.data?.message || 'Unable to register right now.')
-    } finally {
-      setSubmitting(false)
-    }
+    navigate(`/events/${id}/volunteer`)
   }
 
   if (loading) return <Spinner />
@@ -94,23 +81,19 @@ export default function EventDetail() {
           </div>
           <div className="space-y-5">
             <EventCountdown isoDate={event.starts_at} />
-            {msg ? <Alert type="success">{msg}</Alert> : null}
-            {err ? <Alert type="error">{err}</Alert> : null}
-            <label className="block text-xs font-semibold uppercase tracking-wide text-stone-500" htmlFor="notes">
-              Notes for coordinators (optional)
-            </label>
-            <textarea
-              id="notes"
-              rows={3}
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              className="w-full rounded-2xl border border-stone-200 px-3 py-2 text-sm outline-none ring-teal-500/30 focus:border-teal-500 focus:ring-4"
-              placeholder="Tell us about your skills or accessibility needs."
-            />
-            <Button className="w-full py-3" disabled={submitting} onClick={joinVolunteer}>
-              {isAuthenticated ? (submitting ? 'Sending…' : 'Join as volunteer') : 'Sign in to volunteer'}
+            <CapacityBlock event={event} />
+            <Button
+              className="w-full py-3"
+              disabled={event.is_full}
+              onClick={handleVolunteerClick}
+            >
+              {event.is_full
+                ? 'Volunteer spots full'
+                : isAuthenticated
+                  ? 'Join as volunteer'
+                  : 'Sign in to volunteer'}
             </Button>
-            {!isAuthenticated ? (
+            {!isAuthenticated && !event.is_full ? (
               <p className="text-center text-xs text-stone-500">
                 Need an account?{' '}
                 <Link className="font-semibold text-teal-700" to="/register">
@@ -123,5 +106,71 @@ export default function EventDetail() {
         </div>
       </div>
     </article>
+  )
+}
+
+function CapacityBlock({ event }) {
+  const taken = event.volunteers_count ?? 0
+  const cap = event.capacity ?? null
+  const isFull = !!event.is_full
+
+  if (!cap) {
+    return (
+      <div className="flex items-center justify-between rounded-2xl border border-stone-100 bg-stone-50 px-4 py-3 text-sm">
+        <span className="flex items-center gap-2 font-semibold text-stone-700">
+          <Users className="h-4 w-4 text-teal-700" />
+          Volunteers joined
+        </span>
+        <span className="text-base font-bold text-stone-900">{taken}</span>
+      </div>
+    )
+  }
+
+  const remaining = Math.max(cap - taken, 0)
+  const pct = Math.min(100, Math.round((taken / cap) * 100))
+
+  return (
+    <div
+      className={`rounded-2xl border px-4 py-3 ${
+        isFull
+          ? 'border-rose-200 bg-rose-50'
+          : remaining <= Math.max(1, Math.round(cap * 0.2))
+            ? 'border-amber-200 bg-amber-50'
+            : 'border-stone-100 bg-stone-50'
+      }`}
+    >
+      <div className="flex items-center justify-between text-sm">
+        <span className="flex items-center gap-2 font-semibold text-stone-700">
+          <Users className="h-4 w-4 text-teal-700" />
+          Volunteer spots
+        </span>
+        <span className="text-sm font-bold text-stone-900">
+          {taken} / {cap}
+        </span>
+      </div>
+      <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-stone-200">
+        <div
+          className={`h-full rounded-full transition-[width] duration-500 ${
+            isFull
+              ? 'bg-rose-500'
+              : remaining <= Math.max(1, Math.round(cap * 0.2))
+                ? 'bg-amber-500'
+                : 'bg-teal-600'
+          }`}
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+      <p
+        className={`mt-2 text-xs font-medium ${
+          isFull ? 'text-rose-700' : 'text-stone-600'
+        }`}
+      >
+        {isFull
+          ? 'This event is full. Sign-ups are closed.'
+          : remaining === 1
+            ? 'Only 1 spot left!'
+            : `${remaining} spots remaining`}
+      </p>
+    </div>
   )
 }

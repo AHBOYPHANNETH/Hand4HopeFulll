@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Calendar, MapPin, ArrowRight, Check } from 'lucide-react'
+import { Calendar, MapPin, ArrowRight, Check, Users } from 'lucide-react'
 
 function formatDate(iso) {
   try {
@@ -63,6 +63,16 @@ export default function EventCard({ event }) {
           >
             {isFree ? <><Check className="h-3.5 w-3.5" /> Free</> : `$${parseFloat(event.price).toFixed(2)}`}
           </motion.span>
+          {event.is_full && (
+            <motion.span
+              className="inline-flex items-center gap-1 rounded-full bg-rose-500/90 px-3 py-1.5 text-xs font-bold text-white shadow-lg backdrop-blur-sm"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.4, type: 'spring' }}
+            >
+              <Users className="h-3.5 w-3.5" /> Full
+            </motion.span>
+          )}
         </div>
       </Link>
 
@@ -84,6 +94,15 @@ export default function EventCard({ event }) {
           <MapPin className="h-4 w-4 text-primary-600 dark:text-primary-400" />
           <span className="font-medium">{event.location}</span>
         </div>
+
+        {event.capacity ? (
+          <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+            <Users className="h-4 w-4 text-primary-600 dark:text-primary-400" />
+            <span className="font-medium">
+              {event.volunteers_count ?? 0} / {event.capacity} volunteers
+            </span>
+          </div>
+        ) : null}
 
         <Link
           to={`/events/${event.id}`}

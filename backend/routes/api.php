@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Admin\AdminDonationController;
 use App\Http\Controllers\Api\Admin\AdminEventController;
 use App\Http\Controllers\Api\Admin\AdminVolunteerRequestController;
 use App\Http\Controllers\Api\Admin\AdminSiteContentController;
+use App\Http\Controllers\Api\Admin\AdminUserController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\DonationController;
@@ -51,5 +52,9 @@ Route::middleware('auth:sanctum')->group(function (): void {
         Route::get('/volunteer-requests', [AdminVolunteerRequestController::class, 'index']);
         Route::post('/volunteer-requests/update-status', [AdminVolunteerRequestController::class, 'updateStatus']);
         Route::post('/notifications/create', [NotificationController::class, 'create']);
+
+        Route::get('/users', [AdminUserController::class, 'index']);
+        Route::patch('/users/{user}', [AdminUserController::class, 'update']);
+        Route::delete('/users/{user}', [AdminUserController::class, 'destroy']);
     });
 });

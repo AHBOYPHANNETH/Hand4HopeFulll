@@ -5,6 +5,7 @@ import {
   DollarSign,
   MessageSquare,
   Users,
+  UserCog,
   FileText,
   ExternalLink,
   LogOut,
@@ -19,6 +20,7 @@ const NAV_ITEMS = [
   { to: '/admin/donations',  label: 'Donations',        icon: DollarSign },
   { to: '/admin/contacts',   label: 'Contacts',         icon: MessageSquare },
   { to: '/admin/volunteers', label: 'Volunteers',       icon: Users },
+  { to: '/admin/users',      label: 'Users',            icon: UserCog },
   { to: '/admin/content',    label: 'Website Content',  icon: FileText },
 ]
 

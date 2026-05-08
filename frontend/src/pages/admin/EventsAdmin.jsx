@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Plus, Pencil, Trash2, Calendar, MapPin, X } from 'lucide-react'
+import { Plus, Pencil, Trash2, Calendar, MapPin, X, Users } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Button from '../../components/ui/Button'
 import Alert from '../../components/ui/Alert'
@@ -17,7 +17,14 @@ import {
   adminDeleteEvent,
 } from '../../services/eventService'
 
-const EMPTY_FORM = { title: '', description: '', location: '', starts_at: '', image: null }
+const EMPTY_FORM = {
+  title: '',
+  description: '',
+  location: '',
+  starts_at: '',
+  capacity: '',
+  image: null,
+}
 
 export default function EventsAdmin() {
   const [events, setEvents] = useState([])
@@ -58,6 +65,7 @@ export default function EventsAdmin() {
       description: ev.description || '',
       location: ev.location,
       starts_at: ev.starts_at.slice(0, 16),
+      capacity: ev.capacity == null ? '' : String(ev.capacity),
       image: null,
     })
     setModalOpen(true)
@@ -72,6 +80,9 @@ export default function EventsAdmin() {
     fd.append('description', form.description)
     fd.append('location', form.location)
     fd.append('starts_at', new Date(form.starts_at).toISOString())
+    if (form.capacity !== '' && form.capacity != null) {
+      fd.append('capacity', String(form.capacity))
+    }
     if (form.image) fd.append('image', form.image)
     try {
       if (editingId) {
@@ -145,15 +156,16 @@ export default function EventsAdmin() {
                 <th className="px-5 py-3.5">Event</th>
                 <th className="px-5 py-3.5">Date</th>
                 <th className="px-5 py-3.5">Location</th>
+                <th className="px-5 py-3.5">Capacity</th>
                 <th className="px-5 py-3.5 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {loading ? (
-                Array.from({ length: 4 }).map((_, i) => <SkeletonRow key={i} cols={4} />)
+                Array.from({ length: 4 }).map((_, i) => <SkeletonRow key={i} cols={5} />)
               ) : filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="p-8">
+                  <td colSpan={5} className="p-8">
                     <EmptyState
                       icon={Calendar}
                       title={search ? 'No matching events' : 'No events yet'}
@@ -201,6 +213,9 @@ export default function EventsAdmin() {
                         <MapPin className="h-3.5 w-3.5 text-slate-400" />
                         {ev.location}
                       </div>
+                    </td>
+                    <td className="px-5 py-4">
+                      <CapacityCell event={ev} />
                     </td>
                     <td className="px-5 py-4 text-right">
                       <div className="flex justify-end gap-1.5">
@@ -319,6 +334,20 @@ function EventModal({ open, editing, form, setForm, submitting, onCancel, onSubm
                   className="input-field"
                 />
               </Field>
+              <Field label="Volunteer capacity">
+                <input
+                  type="number"
+                  min={1}
+                  max={100000}
+                  value={form.capacity}
+                  onChange={(e) => setForm((f) => ({ ...f, capacity: e.target.value }))}
+                  className="input-field"
+                  placeholder="Leave blank for unlimited"
+                />
+                <span className="mt-1 block text-xs text-slate-500 dark:text-slate-400">
+                  Maximum number of volunteers who can join. Leave empty for no limit.
+                </span>
+              </Field>
               <Field label="Description">
                 <textarea
                   rows={4}
@@ -352,6 +381,40 @@ function EventModal({ open, editing, form, setForm, submitting, onCancel, onSubm
         </motion.div>
       )}
     </AnimatePresence>
+  )
+}
+
+function CapacityCell({ event }) {
+  const taken = event.volunteers_count ?? 0
+  if (!event.capacity) {
+    return (
+      <span className="inline-flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+        <Users className="h-3.5 w-3.5" />
+        {taken} joined · Unlimited
+      </span>
+    )
+  }
+
+  const isFull = !!event.is_full
+  const remaining = Math.max(event.capacity - taken, 0)
+  return (
+    <div className="flex flex-col gap-1">
+      <span
+        className={`inline-flex items-center gap-1 text-xs font-semibold ${
+          isFull
+            ? 'text-rose-700 dark:text-rose-400'
+            : remaining <= Math.max(1, Math.round(event.capacity * 0.2))
+              ? 'text-amber-700 dark:text-amber-400'
+              : 'text-slate-700 dark:text-slate-300'
+        }`}
+      >
+        <Users className="h-3.5 w-3.5" />
+        {taken} / {event.capacity}
+      </span>
+      <span className="text-[10px] text-slate-500 dark:text-slate-400">
+        {isFull ? 'Full' : `${remaining} left`}
+      </span>
+    </div>
   )
 }
 

@@ -7,6 +7,7 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import Donate from './pages/Donate'
 import EventDetail from './pages/EventDetail'
+import EventVolunteer from './pages/EventVolunteer'
 import Events from './pages/Events'
 import GoogleCallback from './pages/GoogleCallback'
 import Home from './pages/Home'
@@ -21,6 +22,7 @@ import EventsAdmin from './pages/admin/EventsAdmin'
 import DonationsAdmin from './pages/admin/DonationsAdmin'
 import ContactsAdmin from './pages/admin/ContactsAdmin'
 import VolunteersAdmin from './pages/admin/VolunteersAdmin'
+import UsersAdmin from './pages/admin/UsersAdmin'
 import ContentAdmin from './pages/admin/ContentAdmin'
 
 export default function App() {
@@ -42,6 +44,7 @@ export default function App() {
         <Route path="donations" element={<DonationsAdmin />} />
         <Route path="contacts" element={<ContactsAdmin />} />
         <Route path="volunteers" element={<VolunteersAdmin />} />
+        <Route path="users" element={<UsersAdmin />} />
         <Route path="content" element={<ContentAdmin />} />
         <Route path="*" element={<Navigate to="overview" replace />} />
       </Route>
@@ -51,6 +54,14 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="events" element={<Events />} />
         <Route path="events/:id" element={<EventDetail />} />
+        <Route
+          path="events/:id/volunteer"
+          element={
+            <ProtectedRoute>
+              <EventVolunteer />
+            </ProtectedRoute>
+          }
+        />
         <Route path="impact" element={<Impact />} />
         <Route path="donate" element={<Donate />} />
         <Route path="contact" element={<Contact />} />

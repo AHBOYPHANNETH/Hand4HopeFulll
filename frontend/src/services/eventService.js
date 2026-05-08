@@ -10,8 +10,8 @@ export async function fetchEvent(id) {
   return data
 }
 
-export async function volunteerForEvent(eventId, notes) {
-  const { data } = await client.post(`/events/${eventId}/volunteer`, { notes })
+export async function volunteerForEvent(eventId, payload) {
+  const { data } = await client.post(`/events/${eventId}/volunteer`, payload)
   return data
 }
 
