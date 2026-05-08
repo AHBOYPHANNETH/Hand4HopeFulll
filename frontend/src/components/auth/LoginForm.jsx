@@ -32,14 +32,14 @@ export default function LoginForm() {
   return (
     <form onSubmit={onSubmit} className="mx-auto max-w-md space-y-5 rounded-3xl border border-stone-100 bg-white p-8 shadow-sm">
       <div>
-        <h1 className="text-2xl font-semibold text-stone-900">Welcome back</h1>
-        <p className="mt-1 text-sm text-stone-600">Sign in to volunteer for events and track impact.</p>
+        <h1 className="text-2xl font-semibold text-stone-900 dark:text-black">Welcome back</h1>
+        <p className="mt-1 text-sm text-stone-600 dark:text-black">Sign in to volunteer for events and track impact.</p>
       </div>
 
       {error ? <Alert type="error">{error}</Alert> : null}
 
       <div className="space-y-2">
-        <label className="text-sm font-medium text-stone-700" htmlFor="email">
+        <label className="text-sm font-medium text-stone-700 dark:text-black" htmlFor="email">
           Email
         </label>
         <input
@@ -49,12 +49,12 @@ export default function LoginForm() {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-xl border border-stone-200 px-3 py-2 text-sm outline-none ring-teal-500/30 focus:border-teal-500 focus:ring-4"
+          className="w-full rounded-xl border border-stone-200 bg-white px-3 py-2 text-sm text-stone-900 placeholder:text-stone-400 outline-none ring-teal-500/30 focus:border-teal-500 focus:ring-4"
         />
       </div>
 
       <div className="space-y-2">
-        <label className="text-sm font-medium text-stone-700" htmlFor="password">
+        <label className="text-sm font-medium text-stone-700 dark:text-black" htmlFor="password">
           Password
         </label>
         <input
@@ -64,7 +64,7 @@ export default function LoginForm() {
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full rounded-xl border border-stone-200 px-3 py-2 text-sm outline-none ring-teal-500/30 focus:border-teal-500 focus:ring-4"
+          className="w-full rounded-xl border border-stone-200 bg-white px-3 py-2 text-sm text-stone-900 placeholder:text-stone-400 outline-none ring-teal-500/30 focus:border-teal-500 focus:ring-4"
         />
       </div>
 
@@ -72,7 +72,7 @@ export default function LoginForm() {
         {loading ? 'Signing in…' : 'Sign in'}
       </Button>
 
-      <p className="text-center text-sm text-stone-600">
+      <p className="text-center text-sm text-stone-600 dark:text-black">
         No account yet?{' '}
         <Link to="/register" className="font-semibold text-teal-700 hover:text-teal-900">
           Create one

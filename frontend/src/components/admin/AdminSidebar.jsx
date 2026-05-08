@@ -48,7 +48,7 @@ export default function AdminSidebar({ open, onClose }) {
         {/* Logo */}
         <div className="flex h-16 shrink-0 items-center justify-between border-b border-slate-100 px-5 dark:border-slate-800">
           <Link to="/admin/overview" className="flex items-center gap-2.5" onClick={onClose}>
-            <img src={logo} alt="Hand4Hope" className="h-8 w-8 object-contain" />
+            <img src={logo} alt="Hand4Hope" className="h-8 w-8 rounded-full object-cover ring-2 ring-primary-200 shadow-sm dark:ring-primary-700" />
             <div className="flex flex-col leading-tight">
               <span className="font-bold text-slate-900 dark:text-white">Hand4Hope</span>
               <span className="text-[10px] font-semibold uppercase tracking-widest text-primary-600 dark:text-primary-400">

@@ -33,13 +33,13 @@ export default function Donate() {
       setLoading(false)
     }
   }
-
+  
   return (
     <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-2 md:py-20">
       <div className="space-y-6">
-        <p className="text-sm font-semibold uppercase tracking-wide text-teal-700">Donate</p>
-        <h1 className="text-4xl font-semibold text-stone-900">Fuel dignity-centered programs</h1>
-        <p className="leading-relaxed text-stone-600">
+        <h1 className="text-sm font-semibold uppercase tracking-wide text-white">Donate</h1>
+        <h1 className="text-4xl font-semibold text-stone-900 dark:text-white">Fuel dignity-centered programs</h1>
+        <p className="leading-relaxed text-stone-600 dark:text-white">
           Contributions fund nutritious meals, adapted learning materials, staff training, and family advocacy clinics.
           Hand4Hope issues acknowledgment receipts for organizational donors upon request.
         </p>
@@ -53,7 +53,7 @@ export default function Donate() {
         {feedback ? <Alert type={feedback.type}>{feedback.text}</Alert> : null}
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-stone-700" htmlFor="name">
+          <label className="text-sm font-medium text-stone-700 dark:text-black" htmlFor="name">
             Name
           </label>
           <input
@@ -61,12 +61,12 @@ export default function Donate() {
             required
             value={form.name}
             onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-            className="w-full rounded-xl border border-stone-200 px-3 py-2 text-sm outline-none ring-teal-500/30 focus:border-teal-500 focus:ring-4"
+            className="w-full rounded-xl border border-stone-200 bg-white px-3 py-2 text-sm text-stone-900 placeholder:text-stone-400 outline-none ring-teal-500/30 focus:border-teal-500 focus:ring-4"
           />
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-stone-700" htmlFor="email">
+          <label className="text-sm font-medium text-stone-700 dark:text-black" htmlFor="email">
             Email
           </label>
           <input
@@ -75,13 +75,13 @@ export default function Donate() {
             required
             value={form.email}
             onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-            className="w-full rounded-xl border border-stone-200 px-3 py-2 text-sm outline-none ring-teal-500/30 focus:border-teal-500 focus:ring-4"
+            className="w-full rounded-xl border border-stone-200 bg-white px-3 py-2 text-sm text-stone-900 placeholder:text-stone-400 outline-none ring-teal-500/30 focus:border-teal-500 focus:ring-4"
           />
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-stone-700" htmlFor="amount">
+            <label className="text-sm font-medium text-stone-700 dark:text-black" htmlFor="amount">
               Amount
             </label>
             <input
@@ -92,18 +92,18 @@ export default function Donate() {
               required
               value={form.amount}
               onChange={(e) => setForm((f) => ({ ...f, amount: e.target.value }))}
-              className="w-full rounded-xl border border-stone-200 px-3 py-2 text-sm outline-none ring-teal-500/30 focus:border-teal-500 focus:ring-4"
+              className="w-full rounded-xl border border-stone-200 bg-white px-3 py-2 text-sm text-stone-900 placeholder:text-stone-400 outline-none ring-teal-500/30 focus:border-teal-500 focus:ring-4"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-medium text-stone-700" htmlFor="currency">
+            <label className="text-sm font-medium text-stone-700 dark:text-black" htmlFor="currency">
               Currency
             </label>
             <select
               id="currency"
               value={form.currency}
               onChange={(e) => setForm((f) => ({ ...f, currency: e.target.value }))}
-              className="w-full rounded-xl border border-stone-200 px-3 py-2 text-sm outline-none ring-teal-500/30 focus:border-teal-500 focus:ring-4"
+              className="w-full rounded-xl border border-stone-200 bg-white px-3 py-2 text-sm text-stone-900 placeholder:text-stone-400 outline-none ring-teal-500/30 focus:border-teal-500 focus:ring-4"
             >
               <option value="USD">USD</option>
               <option value="KHR">KHR</option>
@@ -112,7 +112,7 @@ export default function Donate() {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-stone-700" htmlFor="message">
+          <label className="text-sm font-medium text-stone-700 dark:text-black" htmlFor="message">
             Message (optional)
           </label>
           <textarea
@@ -120,7 +120,7 @@ export default function Donate() {
             rows={4}
             value={form.message}
             onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-            className="w-full rounded-xl border border-stone-200 px-3 py-2 text-sm outline-none ring-teal-500/30 focus:border-teal-500 focus:ring-4"
+            className="w-full rounded-xl border border-stone-200 bg-white px-3 py-2 text-sm text-stone-900 placeholder:text-stone-400 outline-none ring-teal-500/30 focus:border-teal-500 focus:ring-4"
           />
         </div>
 

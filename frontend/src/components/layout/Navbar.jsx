@@ -21,11 +21,9 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [accountOpen, setAccountOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const { isAuthenticated, isAdmin, user, logout } = useAuth()
+  const { isAuthenticated, user, logout } = useAuth()
 
-  // Admins are intentionally invisible on the public navbar — their account
-  // belongs to the admin panel, not the user-facing site.
-  const showUserSession = isAuthenticated && !isAdmin
+  const showUserSession = isAuthenticated
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -65,12 +63,12 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-3 font-display font-bold text-xl text-primary-700 transition-colors hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300"
+            className="flex items-center gap-3 font-display font-bold text-xl text-primary-700 transition-colors hover:text-primary-800 dark:text-white dark:hover:text-primary-300"
           >
             <motion.img
               src={logo}
               alt="Hand4Hope"
-              className="h-10 w-10 object-contain"
+              className="h-10 w-10 rounded-full object-cover ring-2 ring-primary-200 shadow-sm dark:ring-primary-700"
               whileHover={{ scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 300 }}
             />
@@ -88,8 +86,8 @@ export default function Navbar() {
                   `relative px-4 py-2 text-sm font-semibold transition-all duration-200
                   after:absolute after:bottom-0 after:left-4 after:right-4 after:h-0.5 after:transition-all after:duration-300
                   ${isActive
-                    ? 'text-primary-600 dark:text-primary-400 after:bg-linear-to-r after:from-primary-600 after:to-secondary-600'
-                    : 'text-slate-700 hover:text-primary-600 dark:text-slate-300 dark:hover:text-primary-400 after:bg-transparent hover:after:bg-primary-200 dark:hover:after:bg-primary-700'
+                    ? 'text-primary-600 dark:text-white after:bg-linear-to-r after:from-primary-600 after:to-secondary-600'
+                    : 'text-slate-700 hover:text-primary-600 dark:text-white dark:hover:text-primary-300 after:bg-transparent hover:after:bg-primary-200 dark:hover:after:bg-primary-700'
                   }`
                 }
               >
@@ -165,7 +163,7 @@ export default function Navbar() {
                   </AnimatePresence>
                 </div>
               </>
-            ) : !isAdmin ? (
+            ) : (
               <>
                 <Button variant="outline" size="sm" onClick={googleRedirect}>
                   Google
@@ -179,7 +177,7 @@ export default function Navbar() {
                   <Button size="sm">Sign Up</Button>
                 </Link>
               </>
-            ) : null}
+            )}
           </div>
 
           {/* Mobile: theme toggle + hamburger */}
@@ -219,8 +217,8 @@ export default function Navbar() {
                     className={({ isActive }) =>
                       `rounded-lg px-4 py-3 text-sm font-semibold transition-all
                       ${isActive
-                        ? 'bg-primary-100 text-primary-700 dark:bg-primary-900/40 dark:text-primary-300'
-                        : 'text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800'
+                        ? 'bg-primary-100 text-primary-700 dark:bg-primary-900/40 dark:text-white'
+                        : 'text-slate-700 hover:bg-slate-100 dark:text-white dark:hover:bg-slate-800'
                       }`
                     }
                     onClick={() => setOpen(false)}
@@ -256,7 +254,7 @@ export default function Navbar() {
                       <LogOut className="h-4 w-4" /> Logout
                     </Button>
                   </div>
-                ) : !isAdmin ? (
+                ) : (
                   <div className="space-y-2">
                     <Button variant="outline" className="w-full" onClick={googleRedirect}>
                       Sign in with Google
@@ -270,7 +268,7 @@ export default function Navbar() {
                       <Button className="w-full">Sign Up</Button>
                     </Link>
                   </div>
-                ) : null}
+                )}
               </div>
             </div>
           </motion.div>

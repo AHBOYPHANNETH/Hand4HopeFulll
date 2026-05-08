@@ -18,8 +18,8 @@ export default function About() {
     <div className="mx-auto max-w-4xl space-y-12 px-4 py-14 md:py-20">
       <header className="space-y-4">
         <p className="text-sm font-semibold uppercase tracking-wide text-teal-700">About Hand4Hope</p>
-        <h1 className="text-4xl font-semibold text-stone-900">Community-rooted care in Cambodia</h1>
-        <p className="text-lg leading-relaxed text-stone-600">{contents?.about_story}</p>
+        <h1 className="text-4xl font-semibold text-white-900">Community-rooted care in Cambodia</h1>
+        <p className="text-lg leading-relaxed text-white-600">{contents?.about_story}</p>
       </header>
 
       <section className="grid gap-8 md:grid-cols-2">
