@@ -14,10 +14,7 @@ function formatDate(iso) {
 }
 
 export default function EventCard({ event }) {
-  const img =
-    event.image_url ||
-    'https://images.unsplash.com/photo-1488521787991-ed7bbaae773f?auto=format&fit=crop&w=900&q=70'
-
+  const img = event.image_url || null
   const isFree = !event.price || event.price === 0
 
   return (
@@ -28,14 +25,21 @@ export default function EventCard({ event }) {
     >
       <Link
         to={`/events/${event.id}`}
-        className="relative block aspect-[16/10] overflow-hidden bg-slate-200 dark:bg-slate-700"
+        className="relative block aspect-[16/10] overflow-hidden bg-linear-to-br from-primary-200 via-primary-100 to-secondary-200 dark:from-primary-900/60 dark:via-slate-800 dark:to-secondary-900/60"
       >
-        <motion.img
-          src={img}
-          alt={event.title}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-          loading="lazy"
-        />
+        {img ? (
+          <motion.img
+            src={img}
+            alt={event.title}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+            loading="lazy"
+            onError={(e) => { e.currentTarget.style.display = 'none' }}
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center">
+            <Calendar className="h-12 w-12 text-primary-600/60 dark:text-primary-300/60" />
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
 
         {/* Badges */}

@@ -1,7 +1,7 @@
 ﻿import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ChevronRight, ArrowRight, Zap, Users, Heart, TrendingUp, Star, BookOpen, Target, GraduationCap, Check } from 'lucide-react'
+import { ChevronRight, ArrowRight, Zap, Users, Heart, TrendingUp, Star, BookOpen, Target, GraduationCap, Check, MessageCircle, Stethoscope, Smile, HandHeart } from 'lucide-react'
 import EventCard from '../components/EventCard'
 import Button from '../components/ui/Button'
 import Spinner from '../components/ui/Spinner'
@@ -33,7 +33,7 @@ export default function Home() {
         ])
         if (!cancelled) {
           setContents(c)
-          setEvents(ev.slice(0, 3))
+          setEvents(ev.slice(0, 12))
         }
       } finally {
         if (!cancelled) setLoading(false)
@@ -179,6 +179,54 @@ export default function Home() {
                       {stat.prefix}<CountUp end={stat.number} />{stat.suffix}
                     </div>
                     <p className="mt-3 font-semibold text-slate-700 dark:text-slate-300">{stat.label}</p>
+                  </motion.div>
+                </StaggerItem>
+              ))}
+            </div>
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* ── Our Programs ── */}
+      <section className="border-t border-slate-200/50 bg-gradient-to-b from-slate-50 to-white py-16 dark:border-slate-700/50 dark:from-slate-800 dark:to-slate-900 md:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <FadeInUp>
+            <div className="mb-12 text-center">
+              <h2 className="text-4xl font-display font-bold text-slate-900 dark:text-slate-100 md:text-5xl">
+                Our Programs
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+                A holistic set of services designed around the needs of children with intellectual disabilities and their families.
+              </p>
+            </div>
+          </FadeInUp>
+          <StaggerContainer>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { icon: Heart,         title: 'Daycare Support',         desc: 'Safe, nurturing daily care for children with intellectual disabilities.' },
+                { icon: GraduationCap, title: 'Special Education',       desc: 'Tailored learning plans focused on each child’s strengths.' },
+                { icon: MessageCircle, title: 'Speech Therapy',          desc: 'One-on-one sessions to build communication confidence.' },
+                { icon: Users,         title: 'Family Counseling',       desc: 'Guidance and emotional support for caregivers and siblings.' },
+                { icon: Smile,         title: 'Recreational Activities', desc: 'Sports, games and outings that foster joy and friendship.' },
+                { icon: Stethoscope,   title: 'Health Screening',        desc: 'Regular checkups partnered with local clinics and volunteers.' },
+                { icon: BookOpen,      title: 'Parent Workshops',        desc: 'Skill-building sessions for parents to support learning at home.' },
+                { icon: HandHeart,     title: 'Community Outreach',      desc: 'Awareness campaigns reducing stigma in local communities.' },
+              ].map((program, i) => (
+                <StaggerItem key={i}>
+                  <motion.div
+                    className="card group h-full p-6"
+                    whileHover={{ y: -6 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  >
+                    <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-100 to-primary-200 transition-all group-hover:from-primary-200 group-hover:to-primary-300 dark:from-primary-900/50 dark:to-primary-800/50">
+                      <program.icon className="h-6 w-6 text-primary-600 dark:text-primary-400" />
+                    </div>
+                    <h3 className="font-display text-lg font-semibold text-slate-900 dark:text-slate-100">
+                      {program.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                      {program.desc}
+                    </p>
                   </motion.div>
                 </StaggerItem>
               ))}

@@ -26,7 +26,10 @@ export async function adminCreateEvent(formData) {
 }
 
 export async function adminUpdateEvent(id, formData) {
-  const { data } = await client.patch(`/admin/events/${id}`, formData)
+  // PHP doesn't parse multipart bodies on PATCH/PUT — POST with _method spoofing
+  // is the standard Laravel workaround so the file and fields come through.
+  formData.append('_method', 'PATCH')
+  const { data } = await client.post(`/admin/events/${id}`, formData)
   return data
 }
 
