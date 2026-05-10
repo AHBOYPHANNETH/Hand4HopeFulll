@@ -29,7 +29,7 @@ export default function Home() {
       try {
         const [c, ev] = await Promise.all([
           fetchPublicContents(),
-          fetchEvents({ upcoming: true }),
+          fetchEvents(),
         ])
         if (!cancelled) {
           setContents(c)
