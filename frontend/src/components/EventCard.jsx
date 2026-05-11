@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Calendar, MapPin, ArrowRight, Check, Users } from 'lucide-react'
+import { Calendar, MapPin, ArrowRight, Users } from 'lucide-react'
 
 function formatDate(iso) {
   try {
@@ -15,7 +15,6 @@ function formatDate(iso) {
 
 export default function EventCard({ event }) {
   const img = event.image_url || null
-  const isFree = !event.price || event.price === 0
 
   return (
     <motion.article
@@ -52,16 +51,6 @@ export default function EventCard({ event }) {
           >
             <Calendar className="h-3.5 w-3.5" />
             {formatDate(event.starts_at)}
-          </motion.span>
-          <motion.span
-            className={`inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-bold shadow-lg backdrop-blur-sm ${
-              isFree ? 'bg-emerald-500/90 text-white' : 'bg-blue-500/90 text-white'
-            }`}
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.3, type: 'spring' }}
-          >
-            {isFree ? <><Check className="h-3.5 w-3.5" /> Free</> : `$${parseFloat(event.price).toFixed(2)}`}
           </motion.span>
           {event.is_full && (
             <motion.span
