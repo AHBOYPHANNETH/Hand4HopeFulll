@@ -98,8 +98,7 @@ export default function EventDetail() {
                 Need an account?{' '}
                 <Link className="font-semibold text-teal-700" to="/register">
                   Register
-                </Link>{' '}
-                or use Google sign-in from the navbar.
+                </Link>
               </p>
             ) : null}
           </div>

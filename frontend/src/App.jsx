@@ -9,7 +9,6 @@ import Donate from './pages/Donate'
 import EventDetail from './pages/EventDetail'
 import EventVolunteer from './pages/EventVolunteer'
 import Events from './pages/Events'
-import GoogleCallback from './pages/GoogleCallback'
 import Home from './pages/Home'
 import Impact from './pages/Impact'
 import Login from './pages/Login'
@@ -17,6 +16,9 @@ import MyVolunteerRequests from './pages/MyVolunteerRequests'
 import Notifications from './pages/Notifications'
 import Profile from './pages/Profile'
 import Register from './pages/Register'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import TermsOfService from './pages/TermsOfService'
+import CookiePolicy from './pages/CookiePolicy'
 import Overview from './pages/admin/Overview'
 import EventsAdmin from './pages/admin/EventsAdmin'
 import DonationsAdmin from './pages/admin/DonationsAdmin'
@@ -68,7 +70,9 @@ export default function App() {
         <Route path="about" element={<About />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="auth/google/callback" element={<GoogleCallback />} />
+        <Route path="privacy" element={<PrivacyPolicy />} />
+        <Route path="terms" element={<TermsOfService />} />
+        <Route path="cookies" element={<CookiePolicy />} />
         <Route
           path="profile"
           element={

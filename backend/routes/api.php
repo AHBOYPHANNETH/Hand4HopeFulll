@@ -25,6 +25,8 @@ Route::get('/events', [EventController::class, 'index']);
 Route::get('/events/{event}', [EventController::class, 'show']);
 
 Route::post('/donations', [DonationController::class, 'store']);
+Route::post('/donations/khqr/initiate', [DonationController::class, 'initiateKhqr']);
+Route::get('/donations/khqr/{donation}/status', [DonationController::class, 'khqrStatus']);
 Route::post('/contacts', [ContactController::class, 'store']);
 
 Route::get('/site-contents', [SiteContentController::class, 'index']);

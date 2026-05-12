@@ -36,37 +36,37 @@ export default function EventCard({ event }) {
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
-            <Calendar className="h-12 w-12 text-primary-600/60 dark:text-primary-300/60" />
+            <Calendar className="h-10 w-10 text-primary-600/60 dark:text-primary-300/60 sm:h-12 sm:w-12" />
           </div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
 
         {/* Badges */}
-        <div className="absolute left-4 top-4 flex gap-2">
+        <div className="absolute left-2 top-2 flex max-w-[calc(100%-1rem)] flex-wrap gap-1.5 sm:left-4 sm:top-4 sm:gap-2">
           <motion.span
-            className="inline-flex items-center gap-1 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-lg backdrop-blur-sm"
+            className="inline-flex items-center gap-1 rounded-full bg-white/95 px-2 py-1 text-[10px] font-semibold text-slate-700 shadow-lg backdrop-blur-sm sm:px-3 sm:py-1.5 sm:text-xs"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: 'spring' }}
           >
-            <Calendar className="h-3.5 w-3.5" />
+            <Calendar className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
             {formatDate(event.starts_at)}
           </motion.span>
           {event.is_full && (
             <motion.span
-              className="inline-flex items-center gap-1 rounded-full bg-rose-500/90 px-3 py-1.5 text-xs font-bold text-white shadow-lg backdrop-blur-sm"
+              className="inline-flex items-center gap-1 rounded-full bg-rose-500/90 px-2 py-1 text-[10px] font-bold text-white shadow-lg backdrop-blur-sm sm:px-3 sm:py-1.5 sm:text-xs"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.4, type: 'spring' }}
             >
-              <Users className="h-3.5 w-3.5" /> Full
+              <Users className="h-3 w-3 sm:h-3.5 sm:w-3.5" /> Full
             </motion.span>
           )}
         </div>
       </Link>
 
-      <div className="flex flex-1 flex-col gap-3 p-6">
-        <h3 className="line-clamp-2 text-lg font-semibold text-slate-900 dark:text-slate-100">
+      <div className="flex flex-1 flex-col gap-2 p-4 sm:gap-3 sm:p-6">
+        <h3 className="line-clamp-2 text-base font-semibold text-slate-900 dark:text-slate-100 sm:text-lg">
           <Link
             to={`/events/${event.id}`}
             className="transition-colors hover:text-primary-600 dark:hover:text-primary-400"
@@ -75,18 +75,18 @@ export default function EventCard({ event }) {
           </Link>
         </h3>
 
-        <p className="line-clamp-2 flex-grow text-sm text-slate-600 dark:text-slate-400">
+        <p className="line-clamp-2 flex-grow text-xs text-slate-600 dark:text-slate-400 sm:text-sm">
           {event.description}
         </p>
 
-        <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-          <MapPin className="h-4 w-4 text-primary-600 dark:text-primary-400" />
-          <span className="font-medium">{event.location}</span>
+        <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400 sm:text-sm">
+          <MapPin className="h-4 w-4 shrink-0 text-primary-600 dark:text-primary-400" />
+          <span className="line-clamp-1 font-medium">{event.location}</span>
         </div>
 
         {event.capacity ? (
-          <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-            <Users className="h-4 w-4 text-primary-600 dark:text-primary-400" />
+          <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400 sm:text-sm">
+            <Users className="h-4 w-4 shrink-0 text-primary-600 dark:text-primary-400" />
             <span className="font-medium">
               {event.volunteers_count ?? 0} / {event.capacity} volunteers
             </span>
@@ -95,7 +95,7 @@ export default function EventCard({ event }) {
 
         <Link
           to={`/events/${event.id}`}
-          className="group/btn inline-flex items-center gap-2 pt-2 font-semibold text-primary-600 transition-all hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+          className="group/btn inline-flex items-center gap-2 pt-1 text-sm font-semibold text-primary-600 transition-all hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 sm:pt-2 sm:text-base"
         >
           View Details
           <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />

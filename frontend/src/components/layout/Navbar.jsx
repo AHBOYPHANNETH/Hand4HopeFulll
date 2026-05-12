@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Bell, LogOut, Target, User } from 'lucide-react'
-import { BACKEND_ORIGIN } from '../../config'
 import { useAuth } from '../../context/AuthContext'
 import { ThemeToggle } from '../../context/ThemeContext'
 import NotificationDropdown from '../NotificationDropdown'
@@ -44,10 +43,6 @@ export default function Navbar() {
     .slice(0, 2)
     .join('')
     .toUpperCase()
-
-  function googleRedirect() {
-    window.location.href = `${BACKEND_ORIGIN}/auth/google/redirect`
-  }
 
   return (
     <header
@@ -165,9 +160,6 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Button variant="outline" size="sm" onClick={googleRedirect}>
-                  Google
-                </Button>
                 <Link to="/login">
                   <Button variant="ghost" size="sm" className="dark:text-slate-300 dark:hover:bg-slate-800">
                     Login
@@ -256,9 +248,6 @@ export default function Navbar() {
                   </div>
                 ) : (
                   <div className="space-y-2">
-                    <Button variant="outline" className="w-full" onClick={googleRedirect}>
-                      Sign in with Google
-                    </Button>
                     <Link to="/login" onClick={() => setOpen(false)}>
                       <Button variant="ghost" className="w-full dark:text-slate-300 dark:hover:bg-slate-800">
                         Login

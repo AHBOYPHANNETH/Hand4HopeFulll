@@ -152,10 +152,18 @@ export default function Footer() {
             © {new Date().getFullYear()} Hand4Hope. All rights reserved.
           </p>
           <div className="flex flex-wrap justify-center gap-6">
-            {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((label) => (
-              <a key={label} href="#" className="text-sm text-slate-600 transition-colors hover:text-primary-600 dark:text-slate-400 dark:hover:text-primary-400">
+            {[
+              { label: 'Privacy Policy', to: '/privacy' },
+              { label: 'Terms of Service', to: '/terms' },
+              { label: 'Cookie Policy', to: '/cookies' },
+            ].map(({ label, to }) => (
+              <Link
+                key={label}
+                to={to}
+                className="text-sm text-slate-600 transition-colors hover:text-primary-600 dark:text-slate-400 dark:hover:text-primary-400"
+              >
                 {label}
-              </a>
+              </Link>
             ))}
           </div>
         </motion.div>

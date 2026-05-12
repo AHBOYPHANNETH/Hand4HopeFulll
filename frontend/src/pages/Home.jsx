@@ -79,14 +79,14 @@ export default function Home() {
               </motion.div>
 
               <motion.div variants={itemVariants} className="space-y-4">
-                <h1 className="text-5xl font-display font-bold leading-tight tracking-tight text-slate-900 dark:text-slate-100 md:text-6xl">
+                <h1 className="text-4xl font-display font-bold leading-tight tracking-tight text-slate-900 dark:text-slate-100 sm:text-5xl md:text-6xl">
                   {heroTitle.split(' ').map((word, i) => (
                     <span key={i}>
                       {i % 2 === 1 ? <span className="gradient-text">{word} </span> : <span>{word} </span>}
                     </span>
                   ))}
                 </h1>
-                <p className="max-w-xl text-lg leading-relaxed text-slate-600 dark:text-slate-400 md:text-xl">
+                <p className="max-w-xl text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg md:text-xl">
                   {heroSubtitle}
                 </p>
               </motion.div>
@@ -146,17 +146,17 @@ export default function Home() {
       </section>
 
       {/* ── Statistics ── */}
-      <section className="border-t border-slate-200/50 bg-white py-16 dark:border-slate-700/50 dark:bg-slate-900 md:py-24">
+      <section className="border-t border-slate-200/50 bg-white py-12 dark:border-slate-700/50 dark:bg-slate-900 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
+          <div className="mb-8 text-center md:mb-12">
             <FadeInUp>
-              <h2 className="text-4xl font-display font-bold text-slate-900 dark:text-slate-100 md:text-5xl">
+              <h2 className="text-3xl font-display font-bold text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
                 Impact by the Numbers
               </h2>
             </FadeInUp>
           </div>
           <StaggerContainer>
-            <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-4 md:gap-8">
               {[
                 { icon: Users,      number: 500,   label: 'Children Supported', suffix: '+' },
                 { icon: Heart,      number: 1200,  label: 'Active Volunteers',  suffix: '+' },
@@ -165,20 +165,20 @@ export default function Home() {
               ].map((stat, i) => (
                 <StaggerItem key={i}>
                   <motion.div
-                    className="group card p-8 text-center"
+                    className="group card p-4 text-center sm:p-6 md:p-8"
                     whileHover={{ y: -5 }}
                     transition={{ type: 'spring', stiffness: 300 }}
                   >
                     <motion.div
-                      className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-100 to-primary-200 transition-all group-hover:from-primary-200 group-hover:to-primary-300 dark:from-primary-900/50 dark:to-primary-800/50"
+                      className="mx-auto mb-3 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-100 to-primary-200 transition-all group-hover:from-primary-200 group-hover:to-primary-300 dark:from-primary-900/50 dark:to-primary-800/50 sm:h-14 sm:w-14 md:mb-4 md:h-16 md:w-16"
                       whileHover={{ scale: 1.1 }}
                     >
-                      <stat.icon className="h-8 w-8 text-primary-600 dark:text-primary-400" />
+                      <stat.icon className="h-5 w-5 text-primary-600 dark:text-primary-400 sm:h-7 sm:w-7 md:h-8 md:w-8" />
                     </motion.div>
-                    <div className="text-4xl font-bold text-slate-900 dark:text-slate-100">
+                    <div className="text-2xl font-bold text-slate-900 dark:text-slate-100 sm:text-3xl md:text-4xl">
                       {stat.prefix}<CountUp end={stat.number} />{stat.suffix}
                     </div>
-                    <p className="mt-3 font-semibold text-slate-700 dark:text-slate-300">{stat.label}</p>
+                    <p className="mt-2 text-xs font-semibold text-slate-700 dark:text-slate-300 sm:text-sm md:mt-3 md:text-base">{stat.label}</p>
                   </motion.div>
                 </StaggerItem>
               ))}
@@ -188,20 +188,20 @@ export default function Home() {
       </section>
 
       {/* ── Our Programs ── */}
-      <section className="border-t border-slate-200/50 bg-gradient-to-b from-slate-50 to-white py-16 dark:border-slate-700/50 dark:from-slate-800 dark:to-slate-900 md:py-24">
+      <section className="border-t border-slate-200/50 bg-gradient-to-b from-slate-50 to-white py-12 dark:border-slate-700/50 dark:from-slate-800 dark:to-slate-900 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
-            <div className="mb-12 text-center">
-              <h2 className="text-4xl font-display font-bold text-slate-900 dark:text-slate-100 md:text-5xl">
+            <div className="mb-8 text-center md:mb-12">
+              <h2 className="text-3xl font-display font-bold text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
                 Our Programs
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+              <p className="mx-auto mt-3 max-w-2xl text-base text-slate-600 dark:text-slate-400 md:mt-4 md:text-lg">
                 A holistic set of services designed around the needs of children with intellectual disabilities and their families.
               </p>
             </div>
           </FadeInUp>
           <StaggerContainer>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
               {[
                 { icon: Heart,         title: 'Daycare Support',         desc: 'Safe, nurturing daily care for children with intellectual disabilities.' },
                 { icon: GraduationCap, title: 'Special Education',       desc: 'Tailored learning plans focused on each child’s strengths.' },
@@ -214,17 +214,17 @@ export default function Home() {
               ].map((program, i) => (
                 <StaggerItem key={i}>
                   <motion.div
-                    className="card group h-full p-6"
+                    className="card group h-full p-4 sm:p-6"
                     whileHover={{ y: -6 }}
                     transition={{ type: 'spring', stiffness: 300 }}
                   >
-                    <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-100 to-primary-200 transition-all group-hover:from-primary-200 group-hover:to-primary-300 dark:from-primary-900/50 dark:to-primary-800/50">
-                      <program.icon className="h-6 w-6 text-primary-600 dark:text-primary-400" />
+                    <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-100 to-primary-200 transition-all group-hover:from-primary-200 group-hover:to-primary-300 dark:from-primary-900/50 dark:to-primary-800/50 sm:mb-4 sm:h-12 sm:w-12">
+                      <program.icon className="h-5 w-5 text-primary-600 dark:text-primary-400 sm:h-6 sm:w-6" />
                     </div>
-                    <h3 className="font-display text-lg font-semibold text-slate-900 dark:text-slate-100">
+                    <h3 className="font-display text-sm font-semibold text-slate-900 dark:text-slate-100 sm:text-base md:text-lg">
                       {program.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                    <p className="mt-1.5 text-xs leading-relaxed text-slate-600 dark:text-slate-400 sm:mt-2 sm:text-sm">
                       {program.desc}
                     </p>
                   </motion.div>
@@ -236,32 +236,32 @@ export default function Home() {
       </section>
 
       {/* ── Featured Events ── */}
-      <section className="bg-gradient-to-b from-white to-slate-50 py-16 dark:from-slate-900 dark:to-slate-800 md:py-24">
+      <section className="bg-gradient-to-b from-white to-slate-50 py-12 dark:from-slate-900 dark:to-slate-800 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
-            <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+            <div className="mb-6 flex flex-col items-start justify-between gap-3 sm:mb-8 sm:gap-4 md:mb-12 md:flex-row md:items-end md:gap-6">
               <div>
-                <h2 className="text-4xl font-display font-bold text-slate-900 dark:text-slate-100 md:text-5xl">
+                <h2 className="text-2xl font-display font-bold text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
                   Featured Events
                 </h2>
-                <p className="mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+                <p className="mt-2 max-w-2xl text-sm text-slate-600 dark:text-slate-400 sm:mt-3 sm:text-base md:mt-4 md:text-lg">
                   Join meaningful gatherings and connect with our community
                 </p>
               </div>
               <Link
                 to="/events"
-                className="group inline-flex items-center gap-2 font-semibold text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+                className="group inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 sm:gap-2 sm:text-base"
               >
                 View all events
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 sm:h-5 sm:w-5" />
               </Link>
             </div>
           </FadeInUp>
           <StaggerContainer>
-            <div className="grid gap-8 md:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 md:gap-8">
               {preview.length === 0 ? (
                 <StaggerItem>
-                  <p className="py-12 text-center text-lg text-slate-600 dark:text-slate-400 md:col-span-3">
+                  <p className="py-12 text-center text-lg text-slate-600 dark:text-slate-400 sm:col-span-2 md:col-span-3">
                     New events are being scheduled — check back soon!
                   </p>
                 </StaggerItem>
@@ -278,12 +278,12 @@ export default function Home() {
       </section>
 
       {/* ── Community ── */}
-      <section className="border-y border-slate-200/50 bg-gradient-to-r from-primary-50/50 via-white to-secondary-50/50 py-16 dark:border-slate-700/50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 md:py-24">
+      <section className="border-y border-slate-200/50 bg-gradient-to-r from-primary-50/50 via-white to-secondary-50/50 py-12 dark:border-slate-700/50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <FadeInUp>
               <div className="space-y-6">
-                <h2 className="text-4xl font-display font-bold text-slate-900 dark:text-slate-100 md:text-5xl">
+                <h2 className="text-3xl font-display font-bold text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
                   Creating a Community of Volunteers
                 </h2>
                 <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
@@ -360,20 +360,20 @@ export default function Home() {
       </section>
 
       {/* ── Donation tiers ── */}
-      <section className="bg-white py-16 dark:bg-slate-900 md:py-24">
+      <section className="bg-white py-10 dark:bg-slate-900 sm:py-12 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
-            <div className="mb-12 text-center">
-              <h2 className="text-4xl font-display font-bold text-slate-900 dark:text-slate-100 md:text-5xl">
+            <div className="mb-6 text-center sm:mb-8 md:mb-12">
+              <h2 className="text-2xl font-display font-bold text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
                 Support Our Mission
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+              <p className="mx-auto mt-2 max-w-2xl text-sm text-slate-600 dark:text-slate-400 sm:mt-3 sm:text-base md:mt-4 md:text-lg">
                 Your donation directly supports programs, training, and care for children with intellectual disabilities.
               </p>
             </div>
           </FadeInUp>
           <StaggerContainer>
-            <div className="grid gap-8 md:grid-cols-3">
+            <div className="grid gap-4 sm:gap-6 md:grid-cols-3 md:gap-8">
               {[
                 { price: 25,  title: 'Supplies Pack',   desc: 'Educational materials for one month', icon: BookOpen },
                 { price: 100, title: 'Program Support', desc: 'Weekly enrichment activities',        icon: Target, popular: true },
@@ -381,23 +381,23 @@ export default function Home() {
               ].map((plan, i) => (
                 <StaggerItem key={i}>
                   <motion.div
-                    className={`card relative overflow-hidden p-8 transition-all ${plan.popular ? 'ring-2 ring-primary-500 md:scale-105' : ''}`}
+                    className={`card relative overflow-hidden p-4 transition-all sm:p-6 md:p-8 ${plan.popular ? 'ring-2 ring-primary-500 md:scale-105' : ''}`}
                     whileHover={{ y: -10 }}
                   >
                     {plan.popular && (
                       <div className="absolute -top-2 left-1/2 -translate-x-1/2">
-                        <span className="inline-block rounded-full bg-gradient-to-r from-accent-500 to-primary-600 px-4 py-1 text-xs font-bold text-white">
+                        <span className="inline-block rounded-full bg-gradient-to-r from-accent-500 to-primary-600 px-3 py-0.5 text-[10px] font-bold text-white sm:px-4 sm:py-1 sm:text-xs">
                           Most Popular
                         </span>
                       </div>
                     )}
-                    <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-100 dark:bg-primary-900/40">
-                      <plan.icon className="h-8 w-8 text-primary-600 dark:text-primary-400" />
+                    <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary-100 dark:bg-primary-900/40 sm:mb-4 sm:h-14 sm:w-14 sm:rounded-2xl">
+                      <plan.icon className="h-5 w-5 text-primary-600 dark:text-primary-400 sm:h-8 sm:w-8" />
                     </div>
-                    <div className="text-4xl font-bold text-slate-900 dark:text-slate-100">${plan.price}</div>
-                    <p className="mt-2 font-semibold text-slate-900 dark:text-slate-100">{plan.title}</p>
-                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{plan.desc}</p>
-                    <Link to="/donate" className="mt-6 block">
+                    <div className="text-2xl font-bold text-slate-900 dark:text-slate-100 sm:text-4xl">${plan.price}</div>
+                    <p className="mt-1 text-sm font-semibold text-slate-900 dark:text-slate-100 sm:mt-2 sm:text-base">{plan.title}</p>
+                    <p className="mt-1 text-xs text-slate-600 dark:text-slate-400 sm:mt-2 sm:text-sm">{plan.desc}</p>
+                    <Link to="/donate" className="mt-4 block sm:mt-6">
                       <Button className="w-full" variant={plan.popular ? 'gradient' : 'primary'}>
                         Donate Now
                       </Button>
@@ -411,38 +411,38 @@ export default function Home() {
       </section>
 
       {/* ── How to Get Started ── */}
-      <section className="bg-slate-50 py-16 dark:bg-slate-800 md:py-24">
+      <section className="bg-slate-50 py-10 dark:bg-slate-800 sm:py-12 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
-            <div className="mb-12 text-center">
-              <h2 className="text-4xl font-display font-bold text-slate-900 dark:text-slate-100 md:text-5xl">
+            <div className="mb-6 text-center sm:mb-8 md:mb-12">
+              <h2 className="text-2xl font-display font-bold text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
                 How to Get Started
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+              <p className="mx-auto mt-2 max-w-2xl text-sm text-slate-600 dark:text-slate-400 sm:mt-3 sm:text-base md:mt-4 md:text-lg">
                 Join Hand4Hope in just a few simple steps
               </p>
             </div>
           </FadeInUp>
           <StaggerContainer>
-            <div className="grid gap-8 md:grid-cols-3">
+            <div className="grid gap-4 sm:gap-6 md:grid-cols-3 md:gap-8">
               {[
                 { step: 1, title: 'Create Your Profile', desc: 'Sign up and tell us about yourself',        link: '/register', linkText: 'Register now' },
                 { step: 2, title: 'Complete Training',    desc: 'Participate in our comprehensive training',  link: '/events',   linkText: 'View training' },
                 { step: 3, title: 'Start Making Impact',  desc: 'Join events and volunteer at programs',      link: '/events',   linkText: 'Find events' },
               ].map((item, i) => (
                 <StaggerItem key={i}>
-                  <motion.div className="card relative p-8 text-center" whileHover={{ y: -8 }}>
+                  <motion.div className="card relative p-4 text-center sm:p-6 md:p-8" whileHover={{ y: -8 }}>
                     <motion.div
-                      className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-600 to-primary-700 font-display text-2xl font-bold text-white"
+                      className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary-600 to-primary-700 font-display text-lg font-bold text-white sm:mb-6 sm:h-14 sm:w-14 sm:rounded-2xl sm:text-2xl"
                       whileHover={{ scale: 1.1 }}
                     >
                       {item.step}
                     </motion.div>
-                    <h3 className="font-display font-semibold text-slate-900 dark:text-slate-100 text-lg">{item.title}</h3>
-                    <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">{item.desc}</p>
+                    <h3 className="font-display text-base font-semibold text-slate-900 dark:text-slate-100 sm:text-lg">{item.title}</h3>
+                    <p className="mt-1.5 text-xs text-slate-600 dark:text-slate-400 sm:mt-3 sm:text-sm">{item.desc}</p>
                     <Link
                       to={item.link}
-                      className="group mt-6 inline-flex items-center gap-2 font-semibold text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+                      className="group mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 sm:mt-6 sm:gap-2 sm:text-base"
                     >
                       {item.linkText}
                       <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -456,33 +456,33 @@ export default function Home() {
       </section>
 
       {/* ── Testimonials ── */}
-      <section className="bg-white py-16 dark:bg-slate-900 md:py-24">
+      <section className="bg-white py-10 dark:bg-slate-900 sm:py-12 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
-            <div className="mb-12 text-center">
-              <h2 className="text-4xl font-display font-bold text-slate-900 dark:text-slate-100 md:text-5xl">
+            <div className="mb-6 text-center sm:mb-8 md:mb-12">
+              <h2 className="text-2xl font-display font-bold text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
                 Voices from Our Community
               </h2>
-              <p className="mt-4 text-lg text-slate-600 dark:text-slate-400">
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 sm:mt-3 sm:text-base md:mt-4 md:text-lg">
                 Hear from volunteers and donors who are making a difference
               </p>
             </div>
           </FadeInUp>
           <StaggerContainer>
-            <div className="grid gap-8 md:grid-cols-3">
+            <div className="grid gap-4 sm:gap-6 md:grid-cols-3 md:gap-8">
               {[
                 { name: 'Sarah Johnson', role: 'Teacher & Volunteer', quote: 'Volunteering with Hand4Hope has been the most rewarding experience of my life.' },
                 { name: 'Mark Chen',     role: 'New Volunteer',       quote: 'The training provided is excellent. I felt well-prepared from day one.' },
                 { name: 'Emily Brown',   role: 'Donor',               quote: 'Impressed by how transparent they are with funds and their impact.' },
               ].map((t, i) => (
                 <StaggerItem key={i}>
-                  <motion.div className="card p-8" whileHover={{ y: -5 }}>
-                    <div className="mb-4 flex gap-1 text-accent-400">
-                      {[...Array(5)].map((_, j) => <Star key={j} className="h-4 w-4 fill-accent-400 text-accent-400" />)}
+                  <motion.div className="card p-4 sm:p-6 md:p-8" whileHover={{ y: -5 }}>
+                    <div className="mb-2 flex gap-1 text-accent-400 sm:mb-4">
+                      {[...Array(5)].map((_, j) => <Star key={j} className="h-3.5 w-3.5 fill-accent-400 text-accent-400 sm:h-4 sm:w-4" />)}
                     </div>
-                    <p className="mb-6 text-lg italic text-slate-700 dark:text-slate-300">"{t.quote}"</p>
-                    <p className="font-semibold text-slate-900 dark:text-slate-100">{t.name}</p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">{t.role}</p>
+                    <p className="mb-3 text-sm italic text-slate-700 dark:text-slate-300 sm:mb-6 sm:text-base md:text-lg">"{t.quote}"</p>
+                    <p className="text-sm font-semibold text-slate-900 dark:text-slate-100 sm:text-base">{t.name}</p>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 sm:text-sm">{t.role}</p>
                   </motion.div>
                 </StaggerItem>
               ))}
@@ -492,17 +492,17 @@ export default function Home() {
       </section>
 
       {/* ── FAQ ── */}
-      <section className="border-t border-slate-200/50 bg-gradient-to-br from-slate-50 to-slate-100 py-16 dark:border-slate-700/50 dark:from-slate-800 dark:to-slate-900 md:py-24">
+      <section className="border-t border-slate-200/50 bg-gradient-to-br from-slate-50 to-slate-100 py-10 dark:border-slate-700/50 dark:from-slate-800 dark:to-slate-900 sm:py-12 md:py-24">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
-            <div className="mb-12 text-center">
-              <h2 className="text-4xl font-display font-bold text-slate-900 dark:text-slate-100 md:text-5xl">
+            <div className="mb-6 text-center sm:mb-8 md:mb-12">
+              <h2 className="text-2xl font-display font-bold text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
                 Frequently Asked Questions
               </h2>
             </div>
           </FadeInUp>
           <StaggerContainer>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {[
                 { q: 'Do I need prior experience to volunteer?',  a: 'No! We welcome volunteers of all backgrounds. We provide comprehensive training for all roles.' },
                 { q: 'How much time do I need to commit?',        a: "We offer flexible volunteering. You can start with a few hours a month and increase as you're able." },
@@ -511,15 +511,15 @@ export default function Home() {
                 { q: "Can I donate if I can't volunteer?",        a: 'Absolutely! Donations are just as valuable and help us continue our mission.' },
               ].map((faq, i) => (
                 <StaggerItem key={i}>
-                  <details className="group card cursor-pointer p-6">
-                    <summary className="flex list-none items-center justify-between font-semibold text-slate-900 dark:text-slate-100">
-                      <span className="flex items-center gap-3">
+                  <details className="group card cursor-pointer p-4 sm:p-6">
+                    <summary className="flex list-none items-center justify-between gap-3 text-sm font-semibold text-slate-900 dark:text-slate-100 sm:text-base">
+                      <span className="flex items-start gap-2 sm:items-center sm:gap-3">
                         <span className="font-bold text-primary-600 dark:text-primary-400">?</span>
                         {faq.q}
                       </span>
-                      <ChevronRight className="h-5 w-5 flex-shrink-0 text-primary-600 transition-transform group-open:rotate-90 dark:text-primary-400" />
+                      <ChevronRight className="h-4 w-4 shrink-0 text-primary-600 transition-transform group-open:rotate-90 dark:text-primary-400 sm:h-5 sm:w-5" />
                     </summary>
-                    <p className="mt-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{faq.a}</p>
+                    <p className="mt-3 text-xs leading-relaxed text-slate-600 dark:text-slate-400 sm:mt-4 sm:text-sm">{faq.a}</p>
                   </details>
                 </StaggerItem>
               ))}
@@ -529,10 +529,10 @@ export default function Home() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="relative overflow-hidden border-t border-slate-200/50 bg-gradient-to-r from-primary-600 to-secondary-600 py-16 dark:border-slate-700/50 md:py-24">
+      <section className="relative overflow-hidden border-t border-slate-200/50 bg-gradient-to-r from-primary-600 to-secondary-600 py-12 dark:border-slate-700/50 md:py-24">
         <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <FadeInUp>
-            <h2 className="text-4xl font-display font-bold text-white md:text-5xl">
+            <h2 className="text-3xl font-display font-bold text-white sm:text-4xl md:text-5xl">
               Ready to Make a Difference?
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-white/90">

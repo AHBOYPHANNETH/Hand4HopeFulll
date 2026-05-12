@@ -173,4 +173,24 @@
   .table-responsive {
     @apply w-full overflow-x-auto rounded-2xl;
   }
+
+  /* Legal page typography (lightweight prose substitute) */
+  .legal-prose p {
+    @apply my-3 leading-relaxed;
+  }
+  .legal-prose ul {
+    @apply my-3 list-disc space-y-1.5 pl-6;
+  }
+  .legal-prose li::marker {
+    @apply text-primary-500;
+  }
+  .legal-prose strong {
+    @apply font-semibold text-slate-900 dark:text-slate-100;
+  }
+  .legal-prose a {
+    @apply text-primary-600 transition-colors hover:underline dark:text-primary-400;
+  }
+  .legal-prose em {
+    @apply italic;
+  }
 }

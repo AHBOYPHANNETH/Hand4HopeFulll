@@ -1,4 +1,4 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import { useAuth } from '../../context/AuthContext'
@@ -6,15 +6,13 @@ import Spinner from '../ui/Spinner'
 
 export default function Layout() {
   const { bootstrapping, isAuthenticated, isAdmin } = useAuth()
-  const location = useLocation()
 
   if (bootstrapping) {
     return <Spinner label="Checking session…" />
   }
 
   // Admins belong in the admin panel — redirect them away from the public site.
-  // Skip the OAuth callback so it can finish setting auth state before redirecting.
-  if (isAuthenticated && isAdmin && location.pathname !== '/auth/google/callback') {
+  if (isAuthenticated && isAdmin) {
     return <Navigate to="/admin" replace />
   }
 
