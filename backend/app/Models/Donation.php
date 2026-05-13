@@ -15,8 +15,10 @@ class Donation extends Model
         'status',
         'md5',
         'qr_string',
+        'deeplink',
         'bakong_hash',
         'paid_at',
+        'expires_at',
     ];
 
     protected $hidden = [
@@ -28,11 +30,19 @@ class Donation extends Model
         return [
             'amount' => 'decimal:2',
             'paid_at' => 'datetime',
+            'expires_at' => 'datetime',
         ];
     }
 
     public function isPaid(): bool
     {
         return $this->status === 'paid';
+    }
+
+    public function isExpired(): bool
+    {
+        return $this->status === 'pending'
+            && $this->expires_at !== null
+            && $this->expires_at->isPast();
     }
 }

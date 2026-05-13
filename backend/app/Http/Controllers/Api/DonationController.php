@@ -25,7 +25,7 @@ class DonationController extends Controller
             'message' => ['nullable', 'string', 'max:2000'],
         ]);
 
-        $data['currency'] = $data['currency'] ?? 'USD';
+        $data['currency'] = $data['currency'] ?? (string) config('bakong.currency');
         $data['status'] = 'paid';
         $data['paid_at'] = now();
 
@@ -47,26 +47,31 @@ class DonationController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email'],
             'amount' => ['required', 'numeric', 'min:0.01'],
-            'currency' => ['required', 'in:USD,KHR'],
+            'currency' => ['nullable', 'in:USD,KHR'],
             'message' => ['nullable', 'string', 'max:2000'],
         ]);
 
-        $accountId = (string) config('bakong.account_id');
-        if ($accountId === '') {
+        $data['currency'] = $data['currency'] ?? (string) config('bakong.currency');
+
+        $merchantId = (string) config('bakong.merchant_id');
+        if ($merchantId === '') {
             return response()->json([
-                'message' => 'KHQR is not configured on the server. Set BAKONG_ACCOUNT_ID.',
+                'message' => 'KHQR is not configured on the server. Set BAKONG_MERCHANT_ID.',
             ], 503);
         }
 
+        $expiryMinutes = max(1, (int) config('bakong.intent_expiry_minutes'));
+        $expiresAt = now()->addMinutes($expiryMinutes);
         $instructionRef = strtoupper(Str::random(8));
 
         $donation = Donation::create([
             ...$data,
             'status' => 'pending',
+            'expires_at' => $expiresAt,
         ]);
 
         $qr = KhqrBuilder::build([
-            'bakongAccountId' => $accountId,
+            'bakongAccountId' => $merchantId,
             'merchantName' => (string) config('bakong.merchant_name'),
             'merchantCity' => (string) config('bakong.merchant_city'),
             'merchantCategoryCode' => (string) config('bakong.merchant_category_code'),
@@ -77,18 +82,28 @@ class DonationController extends Controller
             'terminalLabel' => (string) config('bakong.terminal_label'),
         ]);
 
+        $deeplink = BakongClient::fromConfig()->generateDeeplinkByQr(
+            $qr['qr'],
+            (string) config('bakong.app_name'),
+            (string) config('bakong.app_icon_url'),
+            (string) config('bakong.app_callback_url'),
+        );
+
         $donation->update([
             'qr_string' => $qr['qr'],
             'md5' => $qr['md5'],
+            'deeplink' => $deeplink,
         ]);
 
         return response()->json([
             'donation_id' => $donation->id,
             'qr' => $qr['qr'],
             'md5' => $qr['md5'],
+            'deeplink' => $deeplink,
             'amount' => (float) $donation->amount,
             'currency' => $donation->currency,
-            'expires_in' => 5 * 60, // suggested poll window
+            'expires_at' => $expiresAt->toIso8601String(),
+            'expires_in' => $expiryMinutes * 60,
         ], 201);
     }
 
@@ -98,6 +113,10 @@ class DonationController extends Controller
      */
     public function khqrStatus(Donation $donation): JsonResponse
     {
+        if ($donation->isExpired()) {
+            $donation->update(['status' => 'expired']);
+        }
+
         if ($donation->status === 'pending' && $donation->md5) {
             $bakong = BakongClient::fromConfig();
             $resp = $bakong->checkTransactionByMd5($donation->md5);
@@ -115,6 +134,7 @@ class DonationController extends Controller
         return response()->json([
             'status' => $donation->status,
             'paid_at' => $donation->paid_at?->toIso8601String(),
+            'expires_at' => $donation->expires_at?->toIso8601String(),
             'amount' => (float) $donation->amount,
             'currency' => $donation->currency,
         ]);

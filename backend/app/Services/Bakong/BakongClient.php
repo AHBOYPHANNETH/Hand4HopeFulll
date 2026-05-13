@@ -47,6 +47,32 @@ class BakongClient
         return $this->post('/v1/check_bakong_account', ['accountId' => $accountId]);
     }
 
+    /**
+     * Ask Bakong to mint a deeplink shortLink for the given KHQR. Returns the
+     * shortLink URL, or null when Bakong's deeplink provider is unavailable
+     * (errorCode 4 / "Error occurred on requesting deeplink from provider").
+     *
+     * We can't construct the URL locally — Bakong's CloudFront blocks any
+     * deeplink URL that hasn't been registered through this endpoint.
+     */
+    public function generateDeeplinkByQr(string $qr, string $appName, string $appIconUrl, string $appCallbackUrl): ?string
+    {
+        $resp = $this->post('/v1/generate_deeplink_by_qr', [
+            'qr' => $qr,
+            'sourceInfo' => [
+                'appName' => $appName,
+                'appIconUrl' => $appIconUrl,
+                'appDeepLinkCallback' => $appCallbackUrl,
+            ],
+        ]);
+
+        if (! $resp || (int) ($resp['responseCode'] ?? -1) !== 0) {
+            return null;
+        }
+
+        return $resp['data']['shortLink'] ?? null;
+    }
+
     private function post(string $path, array $body): ?array
     {
         if ($this->baseUrl === '' || $this->token === '') {

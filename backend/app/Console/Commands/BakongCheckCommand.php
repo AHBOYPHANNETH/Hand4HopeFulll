@@ -14,10 +14,10 @@ class BakongCheckCommand extends Command
 
     public function handle(): int
     {
-        $account = (string) ($this->argument('account') ?: config('bakong.account_id'));
+        $account = (string) ($this->argument('account') ?: config('bakong.merchant_id'));
 
         if ($account === '') {
-            $this->error('No account given. Pass one as argument or set BAKONG_ACCOUNT_ID in .env.');
+            $this->error('No account given. Pass one as argument or set BAKONG_MERCHANT_ID in .env.');
             return self::FAILURE;
         }
 

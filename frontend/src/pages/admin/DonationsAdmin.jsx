@@ -33,8 +33,31 @@ export default function DonationsAdmin() {
     [donations, search]
   )
 
-  const total = filtered.reduce((sum, d) => sum + Number(d.amount || 0), 0)
-  const avg = filtered.length ? total / filtered.length : 0
+  const byCurrency = useMemo(() => {
+    const buckets = {}
+    for (const d of filtered) {
+      const code = (d.currency || 'USD').toUpperCase()
+      const amount = Number(d.amount || 0)
+      if (!buckets[code]) buckets[code] = { total: 0, count: 0 }
+      buckets[code].total += amount
+      buckets[code].count += 1
+    }
+    return Object.entries(buckets)
+      .map(([code, { total, count }]) => ({
+        code,
+        total,
+        count,
+        avg: count ? total / count : 0,
+      }))
+      .sort((a, b) => (a.code === 'USD' ? -1 : b.code === 'USD' ? 1 : a.code.localeCompare(b.code)))
+  }, [filtered])
+
+  function formatAmount(code, amount) {
+    if (code === 'USD') {
+      return `$${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+    }
+    return `${code} ${amount.toLocaleString(undefined, { maximumFractionDigits: 0 })}`
+  }
 
   function exportCsv() {
     const rows = [
@@ -74,15 +97,35 @@ export default function DonationsAdmin() {
         <StatCard
           icon={DollarSign}
           label="Total raised"
-          value={`$${total.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`}
+          value={
+            byCurrency.length === 0 ? (
+              '—'
+            ) : (
+              <span className="flex flex-col gap-0.5">
+                {byCurrency.map((b) => (
+                  <span key={b.code}>{formatAmount(b.code, b.total)}</span>
+                ))}
+              </span>
+            )
+          }
           hint={loading ? 'Loading…' : `${filtered.length} donations`}
           iconClass="bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400"
         />
         <StatCard
           icon={DollarSign}
           label="Average gift"
-          value={`$${avg.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`}
-          hint="Per donation"
+          value={
+            byCurrency.length === 0 ? (
+              '—'
+            ) : (
+              <span className="flex flex-col gap-0.5">
+                {byCurrency.map((b) => (
+                  <span key={b.code}>{formatAmount(b.code, b.avg)}</span>
+                ))}
+              </span>
+            )
+          }
+          hint="Per donation, by currency"
           iconClass="bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
         />
         <StatCard

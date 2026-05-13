@@ -9,9 +9,9 @@ import {
   CheckCircle2,
   Loader2,
   Smartphone,
-  RefreshCw,
   Copy,
   Check,
+  AlertCircle,
 } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Alert from '../components/ui/Alert'
@@ -183,8 +183,6 @@ export default function Donate() {
                 session={session}
                 onPaid={() => setStep('success')}
                 onCancel={reset}
-                onRegenerate={generate}
-                regenerating={loading}
               />
             )}
 
@@ -317,11 +315,11 @@ function DonationForm({ form, setForm, pickPreset, onSubmit, loading, error }) {
       <Button type="submit" className="w-full py-3" disabled={loading}>
         {loading ? (
           <>
-            <Loader2 className="h-4 w-4 animate-spin" /> Generating KHQR…
+            <Loader2 className="h-4 w-4 animate-spin" /> PAY WITH KHQR…
           </>
         ) : (
           <>
-            Generate KHQR <ArrowRight className="h-4 w-4" />
+            PAY WITH KHQR <ArrowRight className="h-4 w-4" />
           </>
         )}
       </Button>
@@ -349,12 +347,15 @@ function Field({ id, label, icon: Icon, ...props }) {
   )
 }
 
-function KhqrPayment({ session, onPaid, onCancel, onRegenerate, regenerating }) {
+function KhqrPayment({ session, onPaid, onCancel }) {
   const [secondsLeft, setSecondsLeft] = useState(session.expires_in ?? 300)
   const [copied, setCopied] = useState(false)
   const stoppedRef = useRef(false)
 
-  const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=8&data=${encodeURIComponent(
+  // ecc=M keeps the QR readable for dense KHQR payloads; ecc=H pushes
+  // the symbol to a higher version and some bank scanners (ACLEDA, Wing)
+  // fail to lock on. margin=4 is the EMVCo quiet-zone minimum.
+  const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=640x640&margin=4&ecc=M&data=${encodeURIComponent(
     session.qr,
   )}`
 
@@ -421,10 +422,10 @@ function KhqrPayment({ session, onPaid, onCancel, onRegenerate, regenerating }) 
     >
       <div>
         <h2 className="font-display text-2xl font-bold text-slate-900 dark:text-slate-100">
-          Scan to pay
+          Pay with KHQR
         </h2>
         <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-          Open any KHQR-supported app and scan the code below.
+          Scan with any KHQR-supported app, or tap the button below if you're on your phone.
         </p>
       </div>
 
@@ -457,7 +458,7 @@ function KhqrPayment({ session, onPaid, onCancel, onRegenerate, regenerating }) 
       >
         {expired ? (
           <>
-            <RefreshCw className="h-4 w-4" /> QR expired. Generate a new one to continue.
+            <AlertCircle className="h-4 w-4" /> This QR has expired. Cancel and start a new donation.
           </>
         ) : (
           <>
@@ -467,22 +468,6 @@ function KhqrPayment({ session, onPaid, onCancel, onRegenerate, regenerating }) 
       </div>
 
       <div className="flex flex-col gap-2 sm:flex-row">
-        <button
-          type="button"
-          onClick={onRegenerate}
-          disabled={regenerating}
-          className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-linear-to-r from-primary-600 to-secondary-600 px-4 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {regenerating ? (
-            <>
-              <Loader2 className="h-4 w-4 animate-spin" /> Generating…
-            </>
-          ) : (
-            <>
-              <RefreshCw className="h-4 w-4" /> {expired ? 'New QR' : 'Generate new QR'}
-            </>
-          )}
-        </button>
         <button
           type="button"
           onClick={copyQr}
