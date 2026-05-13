@@ -161,7 +161,11 @@ export default function Navbar() {
             ) : (
               <>
                 <Link to="/login">
-                  <Button variant="ghost" size="sm" className="dark:text-slate-300 dark:hover:bg-slate-800">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="bg-primary-50 text-primary-700 hover:bg-primary-100 dark:bg-primary-900/30 dark:text-primary-300 dark:hover:bg-primary-900/50"
+                  >
                     Login
                   </Button>
                 </Link>
@@ -249,7 +253,10 @@ export default function Navbar() {
                 ) : (
                   <div className="space-y-2">
                     <Link to="/login" onClick={() => setOpen(false)}>
-                      <Button variant="ghost" className="w-full dark:text-slate-300 dark:hover:bg-slate-800">
+                      <Button
+                        variant="ghost"
+                        className="w-full bg-primary-50 text-primary-700 hover:bg-primary-100 dark:bg-primary-900/30 dark:text-primary-300 dark:hover:bg-primary-900/50"
+                      >
                         Login
                       </Button>
                     </Link>

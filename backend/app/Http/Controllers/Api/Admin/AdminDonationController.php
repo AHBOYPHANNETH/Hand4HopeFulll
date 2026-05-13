@@ -9,6 +9,11 @@ class AdminDonationController extends Controller
 {
     public function index()
     {
-        return response()->json(Donation::orderByDesc('created_at')->limit(100)->get());
+        return response()->json(
+            Donation::where('status', 'paid')
+                ->orderByDesc('paid_at')
+                ->limit(100)
+                ->get()
+        );
     }
 }

@@ -15,8 +15,8 @@ class AdminAnalyticsController extends Controller
     {
         return response()->json([
             'events_count' => Event::count(),
-            'donations_count' => Donation::count(),
-            'donations_total_amount' => (float) Donation::sum('amount'),
+            'donations_count' => Donation::where('status', 'paid')->count(),
+            'donations_total_amount' => (float) Donation::where('status', 'paid')->sum('amount'),
             'contacts_count' => Contact::count(),
             'volunteer_signups_count' => (int) DB::table('event_volunteers')->count(),
             'users_count' => User::count(),

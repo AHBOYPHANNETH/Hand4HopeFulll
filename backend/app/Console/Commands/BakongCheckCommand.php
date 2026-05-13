@@ -68,6 +68,28 @@ class BakongCheckCommand extends Command
         $this->line($qr['qr']);
         $this->line('MD5: ' . $qr['md5']);
 
+        $imageUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=8&data=' . rawurlencode($qr['qr']);
+        $this->newLine();
+        $this->line('Scan this URL to see the QR image (Ctrl+click in most terminals):');
+        $this->line($imageUrl);
+
+        $this->parseAndPrintTlv($qr['qr']);
+
         return self::SUCCESS;
+    }
+
+    private function parseAndPrintTlv(string $qr): void
+    {
+        $this->newLine();
+        $this->line('Decoded TLV:');
+        $i = 0;
+        $n = strlen($qr);
+        while ($i + 4 <= $n) {
+            $tag = substr($qr, $i, 2);
+            $len = (int) substr($qr, $i + 2, 2);
+            $value = substr($qr, $i + 4, $len);
+            $this->line(sprintf('  %s (%02d) %s', $tag, $len, $value));
+            $i += 4 + $len;
+        }
     }
 }
