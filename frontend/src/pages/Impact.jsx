@@ -23,18 +23,18 @@ export default function Impact() {
   if (loading) return <Spinner />
 
   const stats = [
-    { label: 'Children supported annually', value: contents?.impact_stat_children || '—' },
-    { label: 'Active volunteers', value: contents?.impact_stat_volunteers || '—' },
-    { label: 'Care & learning sessions', value: contents?.impact_stat_sessions || '—' },
+    { label: 'Kids reached this year',  value: contents?.impact_stat_children || '—' },
+    { label: 'People who keep showing up', value: contents?.impact_stat_volunteers || '—' },
+    { label: 'Hours given by volunteers',  value: contents?.impact_stat_sessions || '—' },
   ]
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
       <header className="max-w-3xl space-y-4">
-        <p className="text-sm font-semibold uppercase tracking-wide text-teal-700">Impact</p>
-        <h1 className="text-4xl font-semibold text-stone-900">Evidence of belonging</h1>
+        <p className="text-sm font-semibold uppercase tracking-wide text-teal-700">What we&apos;ve done</p>
+        <h1 className="text-4xl font-semibold text-stone-900">A pile of Saturdays adds up</h1>
         <p className="text-lg text-stone-600">
-          Behind every statistic is a family gaining respite, a teacher adapting a lesson, or a neighbor choosing inclusion.
+          We don&apos;t love putting things in numbers. But people ask, so here you go. Behind each one is a specific morning, a specific street, and specific people who showed up.
         </p>
       </header>
 
@@ -48,7 +48,7 @@ export default function Impact() {
       </section>
 
       <section className="mt-16 space-y-8">
-        <h2 className="text-2xl font-semibold text-stone-900">Stories from families & volunteers</h2>
+        <h2 className="text-2xl font-semibold text-stone-900">A few people who&apos;ve been around a while</h2>
         <div className="grid gap-6 md:grid-cols-2">
           {testimonials.map((t, idx) => (
             <figure key={idx} className="rounded-3xl border border-stone-100 bg-stone-50 p-8 shadow-inner">

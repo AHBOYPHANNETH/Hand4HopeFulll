@@ -6,13 +6,15 @@
 **Volunteer:** {{ $user->name }} ({{ $user->email }})  
 **Date:** {{ $event->starts_at->format('M j, Y g:i A') }}
 @else
-# You are signed up!
+# You're on the list
 
 Hi {{ $user->name }},
 
-Thank you for volunteering for **{{ $event->title }}** on {{ $event->starts_at->format('M j, Y') }}.
+We've got you down for **{{ $event->title }}** on {{ $event->starts_at->format('M j, Y') }}.
 
-We will share more details closer to the date.
+A couple of days before, we'll send the meeting spot and what to wear. If something comes up and you can't make it, just reply to this email.
+
+See you there.
 
 — Hand4Hope
 @endif

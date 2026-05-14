@@ -63,7 +63,7 @@ export default function Footer() {
               Hand4Hope
             </Link>
             <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-              Building inclusive communities where every child thrives. Supporting children with intellectual disabilities through daycare, education, and advocacy.
+              Volunteer around Phnom Penh. Pick one, turn up, go home with sore feet and new friends.
             </p>
             <div className="flex gap-3 pt-2">
               {socialLinks.map((social) => (

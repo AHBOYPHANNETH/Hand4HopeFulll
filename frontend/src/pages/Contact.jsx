@@ -41,10 +41,10 @@ export default function Contact() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
       <header className="max-w-3xl space-y-4">
-        <p className="text-sm font-semibold uppercase tracking-wide text-teal-700">Contact</p>
-        <h1 className="text-4xl font-semibold text-white-900">We would love to hear from you</h1>
+        <p className="text-sm font-semibold uppercase tracking-wide text-teal-700">Get in touch</p>
+        <h1 className="text-4xl font-semibold text-white-900">Drop us a message</h1>
         <p className="text-lg text-white-600">
-          Reach out about volunteering, partnerships, or media inquiries. Our team replies within two business days.
+          Want to volunteer with us, suggest a street that needs help, or partner on something? Send a note. We usually reply within a couple of days — sometimes faster if it&apos;s about a weekend coming up.
         </p>
       </header>
 
@@ -54,7 +54,7 @@ export default function Contact() {
             <Spinner />
           ) : (
             <div className="rounded-3xl border border-stone-100 bg-white p-8 shadow-sm">
-              <h2 className="text-lg font-semibold text-stone-900">Visit & hours</h2>
+              <h2 className="text-lg font-semibold text-stone-900">Where to find us</h2>
               <p className="mt-3 text-stone-700">{contents?.contact_address}</p>
               <p className="mt-2 text-sm font-medium text-teal-800">{contents?.contact_hours}</p>
             </div>

@@ -155,8 +155,8 @@ export default function TermsOfService() {
         viewport={{ once: true }}
         className="mt-12 rounded-2xl border border-primary-100 bg-primary-50/60 p-5 text-sm text-slate-600 dark:border-primary-900/40 dark:bg-primary-900/20 dark:text-slate-300"
       >
-        Thank you for being part of Hand4Hope. Together, we build a more inclusive
-        future for children with intellectual disabilities.
+        Thank you for being part of Hand4Hope. Every event, every volunteer hour,
+        every small gift — together we keep the community moving forward.
       </motion.p>
     </LegalPageLayout>
   )

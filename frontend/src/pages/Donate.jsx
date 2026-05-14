@@ -106,15 +106,14 @@ export default function Donate() {
           className="space-y-6"
         >
           <p className="text-sm font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400">
-            Support our mission
+            Help fund a volunteer event
           </p>
           <h1 className="font-display text-4xl font-bold leading-tight text-slate-900 dark:text-slate-100 md:text-5xl">
-            Fund <span className="gradient-text">dignity-centered</span> programs
+            Buy the <span className="gradient-text">bin bags</span> for next weekend
           </h1>
           <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-            Your donation funds nutritious meals, adapted learning materials, staff
-            training and family advocacy clinics for children with intellectual
-            disabilities in Cambodia.
+            Honestly, that&apos;s most of what we spend money on. Gloves, bin bags, water,
+            tuk-tuk to the spot. A small donation pays for a whole event.
           </p>
 
           <div className="rounded-2xl border border-primary-100 bg-white/60 p-5 backdrop-blur dark:border-primary-900/40 dark:bg-slate-800/60">
@@ -127,8 +126,7 @@ export default function Donate() {
                   Pay with KHQR
                 </p>
                 <p className="text-xs text-slate-600 dark:text-slate-400">
-                  Scan the QR with any Bakong-supported app — ABA, ACLEDA, Wing, Bakong,
-                  and more.
+                  Whatever bank app you already use will scan it. ABA, ACLEDA, Wing, Bakong, all of them.
                 </p>
               </div>
             </div>
@@ -136,9 +134,9 @@ export default function Donate() {
 
           <div className="grid grid-cols-3 gap-3 pt-2">
             {[
-              { n: '$5', l: '1 meal' },
-              { n: '$25', l: '1 week of supplies' },
-              { n: '$100', l: '1 month of care' },
+              { n: '$5', l: 'Gloves & water for one person' },
+              { n: '$25', l: 'A small clean-up morning' },
+              { n: '$100', l: 'A whole weekend event' },
             ].map((s, i) => (
               <motion.div
                 key={i}
@@ -211,10 +209,10 @@ function DonationForm({ form, setForm, pickPreset, onSubmit, loading, error }) {
         </span>
         <div>
           <h2 className="font-display text-2xl font-bold text-slate-900 dark:text-slate-100">
-            Make a donation
+            Send a donation
           </h2>
           <p className="text-sm text-slate-600 dark:text-slate-400">
-            Choose an amount and we'll generate a KHQR for you.
+            Pick an amount, we&apos;ll show you a QR to scan.
           </p>
         </div>
       </div>

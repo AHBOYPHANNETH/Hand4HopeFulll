@@ -37,23 +37,22 @@ export default function Register() {
               <div className="inline-flex items-center gap-2 rounded-full border border-secondary-200 bg-secondary-50/80 px-4 py-2 backdrop-blur-sm dark:border-secondary-800 dark:bg-secondary-900/30">
                 <Zap className="h-4 w-4 text-secondary-600 dark:text-secondary-400" />
                 <span className="text-sm font-semibold text-secondary-700 dark:text-secondary-300">
-                  Become a volunteer
+                  New here? Welcome.
                 </span>
               </div>
 
               <h2 className="font-display text-4xl font-bold leading-tight text-slate-900 dark:text-slate-100">
-                Join a community that <span className="gradient-text">changes lives</span>.
+                Make an account in <span className="gradient-text">two minutes</span>.
               </h2>
               <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-                Create your free account and start making a real difference for children with
-                intellectual disabilities in Cambodia.
+                Once you&apos;re signed up you can RSVP to any Saturday on the calendar. We email a reminder a couple of days before each one.
               </p>
 
               <ul className="space-y-3 pt-2">
                 {[
-                  { icon: HandHeart, text: 'Volunteer for events that fit your schedule' },
-                  { icon: GraduationCap, text: 'Free safeguarding & skills training' },
-                  { icon: Star, text: 'Track your contributions and impact' },
+                  { icon: HandHeart, text: 'Sign up for whichever Saturdays you can make' },
+                  { icon: GraduationCap, text: 'Short safety briefing at the start of each event' },
+                  { icon: Star, text: 'See the photos and receipts from past events' },
                 ].map((item, i) => (
                   <motion.li
                     key={i}
@@ -76,7 +75,7 @@ export default function Register() {
                 <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500 text-white">
                   <Check className="h-4 w-4" />
                 </span>
-                Free forever. No credit card required.
+                Free, of course. You&apos;re volunteering.
               </div>
             </div>
           </div>

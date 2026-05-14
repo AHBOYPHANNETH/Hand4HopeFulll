@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Users, Check, X } from 'lucide-react'
+import { Users, Check, X, CheckCheck } from 'lucide-react'
 import Alert from '../../components/ui/Alert'
+import Button from '../../components/ui/Button'
 import {
   PageHeader,
   EmptyState,
   SkeletonRow,
   SearchInput,
   StatusBadge,
+  ConfirmDialog,
 } from '../../components/admin/shared'
 import {
   adminFetchVolunteerRequests,
@@ -26,6 +28,8 @@ export default function VolunteersAdmin() {
   const [notice, setNotice] = useState(null)
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('all')
+  const [bulkConfirm, setBulkConfirm] = useState(false)
+  const [bulkApproving, setBulkApproving] = useState(false)
 
   async function load() {
     try {
@@ -50,6 +54,31 @@ export default function VolunteersAdmin() {
     } catch (e) {
       setNotice({ type: 'error', text: e.response?.data?.message || 'Failed to update.' })
     }
+  }
+
+  async function approveAllPending() {
+    setBulkConfirm(false)
+    setNotice(null)
+    const pendings = requests.filter((v) => v.status === 'pending')
+    if (!pendings.length) return
+    setBulkApproving(true)
+    const results = await Promise.allSettled(
+      pendings.map((v) =>
+        adminUpdateVolunteerRequestStatus({
+          event_id: v.event_id,
+          user_id: v.user_id,
+          status: 'approved',
+        })
+      )
+    )
+    const failed = results.filter((r) => r.status === 'rejected').length
+    await load()
+    setBulkApproving(false)
+    setNotice(
+      failed
+        ? { type: 'error', text: `Approved ${pendings.length - failed} of ${pendings.length}. ${failed} failed.` }
+        : { type: 'success', text: `Approved ${pendings.length} volunteer${pendings.length === 1 ? '' : 's'}.` }
+    )
   }
 
   const filtered = useMemo(
@@ -81,6 +110,27 @@ export default function VolunteersAdmin() {
       <PageHeader
         title="Volunteer requests"
         description="Approve or reject volunteer applications for upcoming events."
+        actions={
+          <Button
+            size="sm"
+            onClick={() => setBulkConfirm(true)}
+            disabled={loading || bulkApproving || counts.pending === 0}
+            isLoading={bulkApproving}
+          >
+            <CheckCheck className="h-4 w-4" />
+            {bulkApproving ? 'Approving…' : `Approve all pending (${counts.pending})`}
+          </Button>
+        }
+      />
+
+      <ConfirmDialog
+        open={bulkConfirm}
+        title="Approve every pending volunteer?"
+        description={`This will approve all ${counts.pending} pending request${counts.pending === 1 ? '' : 's'} in one go. You can't undo this from here.`}
+        confirmLabel="Approve all"
+        confirmVariant="primary"
+        onCancel={() => setBulkConfirm(false)}
+        onConfirm={approveAllPending}
       />
 
       {notice && (

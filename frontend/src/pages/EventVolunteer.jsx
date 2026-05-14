@@ -162,9 +162,9 @@ export default function EventVolunteer() {
           onSubmit={handleSubmit}
           className="rounded-3xl border border-stone-100 bg-white p-6 shadow-sm md:p-8"
         >
-          <h1 className="text-2xl font-semibold text-stone-900">Volunteer application</h1>
+          <h1 className="text-2xl font-semibold text-stone-900">Sign up for this one</h1>
           <p className="mt-1 text-sm text-stone-500">
-            Tell us a little about yourself. Coordinators will review your details and confirm your spot.
+            Quick form — your name, email, phone. Someone from the team will reply within a day or two to confirm.
           </p>
 
           {event.signups_closed && !msg && (
@@ -177,7 +177,7 @@ export default function EventVolunteer() {
           {event.is_full && !event.signups_closed && !msg && (
             <div className="mt-5">
               <Alert type="error">
-                This event has reached its volunteer capacity. New sign-ups are closed.
+                This one&apos;s full. Try another Saturday on the calendar.
               </Alert>
             </div>
           )}
@@ -253,14 +253,14 @@ export default function EventVolunteer() {
               htmlFor="notes"
               className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-stone-500"
             >
-              Notes for coordinators (optional)
+              Anything we should know? (optional)
             </label>
             <textarea
               id="notes"
               rows={4}
               value={form.notes}
               onChange={(e) => update('notes', e.target.value)}
-              placeholder="Skills, accessibility needs, or anything else we should know."
+              placeholder="Things you're good at, anything we should know about, dietary needs."
               className="w-full rounded-2xl border border-stone-200 px-3 py-2 text-sm outline-none ring-teal-500/30 focus:border-teal-500 focus:ring-4"
             />
           </div>
@@ -284,14 +284,13 @@ export default function EventVolunteer() {
                 : event.is_full
                   ? 'Event full'
                   : submitting
-                    ? 'Submitting…'
-                    : 'Submit application'}
+                    ? 'Sending…'
+                    : 'Send it'}
             </Button>
           </div>
 
           <p className="mt-4 text-xs text-stone-500">
-            By submitting, you confirm the information above is accurate. We will reach out by email
-            once a coordinator reviews your request.
+            We&apos;ll email you to confirm once someone&apos;s seen your sign-up — usually within a day.
           </p>
         </form>
       </div>

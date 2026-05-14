@@ -25,11 +25,11 @@ class DatabaseSeeder extends Seeder
         );
 
         $defaults = [
-            'hero_title' => 'Hands of Hope for Every Child',
-            'hero_subtitle' => 'Daycare, inclusive education, and rights protection for children with intellectual disabilities in Cambodia.',
-            'mission_text' => 'Hand4Hope exists so families receive respite, children learn in dignity, and communities understand inclusion.',
-            'vision_text' => 'A Cambodia where children with intellectual disabilities are visible, valued, and supported.',
-            'about_story' => 'Founded by caregivers and educators, Hand4Hope grows community-led programs grounded in compassion and evidence.',
+            'hero_title' => 'Spend a Saturday. Help your neighbourhood.',
+            'hero_subtitle' => 'Hand4Hope runs small, weekend-friendly volunteer events around Phnom Penh. Bring yourself, bring a friend, leave a place a bit better than you found it.',
+            'mission_text' => 'We pick one street, one park, one community at a time, and we do something useful there. The work is small. We just do a lot of it.',
+            'vision_text' => 'We want every part of Phnom Penh to have a few people who say "yeah, that\'s my neighbourhood" and mean it.',
+            'about_story' => 'Hand4Hope started in 2023 when four of us got tired of complaining about the rubbish on our own street and went out one Sunday to clean it. We posted about it, a few neighbours came the next week, and it kept growing. We\'re still run entirely by volunteers. There\'s no head office, just a Telegram group and a Saturday calendar.',
             'impact_stat_children' => '120',
             'impact_stat_volunteers' => '85',
             'impact_stat_sessions' => '2400',
@@ -37,14 +37,19 @@ class DatabaseSeeder extends Seeder
             'contact_hours' => 'Mon–Sat · 8:00–17:00',
             'testimonials_json' => json_encode([
                 [
-                    'quote' => 'My daughter smiles every morning knowing she has friends who understand her.',
-                    'name' => 'Sophea',
-                    'role' => 'Parent partner',
+                    'quote' => 'I went to one clean-up in Tuol Kork and ended up coming back every weekend. The people are normal. The work isn\'t complicated. You just turn up.',
+                    'name' => 'Sophea Chan',
+                    'role' => 'Volunteer since 2024',
                 ],
                 [
-                    'quote' => 'Volunteering here changed how I see ability in our community.',
-                    'name' => 'Dara',
-                    'role' => 'Student volunteer',
+                    'quote' => 'I was nervous on my first event because I didn\'t know anyone. By the end of the morning I had three new phone numbers and an aching back. Worth it.',
+                    'name' => 'Dara Pich',
+                    'role' => 'Student, RUPP',
+                ],
+                [
+                    'quote' => 'I don\'t have time most weekends but I send what I can each month. They post photos and receipts in the group, so I can see where it went.',
+                    'name' => 'Channary Sok',
+                    'role' => 'Donor',
                 ],
             ]),
         ];
@@ -55,79 +60,94 @@ class DatabaseSeeder extends Seeder
 
         $events = [
             [
-                'title' => 'Inclusive Play Day',
-                'description' => 'Volunteers host sensory-friendly games and creative workshops for children and siblings.',
-                'starts_at' => Carbon::now()->addWeeks(2)->setTime(9, 0),
+                'title' => 'Neighbourhood Clean-Up Day',
+                'description' => 'Volunteers spend the morning tidying up streets, parks and waterways together. Gloves, bags and water provided.',
+                'starts_at' => Carbon::now()->addDays(4)->setTime(9, 0),
                 'location' => 'Hand4Hope Community Center, Phnom Penh',
                 'price' => 0,
-            ],
-            [
-                'title' => 'Rights & Family Advocacy Clinic',
-                'description' => 'Legal volunteers meet families for guidance on education access and documentation.',
-                'starts_at' => Carbon::now()->addWeeks(5)->setTime(13, 30),
-                'location' => 'Partner NGO Hub, Phnom Penh',
-                'price' => 0,
+                'capacity' => 30,
             ],
             [
                 'title' => 'Volunteer Orientation',
-                'description' => 'Learn safeguarding practices and classroom support strategies.',
+                'description' => 'Brand-new volunteers learn how our events run, our safeguarding rules and how to choose their first role.',
                 'starts_at' => Carbon::now()->addDays(10)->setTime(18, 0),
                 'location' => 'Online (link emailed)',
                 'price' => 0,
+                'capacity' => 25,
             ],
             [
-                'title' => 'Speech Therapy Workshop',
-                'description' => 'Hands-on session led by certified therapists for parents and aides.',
+                'title' => 'Community Help Desk',
+                'description' => 'Free guidance from volunteer lawyers and case workers on documents, school enrolment and family paperwork.',
+                'starts_at' => Carbon::now()->addWeeks(2)->setTime(13, 30),
+                'location' => 'Partner NGO Hub, Phnom Penh',
+                'price' => 0,
+                'capacity' => 15,
+            ],
+            [
+                'title' => 'Wellbeing & First-Aid Workshop',
+                'description' => 'Hands-on session led by certified medics — basic first aid, mental wellbeing and how to look after each other on event days.',
                 'starts_at' => Carbon::now()->addWeeks(3)->setTime(10, 0),
                 'location' => 'Hand4Hope Community Center, Phnom Penh',
                 'price' => 0,
+                'capacity' => 20,
             ],
             [
-                'title' => 'Family Picnic & Awareness Walk',
-                'description' => 'Community walk and picnic to raise awareness about inclusion and disability rights.',
+                'title' => 'Family Picnic & Community Walk',
+                'description' => 'Open picnic and a friendly walk to bring neighbours together — bring something to share and somebody you want to meet.',
                 'starts_at' => Carbon::now()->addWeeks(4)->setTime(7, 30),
                 'location' => 'Wat Phnom Park, Phnom Penh',
                 'price' => 0,
+                'capacity' => 60,
             ],
             [
-                'title' => 'Music & Arts Therapy Showcase',
-                'description' => 'Children present art and musical pieces created during weekly therapy sessions.',
+                'title' => 'Skills-Sharing Workshop',
+                'description' => 'Volunteers teach volunteers — practical sessions on cooking, basic repairs, photography, simple coding and more.',
+                'starts_at' => Carbon::now()->addWeeks(5)->setTime(14, 0),
+                'location' => 'Hand4Hope Training Room, Phnom Penh',
+                'price' => 0,
+                'capacity' => 18,
+            ],
+            [
+                'title' => 'Community Arts Showcase',
+                'description' => 'Local artists and youth groups share music, paintings and stories from a season of community workshops.',
                 'starts_at' => Carbon::now()->addWeeks(6)->setTime(15, 0),
                 'location' => 'Koh Pich Cultural Hall, Phnom Penh',
                 'price' => 5,
+                'capacity' => 120,
             ],
             [
-                'title' => 'Charity Run for Inclusion',
-                'description' => '5K run raising funds for adapted learning materials and therapy programs.',
+                'title' => 'Charity Run for the Community',
+                'description' => '5K run raising funds for the next year of community events, training and emergency drives.',
                 'starts_at' => Carbon::now()->addWeeks(7)->setTime(6, 0),
                 'location' => 'Olympic Stadium, Phnom Penh',
                 'price' => 10,
+                'capacity' => 200,
             ],
             [
-                'title' => 'Caregiver Skill Workshop',
-                'description' => 'Practical strategies for supporting daily routines and learning at home.',
-                'starts_at' => Carbon::now()->addWeeks(2)->setTime(14, 0),
-                'location' => 'Hand4Hope Training Room, Phnom Penh',
-                'price' => 0,
-            ],
-            [
-                'title' => 'Annual Donor Appreciation Gala',
-                'description' => 'Evening of stories, music and recognition for the donors who power our mission.',
+                'title' => 'Annual Volunteers & Donors Gala',
+                'description' => 'A grateful evening of food, music and recognition for everyone whose hours and gifts powered the year.',
                 'starts_at' => Carbon::now()->addWeeks(8)->setTime(18, 30),
                 'location' => 'Sofitel Phokeethra, Phnom Penh',
                 'price' => 50,
+                'capacity' => 150,
             ],
             [
-                'title' => 'Inclusive Sports Day',
-                'description' => 'Adaptive sports tournament where children, families and volunteers play together.',
+                'title' => 'Community Sports Day',
+                'description' => 'Open-to-all tournament where kids, parents and volunteers play side by side. No experience needed, just bring trainers.',
                 'starts_at' => Carbon::now()->addWeeks(9)->setTime(8, 0),
                 'location' => 'Phnom Penh Sports Complex',
                 'price' => 0,
+                'capacity' => 80,
             ],
         ];
 
+        $titles = array_column($events, 'title');
+
+        // Drop any leftover events from previous seed sets (e.g. disability-focused demo data).
+        Event::whereNotIn('title', $titles)->delete();
+
         foreach ($events as $payload) {
-            Event::firstOrCreate(
+            Event::updateOrCreate(
                 ['title' => $payload['title']],
                 $payload
             );

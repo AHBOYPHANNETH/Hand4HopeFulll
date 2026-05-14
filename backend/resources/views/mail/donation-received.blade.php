@@ -11,11 +11,13 @@
 {{ $donation->message }}
 @endif
 @else
-# Thank you, {{ $donation->name }}!
+# Thanks {{ $donation->name }} 🙏
 
-Your generous gift of **{{ $donation->currency }} {{ number_format((float) $donation->amount, 2) }}** helps children with intellectual disabilities in Cambodia access daycare, education, and protection.
+We got your **{{ $donation->currency }} {{ number_format((float) $donation->amount, 2) }}**. It's going straight into the bag of supplies for the next event. We'll post photos when we run it.
 
-Hands of Hope Community — Hand4Hope
+If you want a tax receipt, just reply to this email with your reference number and we'll send one over.
+
+— The Hand4Hope crew
 @endif
 
 </x-mail::message>

@@ -52,7 +52,7 @@ export default function LoginForm() {
           Welcome back
         </h1>
         <p className="text-sm text-slate-600 dark:text-slate-400">
-          Sign in to volunteer for events and track your impact.
+          Sign in to RSVP for the next Saturday.
         </p>
       </div>
 

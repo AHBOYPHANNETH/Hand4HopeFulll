@@ -33,22 +33,21 @@ export default function Login() {
               <div className="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50/80 px-4 py-2 backdrop-blur-sm dark:border-primary-800 dark:bg-primary-900/30">
                 <Sparkles className="h-4 w-4 text-primary-600 dark:text-primary-400" />
                 <span className="text-sm font-semibold text-primary-700 dark:text-primary-300">
-                  Welcome back, hero
+                  Welcome back
                 </span>
               </div>
 
               <h2 className="font-display text-4xl font-bold leading-tight text-slate-900 dark:text-slate-100">
-                Continue your journey of <span className="gradient-text">kindness</span>.
+                Sign in and pick a <span className="gradient-text">Saturday</span>.
               </h2>
               <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-                Sign in to volunteer for events, track your impact and stay connected with the
-                Hand4Hope community.
+                Log in to sign up for events, see what you&apos;ve been to, and stay in the loop.
               </p>
 
               <div className="grid grid-cols-2 gap-4 pt-4">
                 {[
-                  { icon: Users, n: '1.2K', label: 'Active volunteers' },
-                  { icon: Heart, n: '500+', label: 'Children supported' },
+                  { icon: Users, n: '85',  label: 'Regular volunteers' },
+                  { icon: Heart, n: '120', label: 'Kids reached this year' },
                 ].map((s, i) => (
                   <motion.div
                     key={i}
@@ -71,7 +70,7 @@ export default function Login() {
                   <ShieldCheck className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                 </span>
                 <p className="text-sm text-slate-600 dark:text-slate-300">
-                  Your account is secured with industry-standard encryption.
+                  We never share your email and we don&apos;t spam.
                 </p>
               </div>
             </div>

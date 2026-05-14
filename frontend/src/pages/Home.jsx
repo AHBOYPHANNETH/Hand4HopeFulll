@@ -43,8 +43,8 @@ export default function Home() {
     return () => { cancelled = true }
   }, [])
 
-  const heroTitle    = contents?.hero_title    || 'Hands of Hope for Every Child'
-  const heroSubtitle = contents?.hero_subtitle || 'Supporting children with intellectual disabilities through daycare, education, and advocacy in Cambodia.'
+  const heroTitle    = contents?.hero_title    || 'Spend a Saturday. Help your neighbourhood.'
+  const heroSubtitle = contents?.hero_subtitle || 'Hand4Hope runs small, weekend-friendly volunteer events around Phnom Penh. Bring yourself, bring a friend, leave a place a bit better than you found it.'
   const mission      = contents?.mission_text  || ''
   const preview      = useMemo(() => events || [], [events])
 
@@ -74,7 +74,7 @@ export default function Home() {
               <motion.div variants={itemVariants} className="inline-flex">
                 <div className="flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50/80 px-4 py-2 backdrop-blur-sm dark:border-primary-800 dark:bg-primary-900/30">
                   <Zap className="h-4 w-4 text-primary-600 dark:text-primary-400" />
-                  <span className="text-sm font-semibold text-primary-700 dark:text-primary-300">Empowering Communities</span>
+                  <span className="text-sm font-semibold text-primary-700 dark:text-primary-300">Run by volunteers, every weekend</span>
                 </div>
               </motion.div>
 
@@ -94,12 +94,12 @@ export default function Home() {
               <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
                 <Link to="/events">
                   <Button size="lg" className="group">
-                    Explore Events
+                    See this weekend
                     <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </Link>
                 <Link to="/register">
-                  <Button variant="outline" size="lg">Become a Volunteer</Button>
+                  <Button variant="outline" size="lg">Sign up to help</Button>
                 </Link>
               </motion.div>
 
@@ -110,8 +110,8 @@ export default function Home() {
                       <div key={i} className="h-8 w-8 rounded-full border-2 border-white bg-primary-400 dark:border-slate-800" />
                     ))}
                   </div>
-                  <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">+1,200 Volunteers</span>
-                  <div className="flex items-center gap-1 text-sm font-semibold text-slate-700 dark:text-slate-300"><Star className="h-4 w-4 fill-accent-400 text-accent-400" /> 4.9/5 Rating</div>
+                  <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">85 regulars and counting</span>
+                  <div className="flex items-center gap-1 text-sm font-semibold text-slate-700 dark:text-slate-300"><Star className="h-4 w-4 fill-accent-400 text-accent-400" /> Free to join</div>
                 </div>
                 
               </motion.div>
@@ -122,21 +122,85 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative h-96 md:h-full"
+              className="relative min-h-96 md:h-full"
             >
               <div className="glass relative h-full rounded-3xl p-8 shadow-2xl">
                 <div className="space-y-6">
-                  <p className="text-sm font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400">Mission Snapshot</p>
-                  <p className="font-display text-xl leading-relaxed text-slate-800 dark:text-slate-200">{mission}</p>
-                  <div className="grid grid-cols-2 gap-4 pt-4">
-                    <div className="rounded-xl bg-white/50 p-4 backdrop-blur dark:bg-slate-800/50">
-                      <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">500+</p>
-                      <p className="mt-1 text-xs font-semibold text-slate-600 dark:text-slate-400">Children Supported</p>
+                  <div className="flex items-start justify-between gap-3">
+                    <p className="text-sm font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400">
+                      What we're up to
+                    </p>
+                    <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 dark:bg-emerald-900/30">
+                      <span className="relative flex h-2 w-2">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                      </span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-300">
+                        Active today
+                      </span>
+                    </span>
+                  </div>
+
+                  <p className="font-display text-xl leading-relaxed text-slate-800 dark:text-slate-200">
+                    {mission}
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="rounded-xl bg-white/60 p-4 backdrop-blur dark:bg-slate-800/50">
+                      <div className="mb-2 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary-100 text-primary-600 dark:bg-primary-900/40 dark:text-primary-400">
+                        <Users className="h-4 w-4" />
+                      </div>
+                      <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">
+                        <CountUp end={500} />+
+                      </p>
+                      <p className="mt-1 text-xs font-semibold text-slate-600 dark:text-slate-400">
+                        Kids reached this year
+                      </p>
                     </div>
-                    <div className="rounded-xl bg-white/50 p-4 backdrop-blur dark:bg-slate-800/50">
-                      <p className="text-3xl font-bold text-secondary-600 dark:text-secondary-400">1.2K</p>
-                      <p className="mt-1 text-xs font-semibold text-slate-600 dark:text-slate-400">Active Volunteers</p>
+                    <div className="rounded-xl bg-white/60 p-4 backdrop-blur dark:bg-slate-800/50">
+                      <div className="mb-2 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-secondary-100 text-secondary-600 dark:bg-secondary-900/40 dark:text-secondary-400">
+                        <Heart className="h-4 w-4" />
+                      </div>
+                      <p className="text-3xl font-bold text-secondary-600 dark:text-secondary-400">
+                        <CountUp end={85} />
+                      </p>
+                      <p className="mt-1 text-xs font-semibold text-slate-600 dark:text-slate-400">
+                        People who keep showing up
+                      </p>
                     </div>
+                  </div>
+
+                  <div className="space-y-2.5 border-t border-slate-200/60 pt-5 dark:border-slate-700/60">
+                    <p className="text-[11px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                      What we run
+                    </p>
+                    {[
+                      { icon: HandHeart,     text: 'Weekend clean-ups in different sangkats' },
+                      { icon: GraduationCap, text: 'Free workshops where volunteers teach what they know' },
+                      { icon: Stethoscope,   text: 'Help-desk days for paperwork and school enrolment' },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-center gap-2.5 text-sm">
+                        <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-primary-50 text-primary-600 dark:bg-primary-900/30 dark:text-primary-400">
+                          <item.icon className="h-3.5 w-3.5" />
+                        </span>
+                        <span className="text-slate-700 dark:text-slate-300">{item.text}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center justify-between border-t border-slate-200/60 pt-4 dark:border-slate-700/60">
+                    <div className="flex items-center gap-2">
+                      <Star className="h-4 w-4 fill-accent-400 text-accent-400" />
+                      <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                        Receipts posted every month
+                      </span>
+                    </div>
+                    <Link
+                      to="/about"
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+                    >
+                      How we started <ArrowRight className="h-3 w-3" />
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -151,17 +215,17 @@ export default function Home() {
           <div className="mb-8 text-center md:mb-12">
             <FadeInUp>
               <h2 className="text-3xl font-display font-bold text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
-                Impact by the Numbers
+                The year so far
               </h2>
             </FadeInUp>
           </div>
           <StaggerContainer>
             <div className="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-4 md:gap-8">
               {[
-                { icon: Users,      number: 500,   label: 'Children Supported', suffix: '+' },
-                { icon: Heart,      number: 1200,  label: 'Active Volunteers',  suffix: '+' },
-                { icon: TrendingUp, number: 85000, label: 'Donations Raised', prefix: '$', suffix: '+' },
-                { icon: Zap,        number: 50,    label: 'Events Hosted',      suffix: '+' },
+                { icon: Users,      number: 120,   label: 'Kids reached',         suffix: '' },
+                { icon: Heart,      number: 85,    label: 'Regular volunteers',   suffix: '' },
+                { icon: TrendingUp, number: 6400,  label: 'Donated by you',       prefix: '$', suffix: '' },
+                { icon: Zap,        number: 38,    label: 'Saturdays out so far', suffix: '' },
               ].map((stat, i) => (
                 <StaggerItem key={i}>
                   <motion.div
@@ -193,24 +257,24 @@ export default function Home() {
           <FadeInUp>
             <div className="mb-8 text-center md:mb-12">
               <h2 className="text-3xl font-display font-bold text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
-                Our Programs
+                What a Saturday looks like
               </h2>
               <p className="mx-auto mt-3 max-w-2xl text-base text-slate-600 dark:text-slate-400 md:mt-4 md:text-lg">
-                A holistic set of services designed around the needs of children with intellectual disabilities and their families.
+                Pick one. Show up. Most events are 2–3 hours and we feed you afterwards.
               </p>
             </div>
           </FadeInUp>
           <StaggerContainer>
             <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
               {[
-                { icon: Heart,         title: 'Daycare Support',         desc: 'Safe, nurturing daily care for children with intellectual disabilities.' },
-                { icon: GraduationCap, title: 'Special Education',       desc: 'Tailored learning plans focused on each child’s strengths.' },
-                { icon: MessageCircle, title: 'Speech Therapy',          desc: 'One-on-one sessions to build communication confidence.' },
-                { icon: Users,         title: 'Family Counseling',       desc: 'Guidance and emotional support for caregivers and siblings.' },
-                { icon: Smile,         title: 'Recreational Activities', desc: 'Sports, games and outings that foster joy and friendship.' },
-                { icon: Stethoscope,   title: 'Health Screening',        desc: 'Regular checkups partnered with local clinics and volunteers.' },
-                { icon: BookOpen,      title: 'Parent Workshops',        desc: 'Skill-building sessions for parents to support learning at home.' },
-                { icon: HandHeart,     title: 'Community Outreach',      desc: 'Awareness campaigns reducing stigma in local communities.' },
+                { icon: HandHeart,     title: 'Clean-up mornings',     desc: 'One street or one park, bin bags and gloves provided.' },
+                { icon: GraduationCap, title: 'Skill-share workshops', desc: 'Whatever you know how to do — cooking, basic repairs, photo editing.' },
+                { icon: MessageCircle, title: 'Help desk',             desc: 'A lawyer and two case workers help families with paperwork.' },
+                { icon: Users,         title: 'Family picnics',        desc: 'Bring something to share. Meet people who live two doors down.' },
+                { icon: Smile,         title: 'Sports days',           desc: 'Pickup games. No teams pre-formed, no experience needed.' },
+                { icon: Stethoscope,   title: 'First-aid days',        desc: 'Free check-ups with two partner clinics every quarter.' },
+                { icon: BookOpen,      title: 'Tutor evenings',        desc: 'Read with kids who are catching up on English or maths.' },
+                { icon: Heart,         title: 'When things go wrong',  desc: 'Floods, fires — we get a group out within a couple of hours.' },
               ].map((program, i) => (
                 <StaggerItem key={i}>
                   <motion.div
@@ -242,17 +306,17 @@ export default function Home() {
             <div className="mb-6 flex flex-col items-start justify-between gap-3 sm:mb-8 sm:gap-4 md:mb-12 md:flex-row md:items-end md:gap-6">
               <div>
                 <h2 className="text-2xl font-display font-bold text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
-                  Featured Events
+                  Coming up
                 </h2>
                 <p className="mt-2 max-w-2xl text-sm text-slate-600 dark:text-slate-400 sm:mt-3 sm:text-base md:mt-4 md:text-lg">
-                  Join meaningful gatherings and connect with our community
+                  Next three events on the calendar
                 </p>
               </div>
               <Link
                 to="/events"
                 className="group inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 sm:gap-2 sm:text-base"
               >
-                View all events
+                See the full calendar
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 sm:h-5 sm:w-5" />
               </Link>
             </div>
@@ -262,7 +326,7 @@ export default function Home() {
               {preview.length === 0 ? (
                 <StaggerItem>
                   <p className="py-12 text-center text-lg text-slate-600 dark:text-slate-400 sm:col-span-2 md:col-span-3">
-                    New events are being scheduled — check back soon!
+                    Calendar is empty for now. We'll post the next one on Telegram.
                   </p>
                 </StaggerItem>
               ) : (
@@ -284,17 +348,17 @@ export default function Home() {
             <FadeInUp>
               <div className="space-y-6">
                 <h2 className="text-3xl font-display font-bold text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
-                  Creating a Community of Volunteers
+                  Why people come back
                 </h2>
                 <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
-                  Together, we're building an inclusive community where every person has the opportunity to contribute, learn, and make a meaningful impact in the lives of children with intellectual disabilities.
+                  We're not slick. We're not big. There's a Telegram group, a list of next Saturdays, and a few people who'll text you a reminder. That's basically it. Most volunteers come for one event, like the people, and stick around.
                 </p>
                 <StaggerContainer delay={0.2}>
                   {[
-                    { icon: Check, title: 'Flexible Volunteering', desc: 'Choose roles that fit your schedule' },
-                    { icon: Check, title: 'Free Training',         desc: 'Comprehensive safeguarding & skills training' },
-                    { icon: Check, title: 'Supportive Team',       desc: 'Work alongside passionate community members' },
-                    { icon: Check, title: 'Make an Impact',        desc: "See the real difference you're making" },
+                    { icon: Check, title: 'Come when you can', desc: 'One Saturday a month is plenty. No pressure to do more.' },
+                    { icon: Check, title: 'Nothing to prepare',  desc: 'We bring the gloves, bin bags, water, snacks.' },
+                    { icon: Check, title: 'You\'ll know someone', desc: 'After two events you\'ll see familiar faces every time.' },
+                    { icon: Check, title: 'You\'ll see the work', desc: 'Photos before and after, every event, posted within a day.' },
                   ].map((item, i) => (
                     <StaggerItem key={i}>
                       <div className="flex gap-4">
@@ -313,7 +377,7 @@ export default function Home() {
                 </StaggerContainer>
                 <Link to="/register">
                   <Button size="lg" className="mt-4">
-                    Join Our Community
+                    Sign me up
                     <ArrowRight className="h-5 w-5" />
                   </Button>
                 </Link>
@@ -331,9 +395,9 @@ export default function Home() {
                 <div className="absolute inset-0 bg-primary-500/10" />
                 <div className="relative flex h-full flex-col justify-center space-y-4 p-8">
                   {[
-                    { icon: Users,         title: 'Community Events',  desc: 'Monthly meetups and training' },
-                    { icon: GraduationCap, title: 'Skills Development', desc: 'Learn while helping others' },
-                    { icon: Star,          title: 'Recognition',        desc: 'Celebrate your contributions' },
+                    { icon: Users,         title: 'A regular crew',     desc: 'Same faces, different sangkat each weekend' },
+                    { icon: GraduationCap, title: 'You\'ll pick things up', desc: 'Basic first aid, organising small events, group logistics' },
+                    { icon: Star,          title: 'No awards, no badges', desc: 'Just the photos and the people who turned up with you' },
                   ].map((item, i) => (
                     <motion.div
                       key={i}
@@ -365,19 +429,19 @@ export default function Home() {
           <FadeInUp>
             <div className="mb-6 text-center sm:mb-8 md:mb-12">
               <h2 className="text-2xl font-display font-bold text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
-                Support Our Mission
+                Help pay for the next one
               </h2>
               <p className="mx-auto mt-2 max-w-2xl text-sm text-slate-600 dark:text-slate-400 sm:mt-3 sm:text-base md:mt-4 md:text-lg">
-                Your donation directly supports programs, training, and care for children with intellectual disabilities.
+                We don't have donors with big cheques. Most of what we spend is gloves, bin bags, drinking water, and tuk-tuks to get supplies there.
               </p>
             </div>
           </FadeInUp>
           <StaggerContainer>
             <div className="grid gap-4 sm:gap-6 md:grid-cols-3 md:gap-8">
               {[
-                { price: 25,  title: 'Supplies Pack',   desc: 'Educational materials for one month', icon: BookOpen },
-                { price: 100, title: 'Program Support', desc: 'Weekly enrichment activities',        icon: Target, popular: true },
-                { price: 500, title: 'Sponsor',         desc: 'Comprehensive support for a child',   icon: Heart },
+                { price: 25,  title: 'Gloves & bin bags',  desc: 'Enough for one clean-up morning of about 15 people', icon: BookOpen },
+                { price: 100, title: 'A whole Saturday',   desc: 'Supplies, water, snacks, tuk-tuk hire for one event',  icon: Target, popular: true },
+                { price: 500, title: 'A whole quarter',    desc: 'Roughly three months of weekend events',               icon: Heart },
               ].map((plan, i) => (
                 <StaggerItem key={i}>
                   <motion.div
@@ -399,7 +463,7 @@ export default function Home() {
                     <p className="mt-1 text-xs text-slate-600 dark:text-slate-400 sm:mt-2 sm:text-sm">{plan.desc}</p>
                     <Link to="/donate" className="mt-4 block sm:mt-6">
                       <Button className="w-full" variant={plan.popular ? 'gradient' : 'primary'}>
-                        Donate Now
+                        Give this amount
                       </Button>
                     </Link>
                   </motion.div>
@@ -416,19 +480,19 @@ export default function Home() {
           <FadeInUp>
             <div className="mb-6 text-center sm:mb-8 md:mb-12">
               <h2 className="text-2xl font-display font-bold text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
-                How to Get Started
+                How this actually works
               </h2>
               <p className="mx-auto mt-2 max-w-2xl text-sm text-slate-600 dark:text-slate-400 sm:mt-3 sm:text-base md:mt-4 md:text-lg">
-                Join Hand4Hope in just a few simple steps
+                Three steps. Should take you about five minutes.
               </p>
             </div>
           </FadeInUp>
           <StaggerContainer>
             <div className="grid gap-4 sm:gap-6 md:grid-cols-3 md:gap-8">
               {[
-                { step: 1, title: 'Create Your Profile', desc: 'Sign up and tell us about yourself',        link: '/register', linkText: 'Register now' },
-                { step: 2, title: 'Complete Training',    desc: 'Participate in our comprehensive training',  link: '/events',   linkText: 'View training' },
-                { step: 3, title: 'Start Making Impact',  desc: 'Join events and volunteer at programs',      link: '/events',   linkText: 'Find events' },
+                { step: 1, title: 'Make an account',     desc: 'Name, email, password. That\'s it.',                   link: '/register', linkText: 'Sign up' },
+                { step: 2, title: 'Pick a Saturday',     desc: 'Look at the calendar, pick one you can make.',         link: '/events',   linkText: 'See events' },
+                { step: 3, title: 'Turn up',             desc: 'We\'ll meet at the spot 15 min before and brief you.', link: '/events',   linkText: 'Find one near you' },
               ].map((item, i) => (
                 <StaggerItem key={i}>
                   <motion.div className="card relative p-4 text-center sm:p-6 md:p-8" whileHover={{ y: -8 }}>
@@ -461,19 +525,19 @@ export default function Home() {
           <FadeInUp>
             <div className="mb-6 text-center sm:mb-8 md:mb-12">
               <h2 className="text-2xl font-display font-bold text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
-                Voices from Our Community
+                What people say after their first one
               </h2>
               <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 sm:mt-3 sm:text-base md:mt-4 md:text-lg">
-                Hear from volunteers and donors who are making a difference
+                Pulled straight from our Telegram group. No edits.
               </p>
             </div>
           </FadeInUp>
           <StaggerContainer>
             <div className="grid gap-4 sm:gap-6 md:grid-cols-3 md:gap-8">
               {[
-                { name: 'Sarah Johnson', role: 'Teacher & Volunteer', quote: 'Volunteering with Hand4Hope has been the most rewarding experience of my life.' },
-                { name: 'Mark Chen',     role: 'New Volunteer',       quote: 'The training provided is excellent. I felt well-prepared from day one.' },
-                { name: 'Emily Brown',   role: 'Donor',               quote: 'Impressed by how transparent they are with funds and their impact.' },
+                { name: 'Sophea Chan',    role: 'Volunteer, Tuol Kork',   quote: 'Honestly the first one I came to mostly because a friend dragged me. By the end I was the one organising water for everyone.' },
+                { name: 'Borey Khun',     role: 'First-timer last month', quote: 'I thought it would be awkward. It wasn\'t. Show up, somebody hands you a bin bag, you start walking.' },
+                { name: 'Channary Sok',   role: 'Monthly donor',          quote: 'I can\'t make it most Saturdays so I just send money instead. They send the receipts to the group, which I appreciate.' },
               ].map((t, i) => (
                 <StaggerItem key={i}>
                   <motion.div className="card p-4 sm:p-6 md:p-8" whileHover={{ y: -5 }}>
@@ -497,18 +561,18 @@ export default function Home() {
           <FadeInUp>
             <div className="mb-6 text-center sm:mb-8 md:mb-12">
               <h2 className="text-2xl font-display font-bold text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
-                Frequently Asked Questions
+                Things people usually ask
               </h2>
             </div>
           </FadeInUp>
           <StaggerContainer>
             <div className="space-y-3 sm:space-y-4">
               {[
-                { q: 'Do I need prior experience to volunteer?',  a: 'No! We welcome volunteers of all backgrounds. We provide comprehensive training for all roles.' },
-                { q: 'How much time do I need to commit?',        a: "We offer flexible volunteering. You can start with a few hours a month and increase as you're able." },
-                { q: 'Is there an age requirement?',              a: 'We welcome volunteers 16 and older. Those under 18 need parental consent.' },
-                { q: 'Are donations tax-deductible?',             a: 'Yes! Hand4Hope is a registered non-profit. All donations are tax-deductible.' },
-                { q: "Can I donate if I can't volunteer?",        a: 'Absolutely! Donations are just as valuable and help us continue our mission.' },
+                { q: 'Do I need to know anything to come?',       a: 'No. Most events are picking up rubbish or carrying boxes. The person running it will tell you what to do when you get there.' },
+                { q: 'How often do I have to come?',              a: 'As often as you feel like. People come once a month, once a quarter, or every weekend. Nobody chases you.' },
+                { q: 'What\'s the minimum age?',                  a: '16. Under 18 we need a parent\'s number in the form, and they should know where you\'re going.' },
+                { q: 'Can I get a tax receipt?',                  a: 'For donations of $50 and up, yes — email us with your donation reference and we\'ll send one within a week.' },
+                { q: 'I want to help but can\'t come in person.', a: 'Send a small donation, or share our Telegram link with a friend who lives in Phnom Penh. Both help.' },
               ].map((faq, i) => (
                 <StaggerItem key={i}>
                   <details className="group card cursor-pointer p-4 sm:p-6">
@@ -533,20 +597,28 @@ export default function Home() {
         <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <FadeInUp>
             <h2 className="text-3xl font-display font-bold text-white sm:text-4xl md:text-5xl">
-              Ready to Make a Difference?
+              See you on Saturday?
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-white/90">
-              Join our community of volunteers and donors changing lives
+              Either come help, or chip in a bit for the next one. Both are useful.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Link to="/register">
-                <Button size="lg" variant="secondary" className="bg-white text-primary-600 hover:bg-slate-50">
-                  Volunteer Now
+                <Button
+                  size="lg"
+                  variant="primary"
+                  className="bg-white! text-primary-700! hover:bg-slate-50! hover:text-primary-800!"
+                >
+                  Sign me up
                 </Button>
               </Link>
               <Link to="/donate">
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-                  Make a Donation
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-white! text-white! hover:bg-white/10!"
+                >
+                  Send some money
                 </Button>
               </Link>
             </div>

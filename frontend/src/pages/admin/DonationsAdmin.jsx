@@ -129,27 +129,43 @@ export default function DonationsAdmin() {
           iconClass="bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400"
         />
         <StatCard
-          icon={StatIcon}
-          label="Average gift"
-          value={
-            byCurrency.length === 0 ? (
-              '—'
-            ) : (
-              <span className="flex flex-col gap-0.5">
-                {byCurrency.map((b) => (
-                  <span key={b.code}>{formatAmount(b.code, b.avg)}</span>
-                ))}
-              </span>
-            )
-          }
-          hint="Per donation, by currency"
+          icon={(props) => <CurrencyIcon currency="USD" {...props} />}
+          label="Total raised (USD)"
+          value={(() => {
+            const usd = byCurrency.find((b) => b.code === 'USD')
+            return usd ? formatAmount('USD', usd.total) : '$0.00'
+          })()}
+          hint={(() => {
+            const usd = byCurrency.find((b) => b.code === 'USD')
+            return usd ? `${usd.count} USD donation${usd.count === 1 ? '' : 's'}` : 'No USD donations yet'
+          })()}
           iconClass="bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
         />
         <StatCard
           icon={StatIcon}
           label="Donations"
-          value={loading ? '—' : filtered.length}
-          hint="In current view"
+          value={
+            loading ? (
+              '—'
+            ) : (() => {
+              const usd = byCurrency.find((b) => b.code === 'USD')?.count ?? 0
+              const khr = byCurrency.find((b) => b.code === 'KHR')?.count ?? 0
+              return (
+                <span className="flex items-baseline gap-3">
+                  <span className="flex items-baseline gap-1">
+                    <span className="text-base font-semibold text-emerald-600 dark:text-emerald-400">$</span>
+                    <span>{usd}</span>
+                  </span>
+                  <span className="text-slate-300 dark:text-slate-600">/</span>
+                  <span className="flex items-baseline gap-1">
+                    <span className="text-base font-semibold text-amber-600 dark:text-amber-400">៛</span>
+                    <span>{khr}</span>
+                  </span>
+                </span>
+              )
+            })()
+          }
+          hint={`${filtered.length} in current view`}
           iconClass="bg-amber-50 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400"
         />
       </div>

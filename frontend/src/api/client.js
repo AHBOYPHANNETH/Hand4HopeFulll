@@ -15,6 +15,10 @@ client.interceptors.response.use(
       localStorage.removeItem('hand4hope_token')
       localStorage.removeItem('hand4hope_user')
       delete client.defaults.headers.common.Authorization
+      // Tell AuthContext so React state (isAuthenticated, user) follows the wipe.
+      // Without this the UI keeps acting logged-in and every later request goes
+      // out with no Authorization header → repeated "Unauthenticated." responses.
+      window.dispatchEvent(new Event('hand4hope:auth-cleared'))
     }
     return Promise.reject(err)
   }

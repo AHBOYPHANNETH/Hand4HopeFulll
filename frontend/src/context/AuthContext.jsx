@@ -28,6 +28,16 @@ export function AuthProvider({ children }) {
   }, [token])
 
   useEffect(() => {
+    const handleCleared = () => {
+      setToken(null)
+      setUser(null)
+      setUnreadNotifications(0)
+    }
+    window.addEventListener('hand4hope:auth-cleared', handleCleared)
+    return () => window.removeEventListener('hand4hope:auth-cleared', handleCleared)
+  }, [])
+
+  useEffect(() => {
     if (!token) {
       startTransition(() => setBootstrapping(false))
       return
