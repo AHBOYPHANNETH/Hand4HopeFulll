@@ -81,7 +81,7 @@ export default function Navbar() {
                   `relative px-4 py-2 text-sm font-semibold transition-all duration-200
                   after:absolute after:bottom-0 after:left-4 after:right-4 after:h-0.5 after:transition-all after:duration-300
                   ${isActive
-                    ? 'text-primary-600 dark:text-white after:bg-linear-to-r after:from-primary-600 after:to-secondary-600'
+                    ? 'text-primary-600 dark:text-white after:bg-primary-600'
                     : 'text-slate-700 hover:text-primary-600 dark:text-white dark:hover:text-primary-300 after:bg-transparent hover:after:bg-primary-200 dark:hover:after:bg-primary-700'
                   }`
                 }
@@ -117,7 +117,7 @@ export default function Navbar() {
                         className="h-10 w-10 rounded-full object-cover ring-2 ring-white shadow-sm dark:ring-slate-800"
                       />
                     ) : (
-                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-br from-primary-200 to-primary-300 text-sm font-bold text-primary-700 ring-2 ring-white shadow-sm dark:ring-slate-800">
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary-200 text-sm font-bold text-primary-700 ring-2 ring-white shadow-sm dark:ring-slate-800">
                         {initials}
                       </span>
                     )}
@@ -148,7 +148,7 @@ export default function Navbar() {
                         ))}
                         <button
                           type="button"
-                          className="flex w-full items-center gap-2 px-4 py-3 text-left text-sm font-semibold text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20"
+                          className="flex w-full items-center gap-2 px-4 py-3 text-left text-sm font-semibold text-orange-600 transition-colors hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-900/20"
                           onClick={() => { setAccountOpen(false); logout() }}
                         >
                           <LogOut className="h-4 w-4" /> Logout

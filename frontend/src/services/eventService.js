@@ -52,3 +52,36 @@ export async function adminUpdateVolunteerRequestStatus(payload) {
   const { data } = await client.post('/admin/volunteer-requests/update-status', payload)
   return data
 }
+
+export async function adminFetchEventRosters() {
+  const { data } = await client.get('/admin/event-rosters')
+  return data
+}
+
+export async function adminFetchEventRoster(eventId) {
+  const { data } = await client.get(`/admin/event-rosters/${eventId}`)
+  return data
+}
+
+/**
+ * Fetch the CSV as a blob (Sanctum token rides on the Authorization header,
+ * so a plain <a download> won't work) and trigger a client-side download.
+ */
+export async function adminDownloadEventRosterCsv(eventId, filenameHint = 'event') {
+  const response = await client.get(`/admin/event-rosters/${eventId}/export`, {
+    responseType: 'blob',
+  })
+  const blob = new Blob([response.data], { type: 'text/csv;charset=utf-8' })
+  const url = window.URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  const safe = filenameHint
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '') || 'event'
+  link.download = `${safe}-volunteers.csv`
+  document.body.appendChild(link)
+  link.click()
+  link.remove()
+  window.URL.revokeObjectURL(url)
+}

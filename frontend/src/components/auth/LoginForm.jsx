@@ -44,7 +44,7 @@ export default function LoginForm() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: 'spring', stiffness: 200, delay: 0.2 }}
-          className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br from-primary-500 to-secondary-500 shadow-lg"
+          className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-500 shadow-lg"
         >
           <LogIn className="h-7 w-7 text-white" />
         </motion.div>
@@ -97,7 +97,7 @@ export default function LoginForm() {
         disabled={loading}
         whileHover={{ scale: loading ? 1 : 1.02 }}
         whileTap={{ scale: loading ? 1 : 0.98 }}
-        className="group flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-primary-600 to-secondary-600 py-3.5 font-semibold text-white shadow-lg transition-all hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
+        className="group flex w-full items-center justify-center gap-2 rounded-xl bg-primary-600 py-3.5 font-semibold text-white shadow-lg transition-all hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
       >
         {loading ? (
           <>

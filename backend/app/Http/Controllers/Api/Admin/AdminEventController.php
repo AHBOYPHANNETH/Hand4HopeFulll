@@ -66,16 +66,10 @@ class AdminEventController extends Controller
             'description' => ['nullable', 'string'],
             'starts_at' => [$partial ? 'sometimes' : 'required', 'date'],
             'location' => [$partial ? 'sometimes' : 'required', 'string', 'max:255'],
-            'capacity' => ['nullable', 'integer', 'min:1', 'max:100000'],
+            'capacity' => [$partial ? 'sometimes' : 'required', 'integer', 'min:1', 'max:100000'],
             'image' => ['nullable', 'image', 'max:5120'],
         ];
 
-        $data = $request->validate($rules);
-
-        if (array_key_exists('capacity', $data) && $data['capacity'] === '') {
-            $data['capacity'] = null;
-        }
-
-        return $data;
+        return $request->validate($rules);
     }
 }

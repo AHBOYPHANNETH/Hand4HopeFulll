@@ -4,15 +4,15 @@ import RegisterForm from '../components/auth/RegisterForm'
 
 export default function Register() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-linear-to-br from-primary-50 via-white to-secondary-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
+    <div className="relative min-h-screen overflow-hidden bg-primary-50 dark:bg-slate-900">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute -left-40 -top-40 h-96 w-96 rounded-full bg-linear-to-r from-secondary-300/30 to-primary-300/30 blur-3xl"
+          className="absolute -left-40 -top-40 h-96 w-96 rounded-full bg-secondary-300/30 blur-3xl"
           animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
           transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-linear-to-r from-accent-300/30 to-secondary-300/30 blur-3xl"
+          className="absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-accent-300/30 blur-3xl"
           animate={{ y: [0, 20, 0], x: [0, -10, 0] }}
           transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -32,7 +32,7 @@ export default function Register() {
           className="order-1 hidden lg:order-2 lg:flex lg:items-center"
         >
           <div className="glass relative w-full overflow-hidden rounded-3xl p-10 shadow-2xl">
-            <div className="absolute inset-0 bg-linear-to-br from-secondary-500/10 via-transparent to-primary-500/10" />
+            <div className="absolute inset-0 bg-secondary-500/10" />
             <div className="relative space-y-8">
               <div className="inline-flex items-center gap-2 rounded-full border border-secondary-200 bg-secondary-50/80 px-4 py-2 backdrop-blur-sm dark:border-secondary-800 dark:bg-secondary-900/30">
                 <Zap className="h-4 w-4 text-secondary-600 dark:text-secondary-400" />
@@ -62,7 +62,7 @@ export default function Register() {
                     transition={{ delay: 0.3 + i * 0.12 }}
                     className="flex items-start gap-3 rounded-2xl border border-white/40 bg-white/50 p-4 backdrop-blur-sm dark:border-slate-700/40 dark:bg-slate-800/50"
                   >
-                    <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-primary-500 to-secondary-500 text-white">
+                    <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-500 text-white">
                       <item.icon className="h-5 w-5" />
                     </span>
                     <span className="pt-1 text-sm font-medium text-slate-700 dark:text-slate-200">

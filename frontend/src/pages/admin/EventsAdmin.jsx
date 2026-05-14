@@ -80,9 +80,7 @@ export default function EventsAdmin() {
     fd.append('description', form.description)
     fd.append('location', form.location)
     fd.append('starts_at', new Date(form.starts_at).toISOString())
-    if (form.capacity !== '' && form.capacity != null) {
-      fd.append('capacity', String(form.capacity))
-    }
+    fd.append('capacity', String(form.capacity))
     if (form.image) fd.append('image', form.image)
     try {
       if (editingId) {
@@ -229,7 +227,7 @@ export default function EventsAdmin() {
                         <button
                           type="button"
                           onClick={() => setConfirmId(ev.id)}
-                          className="inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-rose-600 transition-colors hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-900/30"
+                          className="inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-orange-600 transition-colors hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-900/30"
                         >
                           <Trash2 className="h-3.5 w-3.5" /> Delete
                         </button>
@@ -334,18 +332,19 @@ function EventModal({ open, editing, form, setForm, submitting, onCancel, onSubm
                   className="input-field"
                 />
               </Field>
-              <Field label="Volunteer capacity">
+              <Field label="Volunteer capacity *">
                 <input
                   type="number"
+                  required
                   min={1}
                   max={100000}
                   value={form.capacity}
                   onChange={(e) => setForm((f) => ({ ...f, capacity: e.target.value }))}
                   className="input-field"
-                  placeholder="Leave blank for unlimited"
+                  placeholder="e.g. 10"
                 />
                 <span className="mt-1 block text-xs text-slate-500 dark:text-slate-400">
-                  Maximum number of volunteers who can join. Leave empty for no limit.
+                  Maximum number of volunteers who can join. The form locks once it's full (e.g. 10 / 10).
                 </span>
               </Field>
               <Field label="Description">
@@ -402,7 +401,7 @@ function CapacityCell({ event }) {
       <span
         className={`inline-flex items-center gap-1 text-xs font-semibold ${
           isFull
-            ? 'text-rose-700 dark:text-rose-400'
+            ? 'text-orange-700 dark:text-orange-400'
             : remaining <= Math.max(1, Math.round(event.capacity * 0.2))
               ? 'text-amber-700 dark:text-amber-400'
               : 'text-slate-700 dark:text-slate-300'
@@ -423,7 +422,7 @@ function Field({ label, required, children }) {
     <label className="block space-y-1.5">
       <span className="flex items-center gap-1 text-sm font-semibold text-slate-700 dark:text-slate-300">
         {label}
-        {required && <span className="text-rose-500">*</span>}
+        {required && <span className="text-orange-500">*</span>}
       </span>
       {children}
     </label>

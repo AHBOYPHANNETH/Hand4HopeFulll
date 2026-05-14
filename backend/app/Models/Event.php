@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Event extends Model
 {
-    protected $appends = ['image_url', 'volunteers_count', 'is_full'];
+    /** Volunteer sign-ups close this many days before the event starts. */
+    public const SIGNUP_DEADLINE_DAYS = 2;
+
+    protected $appends = ['image_url', 'volunteers_count', 'is_full', 'signup_deadline', 'signups_closed'];
 
     protected $fillable = [
         'title',
@@ -48,10 +51,26 @@ class Event extends Model
         return $this->volunteers_count >= $this->capacity;
     }
 
+    public function getSignupDeadlineAttribute(): ?string
+    {
+        return $this->starts_at?->copy()->subDays(self::SIGNUP_DEADLINE_DAYS)->toIso8601String();
+    }
+
+    public function getSignupsClosedAttribute(): bool
+    {
+        if (! $this->starts_at) {
+            return false;
+        }
+
+        return now()->greaterThanOrEqualTo(
+            $this->starts_at->copy()->subDays(self::SIGNUP_DEADLINE_DAYS)
+        );
+    }
+
     public function volunteers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'event_volunteers')
-            ->withPivot('name', 'email', 'phone', 'date_of_birth', 'notes', 'status')
+            ->withPivot('name', 'email', 'phone', 'gender', 'date_of_birth', 'notes', 'status')
             ->withTimestamps();
     }
 

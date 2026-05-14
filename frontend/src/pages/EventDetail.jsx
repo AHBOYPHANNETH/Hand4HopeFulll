@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { Users } from 'lucide-react'
+import { Users, CalendarClock } from 'lucide-react'
 import EventCountdown from '../components/EventCountdown'
 import Button from '../components/ui/Button'
 import Alert from '../components/ui/Alert'
@@ -82,18 +82,21 @@ export default function EventDetail() {
           <div className="space-y-5">
             <EventCountdown isoDate={event.starts_at} />
             <CapacityBlock event={event} />
+            <DeadlineBlock event={event} />
             <Button
               className="w-full py-3"
-              disabled={event.is_full}
+              disabled={event.is_full || event.signups_closed}
               onClick={handleVolunteerClick}
             >
-              {event.is_full
-                ? 'Volunteer spots full'
-                : isAuthenticated
-                  ? 'Join as volunteer'
-                  : 'Sign in to volunteer'}
+              {event.signups_closed
+                ? 'Sign-ups closed'
+                : event.is_full
+                  ? 'Volunteer spots full'
+                  : isAuthenticated
+                    ? 'Join as volunteer'
+                    : 'Sign in to volunteer'}
             </Button>
-            {!isAuthenticated && !event.is_full ? (
+            {!isAuthenticated && !event.is_full && !event.signups_closed ? (
               <p className="text-center text-xs text-stone-500">
                 Need an account?{' '}
                 <Link className="font-semibold text-teal-700" to="/register">
@@ -108,31 +111,51 @@ export default function EventDetail() {
   )
 }
 
+function DeadlineBlock({ event }) {
+  if (!event.signup_deadline) return null
+  const deadline = new Date(event.signup_deadline)
+  const closed = !!event.signups_closed
+  const formatted = new Intl.DateTimeFormat(undefined, {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  }).format(deadline)
+
+  return (
+    <div
+      className={`rounded-2xl border px-4 py-3 text-sm ${
+        closed
+          ? 'border-orange-200 bg-orange-50 text-orange-700'
+          : 'border-stone-100 bg-stone-50 text-stone-700'
+      }`}
+    >
+      <div className="flex items-center gap-2 font-semibold">
+        <CalendarClock className="h-4 w-4" />
+        Sign-up deadline
+      </div>
+      <p className="mt-1 text-xs">
+        {closed
+          ? `Closed on ${formatted} (2 days before the event).`
+          : `Closes ${formatted} — 2 days before the event starts.`}
+      </p>
+    </div>
+  )
+}
+
 function CapacityBlock({ event }) {
   const taken = event.volunteers_count ?? 0
-  const cap = event.capacity ?? null
+  const cap = event.capacity ?? 0
   const isFull = !!event.is_full
 
-  if (!cap) {
-    return (
-      <div className="flex items-center justify-between rounded-2xl border border-stone-100 bg-stone-50 px-4 py-3 text-sm">
-        <span className="flex items-center gap-2 font-semibold text-stone-700">
-          <Users className="h-4 w-4 text-teal-700" />
-          Volunteers joined
-        </span>
-        <span className="text-base font-bold text-stone-900">{taken}</span>
-      </div>
-    )
-  }
-
   const remaining = Math.max(cap - taken, 0)
-  const pct = Math.min(100, Math.round((taken / cap) * 100))
+  const pct = cap > 0 ? Math.min(100, Math.round((taken / cap) * 100)) : 0
 
   return (
     <div
       className={`rounded-2xl border px-4 py-3 ${
         isFull
-          ? 'border-rose-200 bg-rose-50'
+          ? 'border-orange-200 bg-orange-50'
           : remaining <= Math.max(1, Math.round(cap * 0.2))
             ? 'border-amber-200 bg-amber-50'
             : 'border-stone-100 bg-stone-50'
@@ -151,7 +174,7 @@ function CapacityBlock({ event }) {
         <div
           className={`h-full rounded-full transition-[width] duration-500 ${
             isFull
-              ? 'bg-rose-500'
+              ? 'bg-orange-500'
               : remaining <= Math.max(1, Math.round(cap * 0.2))
                 ? 'bg-amber-500'
                 : 'bg-teal-600'
@@ -161,7 +184,7 @@ function CapacityBlock({ event }) {
       </div>
       <p
         className={`mt-2 text-xs font-medium ${
-          isFull ? 'text-rose-700' : 'text-stone-600'
+          isFull ? 'text-orange-700' : 'text-stone-600'
         }`}
       >
         {isFull

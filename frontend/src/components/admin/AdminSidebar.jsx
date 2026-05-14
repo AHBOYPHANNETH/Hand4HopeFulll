@@ -7,6 +7,7 @@ import {
   Users,
   UserCog,
   FileText,
+  ClipboardList,
   ExternalLink,
   LogOut,
   X,
@@ -20,6 +21,7 @@ const NAV_ITEMS = [
   { to: '/admin/donations',  label: 'Donations',        icon: DollarSign },
   { to: '/admin/contacts',   label: 'Contacts',         icon: MessageSquare },
   { to: '/admin/volunteers', label: 'Volunteers',       icon: Users },
+  { to: '/admin/event-rosters', label: 'Event Rosters', icon: ClipboardList },
   { to: '/admin/users',      label: 'Users',            icon: UserCog },
   { to: '/admin/content',    label: 'Website Content',  icon: FileText },
 ]
@@ -109,7 +111,7 @@ export default function AdminSidebar({ open, onClose }) {
                 {user?.avatar_url ? (
                   <img src={user.avatar_url} alt={user.name} className="h-9 w-9 shrink-0 rounded-full object-cover" />
                 ) : (
-                  <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-primary-700 text-sm font-bold text-white">
+                  <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white">
                     {(user?.name || 'A').slice(0, 1).toUpperCase()}
                   </span>
                 )}
@@ -125,7 +127,7 @@ export default function AdminSidebar({ open, onClose }) {
                   type="button"
                   onClick={handleLogout}
                   aria-label="Sign out"
-                  className="shrink-0 rounded-lg p-1.5 text-slate-500 transition-colors hover:bg-rose-100 hover:text-rose-600 dark:text-slate-400 dark:hover:bg-rose-900/30 dark:hover:text-rose-400"
+                  className="shrink-0 rounded-lg p-1.5 text-slate-500 transition-colors hover:bg-orange-100 hover:text-orange-600 dark:text-slate-400 dark:hover:bg-orange-900/30 dark:hover:text-orange-400"
                 >
                   <LogOut className="h-4 w-4" />
                 </button>

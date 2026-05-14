@@ -18,8 +18,8 @@ const CONFIG = {
   },
   error: {
     icon: XCircle,
-    classes: 'bg-rose-50 border-rose-200 text-rose-900 dark:bg-rose-900/30 dark:border-rose-700 dark:text-rose-200',
-    iconClass: 'text-rose-500 dark:text-rose-400',
+    classes: 'bg-orange-50 border-orange-200 text-orange-900 dark:bg-orange-900/30 dark:border-orange-700 dark:text-orange-200',
+    iconClass: 'text-orange-500 dark:text-orange-400',
   },
   warning: {
     icon: AlertTriangle,

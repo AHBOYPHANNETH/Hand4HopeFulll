@@ -83,13 +83,14 @@
 }
 
 @layer components {
-  /* Gradient Text */
+  /* Brand-coloured text (used where the design used to call for a gradient).
+     Kept as classes for backwards compatibility; rendered as solid colour. */
   .gradient-text {
-    @apply bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent;
+    @apply text-primary-700 dark:text-primary-400;
   }
 
   .gradient-text-accent {
-    @apply bg-gradient-to-r from-accent-500 to-primary-600 bg-clip-text text-transparent;
+    @apply text-accent-600 dark:text-accent-400;
   }
 
   /* Glass Morphism */
@@ -114,17 +115,17 @@
   }
 
   .card-gradient {
-    @apply rounded-2xl border border-slate-200/40 bg-gradient-to-br from-white to-slate-50/50 shadow-lg backdrop-blur-sm;
-    @apply dark:border-slate-700/40 dark:from-slate-800 dark:to-slate-900/50;
+    @apply rounded-2xl border border-slate-200/40 bg-white shadow-lg backdrop-blur-sm;
+    @apply dark:border-slate-700/40 dark:bg-slate-800;
   }
 
   /* Buttons */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary-600 to-primary-700 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:from-primary-700 hover:to-primary-800 active:translate-y-0 active:shadow-md disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary-700 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:bg-primary-800 active:translate-y-0 active:shadow-md disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-secondary-600 to-secondary-700 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 active:shadow-md disabled:opacity-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-secondary-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:bg-secondary-700 active:translate-y-0 active:shadow-md disabled:opacity-50;
   }
 
   .btn-outline {
@@ -165,8 +166,7 @@
 
   /* Divider */
   .divider {
-    @apply h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent;
-    @apply dark:via-slate-600;
+    @apply h-px bg-slate-200 dark:bg-slate-700;
   }
 
   /* Responsive table wrapper */

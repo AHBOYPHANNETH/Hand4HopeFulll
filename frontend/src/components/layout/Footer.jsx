@@ -49,7 +49,7 @@ const navLinks = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-200/50 bg-gradient-to-b from-slate-50 to-white dark:border-slate-700/50 dark:from-slate-900 dark:to-slate-900">
+    <footer className="border-t border-slate-200/50 bg-slate-50 to-white dark:border-slate-700/50 dark:bg-slate-900">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 md:py-24">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
 
@@ -139,7 +139,7 @@ export default function Footer() {
           </motion.div>
         </div>
 
-        <div className="my-12 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent dark:via-slate-700" />
+        <div className="my-12 h-px from-transparent to-transparent" />
 
         <motion.div
           variants={fadeUp}

@@ -84,15 +84,15 @@ export default function Donate() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-linear-to-br from-primary-50 via-white to-secondary-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
+    <div className="relative min-h-screen overflow-hidden bg-primary-50 dark:bg-slate-900">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-linear-to-r from-primary-300/30 to-secondary-300/30 blur-3xl"
+          className="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-primary-300/30 blur-3xl"
           animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
           transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-linear-to-r from-accent-300/30 to-primary-300/30 blur-3xl"
+          className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-accent-300/30 blur-3xl"
           animate={{ y: [0, 20, 0], x: [0, -10, 0] }}
           transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -119,7 +119,7 @@ export default function Donate() {
 
           <div className="rounded-2xl border border-primary-100 bg-white/60 p-5 backdrop-blur dark:border-primary-900/40 dark:bg-slate-800/60">
             <div className="flex items-center gap-3">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-primary-500 to-secondary-500 text-white">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary-500 text-white">
                 <Smartphone className="h-5 w-5" />
               </span>
               <div>
@@ -144,7 +144,7 @@ export default function Donate() {
                 key={i}
                 whileHover={{ y: -4 }}
                 transition={{ type: 'spring', stiffness: 300 }}
-                className="relative overflow-hidden rounded-2xl border border-primary-200/70 bg-linear-to-br from-primary-50 via-white to-secondary-50 p-4 text-center shadow-md dark:border-primary-800/50 dark:from-primary-900/40 dark:via-slate-800 dark:to-secondary-900/30"
+                className="relative overflow-hidden rounded-2xl border border-primary-200/70 bg-primary-50 p-4 text-center shadow-md dark:border-primary-800/50 dark:bg-primary-900/40"
               >
                 <span className="pointer-events-none absolute -right-4 -top-4 h-16 w-16 rounded-full bg-primary-300/30 blur-2xl dark:bg-primary-500/20" />
                 <p className="relative text-2xl font-bold text-primary-700 dark:text-primary-300">
@@ -206,7 +206,7 @@ function DonationForm({ form, setForm, pickPreset, onSubmit, loading, error }) {
       className="space-y-5"
     >
       <div className="flex items-center gap-3">
-        <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br from-primary-500 to-secondary-500 shadow-lg">
+        <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-500 shadow-lg">
           <Heart className="h-6 w-6 text-white" />
         </span>
         <div>
@@ -444,7 +444,7 @@ function KhqrPayment({ session, onPaid, onCancel }) {
           </strong>
         </span>
         <span aria-hidden="true">•</span>
-        <span className={expired ? 'font-semibold text-rose-600' : ''}>
+        <span className={expired ? 'font-semibold text-orange-600' : ''}>
           {expired ? 'Expired' : `Expires in ${minutes}:${seconds}`}
         </span>
       </div>
@@ -452,7 +452,7 @@ function KhqrPayment({ session, onPaid, onCancel }) {
       <div
         className={`flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm ${
           expired
-            ? 'bg-rose-50 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300'
+            ? 'bg-orange-50 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300'
             : 'bg-primary-50 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300'
         }`}
       >

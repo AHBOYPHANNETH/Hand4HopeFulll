@@ -18,7 +18,7 @@ function scorePassword(pw) {
 }
 
 const STRENGTH = [
-  { label: 'Too weak', color: 'bg-rose-500', text: 'text-rose-600 dark:text-rose-400' },
+  { label: 'Too weak', color: 'bg-orange-500', text: 'text-orange-600 dark:text-orange-400' },
   { label: 'Weak', color: 'bg-orange-500', text: 'text-orange-600 dark:text-orange-400' },
   { label: 'Fair', color: 'bg-amber-500', text: 'text-amber-600 dark:text-amber-400' },
   { label: 'Good', color: 'bg-lime-500', text: 'text-lime-600 dark:text-lime-400' },
@@ -76,7 +76,7 @@ export default function RegisterForm() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: 'spring', stiffness: 200, delay: 0.2 }}
-          className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br from-secondary-500 to-primary-500 shadow-lg"
+          className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary-500 shadow-lg"
         >
           <UserPlus className="h-7 w-7 text-white" />
         </motion.div>
@@ -179,7 +179,7 @@ export default function RegisterForm() {
               className={`mt-2 inline-flex items-center gap-1.5 text-xs font-medium ${
                 matches
                   ? 'text-emerald-600 dark:text-emerald-400'
-                  : 'text-rose-600 dark:text-rose-400'
+                  : 'text-orange-600 dark:text-orange-400'
               }`}
             >
               {matches ? <Check className="h-3.5 w-3.5" /> : <X className="h-3.5 w-3.5" />}
@@ -194,7 +194,7 @@ export default function RegisterForm() {
         disabled={loading}
         whileHover={{ scale: loading ? 1 : 1.02 }}
         whileTap={{ scale: loading ? 1 : 0.98 }}
-        className="group flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-secondary-600 to-primary-600 py-3.5 font-semibold text-white shadow-lg transition-all hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
+        className="group flex w-full items-center justify-center gap-2 rounded-xl bg-secondary-600 py-3.5 font-semibold text-white shadow-lg transition-all hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
       >
         {loading ? (
           <>

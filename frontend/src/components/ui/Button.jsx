@@ -2,12 +2,12 @@ import { motion } from 'framer-motion'
 import { Loader2 } from 'lucide-react'
 
 const variants = {
-  primary: 'inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary-600 to-primary-700 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:from-primary-700 hover:to-primary-800 active:translate-y-0 active:shadow-md disabled:opacity-50 disabled:cursor-not-allowed',
-  secondary: 'inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-secondary-600 to-secondary-700 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 active:shadow-md disabled:opacity-50',
+  primary: 'inline-flex items-center justify-center gap-2 rounded-full bg-primary-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:bg-primary-700 active:translate-y-0 active:shadow-md disabled:opacity-50 disabled:cursor-not-allowed',
+  secondary: 'inline-flex items-center justify-center gap-2 rounded-full bg-secondary-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 active:shadow-md disabled:opacity-50',
   outline: 'inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary-600 px-6 py-3 font-semibold text-primary-600 transition-all duration-200 hover:bg-primary-50 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50',
   ghost: 'inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold text-slate-700 transition-all duration-200 hover:bg-slate-100 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 dark:text-slate-300 dark:hover:bg-slate-800',
-  gradient: 'inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent-500 to-primary-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 active:shadow-md disabled:opacity-50',
-  danger: 'inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-red-600 to-red-700 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 active:shadow-md disabled:opacity-50',
+  gradient: 'inline-flex items-center justify-center gap-2 rounded-full bg-accent-500 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 active:shadow-md disabled:opacity-50',
+  danger: 'inline-flex items-center justify-center gap-2 rounded-full bg-orange-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 active:shadow-md disabled:opacity-50',
 }
 
 const sizes = {

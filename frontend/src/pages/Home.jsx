@@ -53,15 +53,15 @@ export default function Home() {
   return (
     <div>
       {/* ── Hero ── */}
-      <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 pt-20 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 md:pt-32">
+      <section className="relative min-h-screen overflow-hidden bg-primary-50 pt-20 dark:bg-slate-900 md:pt-32">
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
-            className="absolute -right-40 -top-40 h-80 w-80 rounded-full bg-gradient-to-r from-primary-300/30 to-secondary-300/30 blur-3xl"
+            className="absolute -right-40 -top-40 h-80 w-80 rounded-full bg-primary-300/30 blur-3xl"
             animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           />
           <motion.div
-            className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-gradient-to-r from-accent-300/30 to-primary-300/30 blur-3xl"
+            className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-accent-300/30 blur-3xl"
             animate={{ y: [0, 20, 0], x: [0, -10, 0] }}
             transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
           />
@@ -107,7 +107,7 @@ export default function Home() {
                 <div className="flex items-center gap-2">
                   <div className="flex -space-x-2">
                     {[1, 2, 3].map((i) => (
-                      <div key={i} className="h-8 w-8 rounded-full border-2 border-white bg-gradient-to-br from-primary-400 to-secondary-400 dark:border-slate-800" />
+                      <div key={i} className="h-8 w-8 rounded-full border-2 border-white bg-primary-400 dark:border-slate-800" />
                     ))}
                   </div>
                   <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">+1,200 Volunteers</span>
@@ -170,7 +170,7 @@ export default function Home() {
                     transition={{ type: 'spring', stiffness: 300 }}
                   >
                     <motion.div
-                      className="mx-auto mb-3 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-100 to-primary-200 transition-all group-hover:from-primary-200 group-hover:to-primary-300 dark:from-primary-900/50 dark:to-primary-800/50 sm:h-14 sm:w-14 md:mb-4 md:h-16 md:w-16"
+                      className="mx-auto mb-3 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-primary-100 transition-all group-hover:bg-primary-200 dark:bg-primary-900/50 sm:h-14 sm:w-14 md:mb-4 md:h-16 md:w-16"
                       whileHover={{ scale: 1.1 }}
                     >
                       <stat.icon className="h-5 w-5 text-primary-600 dark:text-primary-400 sm:h-7 sm:w-7 md:h-8 md:w-8" />
@@ -188,7 +188,7 @@ export default function Home() {
       </section>
 
       {/* ── Our Programs ── */}
-      <section className="border-t border-slate-200/50 bg-gradient-to-b from-slate-50 to-white py-12 dark:border-slate-700/50 dark:from-slate-800 dark:to-slate-900 md:py-24">
+      <section className="border-t border-slate-200/50 bg-slate-50 to-white py-12 dark:border-slate-700/50 dark:bg-slate-800 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
             <div className="mb-8 text-center md:mb-12">
@@ -218,7 +218,7 @@ export default function Home() {
                     whileHover={{ y: -6 }}
                     transition={{ type: 'spring', stiffness: 300 }}
                   >
-                    <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-100 to-primary-200 transition-all group-hover:from-primary-200 group-hover:to-primary-300 dark:from-primary-900/50 dark:to-primary-800/50 sm:mb-4 sm:h-12 sm:w-12">
+                    <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-100 transition-all group-hover:bg-primary-200 dark:bg-primary-900/50 sm:mb-4 sm:h-12 sm:w-12">
                       <program.icon className="h-5 w-5 text-primary-600 dark:text-primary-400 sm:h-6 sm:w-6" />
                     </div>
                     <h3 className="font-display text-sm font-semibold text-slate-900 dark:text-slate-100 sm:text-base md:text-lg">
@@ -236,7 +236,7 @@ export default function Home() {
       </section>
 
       {/* ── Featured Events ── */}
-      <section className="bg-gradient-to-b from-white to-slate-50 py-12 dark:from-slate-900 dark:to-slate-800 md:py-24">
+      <section className="bg-white py-12 dark:bg-slate-900 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
             <div className="mb-6 flex flex-col items-start justify-between gap-3 sm:mb-8 sm:gap-4 md:mb-12 md:flex-row md:items-end md:gap-6">
@@ -278,7 +278,7 @@ export default function Home() {
       </section>
 
       {/* ── Community ── */}
-      <section className="border-y border-slate-200/50 bg-gradient-to-r from-primary-50/50 via-white to-secondary-50/50 py-12 dark:border-slate-700/50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 md:py-24">
+      <section className="border-y border-slate-200/50 bg-primary-50/50 py-12 dark:border-slate-700/50 dark:bg-slate-900 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <FadeInUp>
@@ -299,7 +299,7 @@ export default function Home() {
                     <StaggerItem key={i}>
                       <div className="flex gap-4">
                         <div className="flex-shrink-0">
-                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-secondary-500">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-500">
                             <item.icon className="h-4 w-4 text-white" />
                           </div>
                         </div>
@@ -328,7 +328,7 @@ export default function Home() {
               className="relative"
             >
               <div className="glass relative h-96 overflow-hidden rounded-3xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-secondary-500/10" />
+                <div className="absolute inset-0 bg-primary-500/10" />
                 <div className="relative flex h-full flex-col justify-center space-y-4 p-8">
                   {[
                     { icon: Users,         title: 'Community Events',  desc: 'Monthly meetups and training' },
@@ -386,7 +386,7 @@ export default function Home() {
                   >
                     {plan.popular && (
                       <div className="absolute -top-2 left-1/2 -translate-x-1/2">
-                        <span className="inline-block rounded-full bg-gradient-to-r from-accent-500 to-primary-600 px-3 py-0.5 text-[10px] font-bold text-white sm:px-4 sm:py-1 sm:text-xs">
+                        <span className="inline-block rounded-full bg-accent-500 px-3 py-0.5 text-[10px] font-bold text-white sm:px-4 sm:py-1 sm:text-xs">
                           Most Popular
                         </span>
                       </div>
@@ -433,7 +433,7 @@ export default function Home() {
                 <StaggerItem key={i}>
                   <motion.div className="card relative p-4 text-center sm:p-6 md:p-8" whileHover={{ y: -8 }}>
                     <motion.div
-                      className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary-600 to-primary-700 font-display text-lg font-bold text-white sm:mb-6 sm:h-14 sm:w-14 sm:rounded-2xl sm:text-2xl"
+                      className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-primary-600 font-display text-lg font-bold text-white sm:mb-6 sm:h-14 sm:w-14 sm:rounded-2xl sm:text-2xl"
                       whileHover={{ scale: 1.1 }}
                     >
                       {item.step}
@@ -492,7 +492,7 @@ export default function Home() {
       </section>
 
       {/* ── FAQ ── */}
-      <section className="border-t border-slate-200/50 bg-gradient-to-br from-slate-50 to-slate-100 py-10 dark:border-slate-700/50 dark:from-slate-800 dark:to-slate-900 sm:py-12 md:py-24">
+      <section className="border-t border-slate-200/50 bg-slate-50 py-10 dark:border-slate-700/50 dark:bg-slate-800 sm:py-12 md:py-24">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <FadeInUp>
             <div className="mb-6 text-center sm:mb-8 md:mb-12">
@@ -529,7 +529,7 @@ export default function Home() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="relative overflow-hidden border-t border-slate-200/50 bg-gradient-to-r from-primary-600 to-secondary-600 py-12 dark:border-slate-700/50 md:py-24">
+      <section className="relative overflow-hidden border-t border-slate-200/50 bg-primary-600 py-12 dark:border-slate-700/50 md:py-24">
         <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <FadeInUp>
             <h2 className="text-3xl font-display font-bold text-white sm:text-4xl md:text-5xl">

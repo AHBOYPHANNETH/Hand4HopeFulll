@@ -10,15 +10,15 @@ export default function LegalPageLayout({
   children,
 }) {
   return (
-    <div className="relative overflow-hidden bg-linear-to-br from-primary-50 via-white to-secondary-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
+    <div className="relative overflow-hidden bg-primary-50 dark:bg-slate-900">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-linear-to-r from-primary-300/30 to-secondary-300/30 blur-3xl"
+          className="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-primary-300/30 blur-3xl"
           animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
           transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-linear-to-r from-accent-300/30 to-primary-300/30 blur-3xl"
+          className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-accent-300/30 blur-3xl"
           animate={{ y: [0, 20, 0], x: [0, -10, 0] }}
           transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -36,7 +36,7 @@ export default function LegalPageLayout({
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: 'spring', stiffness: 200, delay: 0.15 }}
-              className="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br from-primary-500 to-secondary-500 shadow-lg"
+              className="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-500 shadow-lg"
             >
               <Icon className="h-8 w-8 text-white" />
             </motion.div>

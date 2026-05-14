@@ -158,7 +158,7 @@ export default function UsersAdmin() {
           label="Administrators"
           value={loading ? '—' : counts.admin}
           hint="With dashboard access"
-          iconClass="bg-rose-50 text-rose-600 dark:bg-rose-900/30 dark:text-rose-400"
+          iconClass="bg-orange-50 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400"
         />
         <StatCard
           icon={Users}
@@ -252,7 +252,7 @@ export default function UsersAdmin() {
                               className="h-9 w-9 shrink-0 rounded-full object-cover"
                             />
                           ) : (
-                            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-primary-700 text-sm font-bold text-white">
+                            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white">
                               {(u.name || 'U').slice(0, 1).toUpperCase()}
                             </span>
                           )}
@@ -358,7 +358,7 @@ export default function UsersAdmin() {
                             onClick={() => setConfirmDelete(u)}
                             disabled={isSelf || busyId === u.id}
                             title={isSelf ? 'You cannot delete yourself' : 'Delete user'}
-                            className="inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-rose-600 transition-colors hover:bg-rose-50 disabled:opacity-50 dark:text-rose-400 dark:hover:bg-rose-900/30"
+                            className="inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-orange-600 transition-colors hover:bg-orange-50 disabled:opacity-50 dark:text-orange-400 dark:hover:bg-orange-900/30"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
                           </button>
@@ -402,7 +402,7 @@ function RoleBadge({ role }) {
     <span
       className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold capitalize ${
         isAdmin
-          ? 'bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300'
+          ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300'
           : 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300'
       }`}
     >

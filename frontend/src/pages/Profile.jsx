@@ -165,7 +165,7 @@ export default function Profile() {
                   type="button"
                   onClick={handleRemoveAvatar}
                   disabled={uploading}
-                  className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold text-rose-600 transition-colors hover:bg-rose-50 disabled:opacity-50 dark:text-rose-400 dark:hover:bg-rose-900/30"
+                  className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold text-orange-600 transition-colors hover:bg-orange-50 disabled:opacity-50 dark:text-orange-400 dark:hover:bg-orange-900/30"
                 >
                   <Trash2 className="h-3.5 w-3.5" />
                   Remove

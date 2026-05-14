@@ -24,6 +24,7 @@ import EventsAdmin from './pages/admin/EventsAdmin'
 import DonationsAdmin from './pages/admin/DonationsAdmin'
 import ContactsAdmin from './pages/admin/ContactsAdmin'
 import VolunteersAdmin from './pages/admin/VolunteersAdmin'
+import EventRosterAdmin from './pages/admin/EventRosterAdmin'
 import UsersAdmin from './pages/admin/UsersAdmin'
 import ContentAdmin from './pages/admin/ContentAdmin'
 
@@ -46,6 +47,7 @@ export default function App() {
         <Route path="donations" element={<DonationsAdmin />} />
         <Route path="contacts" element={<ContactsAdmin />} />
         <Route path="volunteers" element={<VolunteersAdmin />} />
+        <Route path="event-rosters" element={<EventRosterAdmin />} />
         <Route path="users" element={<UsersAdmin />} />
         <Route path="content" element={<ContentAdmin />} />
         <Route path="*" element={<Navigate to="overview" replace />} />

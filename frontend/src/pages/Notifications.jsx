@@ -43,30 +43,53 @@ export default function Notifications() {
   }
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
-      <div className="flex items-center justify-between gap-4">
-        <h1 className="text-3xl font-semibold text-stone-900">Notifications</h1>
-        <Button type="button" variant="outline" onClick={markAll}>Mark all as read</Button>
-      </div>
-      <div className="mt-6 space-y-3">
-        {loading ? <p className="text-sm text-stone-500">Loading notifications…</p> : null}
-        {!loading && items.length === 0 ? <p className="text-sm text-stone-500">No notifications available.</p> : null}
-        {items.map((n) => (
-          <article key={n.id} className={`rounded-2xl border p-4 ${n.is_read ? 'border-stone-100 bg-white' : 'border-teal-100 bg-teal-50/50'}`}>
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="text-sm font-semibold text-teal-800">{n.title}</p>
-                <p className="mt-1 text-sm text-stone-700">{n.message}</p>
-                <p className="mt-2 text-xs text-stone-400">{timeAgo(n.created_at)}</p>
+    <div className="min-h-screen bg-stone-50 dark:bg-slate-950">
+      <div className="mx-auto max-w-4xl px-4 py-12">
+        <div className="flex items-center justify-between gap-4">
+          <h1 className="text-3xl font-semibold text-stone-900 dark:text-slate-100">
+            Notifications
+          </h1>
+          <Button type="button" variant="outline" onClick={markAll}>
+            Mark all as read
+          </Button>
+        </div>
+        <div className="mt-6 space-y-3">
+          {loading ? (
+            <p className="text-sm text-stone-500 dark:text-slate-400">Loading notifications…</p>
+          ) : null}
+          {!loading && items.length === 0 ? (
+            <p className="text-sm text-stone-500 dark:text-slate-400">
+              No notifications available.
+            </p>
+          ) : null}
+          {items.map((n) => (
+            <article
+              key={n.id}
+              className={`rounded-2xl border p-4 transition-colors ${
+                n.is_read
+                  ? 'border-stone-100 bg-white dark:border-slate-800 dark:bg-slate-900'
+                  : 'border-teal-100 bg-teal-50/50 dark:border-teal-900/40 dark:bg-teal-900/20'
+              }`}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="text-sm font-semibold text-teal-800 dark:text-teal-300">
+                    {n.title}
+                  </p>
+                  <p className="mt-1 text-sm text-stone-700 dark:text-slate-300">{n.message}</p>
+                  <p className="mt-2 text-xs text-stone-400 dark:text-slate-500">
+                    {timeAgo(n.created_at)}
+                  </p>
+                </div>
+                {!n.is_read ? (
+                  <Button type="button" variant="ghost" className="text-xs" onClick={() => markOne(n.id)}>
+                    Mark read
+                  </Button>
+                ) : null}
               </div>
-              {!n.is_read ? (
-                <Button type="button" variant="ghost" className="text-xs" onClick={() => markOne(n.id)}>
-                  Mark read
-                </Button>
-              ) : null}
-            </div>
-          </article>
-        ))}
+            </article>
+          ))}
+        </div>
       </div>
     </div>
   )

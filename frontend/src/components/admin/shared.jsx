@@ -124,7 +124,7 @@ export function SearchInput({ value, onChange, placeholder = 'Search…' }) {
 export function StatusBadge({ status }) {
   const map = {
     approved: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300',
-    rejected: 'bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300',
+    rejected: 'bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300',
     pending:  'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
   }
   return (

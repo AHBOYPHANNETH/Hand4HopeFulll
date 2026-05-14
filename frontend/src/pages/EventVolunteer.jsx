@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { Calendar, MapPin, ArrowLeft, User, Mail, Phone, CalendarDays, Users } from 'lucide-react'
+import { Calendar, MapPin, ArrowLeft, User, Mail, Phone, CalendarDays, Users, UserRound } from 'lucide-react'
 import EventCountdown from '../components/EventCountdown'
 import Button from '../components/ui/Button'
 import Alert from '../components/ui/Alert'
@@ -37,6 +37,7 @@ export default function EventVolunteer() {
     name: '',
     email: '',
     phone: '',
+    gender: '',
     date_of_birth: '',
     notes: '',
   })
@@ -78,6 +79,7 @@ export default function EventVolunteer() {
         name: form.name.trim(),
         email: form.email.trim(),
         phone: form.phone.trim(),
+        gender: form.gender,
         date_of_birth: form.date_of_birth,
         notes: form.notes.trim() || undefined,
       })
@@ -165,7 +167,14 @@ export default function EventVolunteer() {
             Tell us a little about yourself. Coordinators will review your details and confirm your spot.
           </p>
 
-          {event.is_full && !msg && (
+          {event.signups_closed && !msg && (
+            <div className="mt-5">
+              <Alert type="error">
+                Sign-ups for this event are closed (the deadline is 2 days before the event starts).
+              </Alert>
+            </div>
+          )}
+          {event.is_full && !event.signups_closed && !msg && (
             <div className="mt-5">
               <Alert type="error">
                 This event has reached its volunteer capacity. New sign-ups are closed.
@@ -214,6 +223,19 @@ export default function EventVolunteer() {
                 className={inputClass}
               />
             </Field>
+            <Field label="Gender" icon={UserRound}>
+              <select
+                required
+                value={form.gender}
+                onChange={(e) => update('gender', e.target.value)}
+                className={inputClass}
+              >
+                <option value="" disabled>Select…</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="other">Other</option>
+              </select>
+            </Field>
             <Field label="Date of birth" icon={CalendarDays}>
               <input
                 type="date"
@@ -255,13 +277,15 @@ export default function EventVolunteer() {
             <Button
               type="submit"
               isLoading={submitting}
-              disabled={submitting || event.is_full}
+              disabled={submitting || event.is_full || event.signups_closed}
             >
-              {event.is_full
-                ? 'Event full'
-                : submitting
-                  ? 'Submitting…'
-                  : 'Submit application'}
+              {event.signups_closed
+                ? 'Sign-ups closed'
+                : event.is_full
+                  ? 'Event full'
+                  : submitting
+                    ? 'Submitting…'
+                    : 'Submit application'}
             </Button>
           </div>
 

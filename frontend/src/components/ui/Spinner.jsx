@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 
 export default function Spinner({ label = 'Loading…' }) {
   return (
-    <div className="flex h-screen w-full items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50">
+    <div className="flex h-screen w-full items-center justify-center bg-primary-50">
       <div className="flex flex-col items-center gap-6">
         {/* Animated Spinner */}
         <div className="relative h-20 w-20">

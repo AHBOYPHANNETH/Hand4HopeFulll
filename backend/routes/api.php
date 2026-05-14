@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Admin\AdminAnalyticsController;
 use App\Http\Controllers\Api\Admin\AdminContactController;
 use App\Http\Controllers\Api\Admin\AdminDonationController;
 use App\Http\Controllers\Api\Admin\AdminEventController;
+use App\Http\Controllers\Api\Admin\AdminEventRosterController;
 use App\Http\Controllers\Api\Admin\AdminVolunteerRequestController;
 use App\Http\Controllers\Api\Admin\AdminSiteContentController;
 use App\Http\Controllers\Api\Admin\AdminUserController;
@@ -53,6 +54,10 @@ Route::middleware('auth:sanctum')->group(function (): void {
         Route::put('/site-contents', [AdminSiteContentController::class, 'upsert']);
         Route::get('/volunteer-requests', [AdminVolunteerRequestController::class, 'index']);
         Route::post('/volunteer-requests/update-status', [AdminVolunteerRequestController::class, 'updateStatus']);
+
+        Route::get('/event-rosters', [AdminEventRosterController::class, 'index']);
+        Route::get('/event-rosters/{event}', [AdminEventRosterController::class, 'show']);
+        Route::get('/event-rosters/{event}/export', [AdminEventRosterController::class, 'export']);
         Route::post('/notifications/create', [NotificationController::class, 'create']);
 
         Route::get('/users', [AdminUserController::class, 'index']);

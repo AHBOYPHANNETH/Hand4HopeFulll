@@ -56,7 +56,7 @@ export default function NotificationDropdown() {
       >
         <Bell className="h-5 w-5" />
         {unreadNotifications > 0 ? (
-          <span className="absolute -right-1 -top-1 inline-flex min-w-5 items-center justify-center rounded-full bg-rose-600 px-1.5 py-0.5 text-[10px] font-bold text-white">
+          <span className="absolute -right-1 -top-1 inline-flex min-w-5 items-center justify-center rounded-full bg-orange-600 px-1.5 py-0.5 text-[10px] font-bold text-white">
             {unreadNotifications > 99 ? '99+' : unreadNotifications}
           </span>
         ) : null}

@@ -4,16 +4,16 @@ import LoginForm from '../components/auth/LoginForm'
 
 export default function Login() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-linear-to-br from-primary-50 via-white to-secondary-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
+    <div className="relative min-h-screen overflow-hidden bg-primary-50 dark:bg-slate-900">
       {/* Animated background blobs */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-linear-to-r from-primary-300/30 to-secondary-300/30 blur-3xl"
+          className="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-primary-300/30 blur-3xl"
           animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-linear-to-r from-accent-300/30 to-primary-300/30 blur-3xl"
+          className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-accent-300/30 blur-3xl"
           animate={{ y: [0, 20, 0], x: [0, -10, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -28,7 +28,7 @@ export default function Login() {
           className="hidden lg:flex lg:items-center"
         >
           <div className="glass relative w-full overflow-hidden rounded-3xl p-10 shadow-2xl">
-            <div className="absolute inset-0 bg-linear-to-br from-primary-500/10 via-transparent to-secondary-500/10" />
+            <div className="absolute inset-0 bg-primary-500/10" />
             <div className="relative space-y-8">
               <div className="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50/80 px-4 py-2 backdrop-blur-sm dark:border-primary-800 dark:bg-primary-900/30">
                 <Sparkles className="h-4 w-4 text-primary-600 dark:text-primary-400" />

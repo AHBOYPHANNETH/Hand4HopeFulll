@@ -192,7 +192,7 @@ export default function VolunteersAdmin() {
                           <button
                             type="button"
                             onClick={() => updateStatus(v.event_id, v.user_id, 'rejected')}
-                            className="inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-rose-600 transition-colors hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-900/30"
+                            className="inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-orange-600 transition-colors hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-900/30"
                           >
                             <X className="h-3.5 w-3.5" /> Reject
                           </button>

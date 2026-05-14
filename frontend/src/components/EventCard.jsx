@@ -24,7 +24,7 @@ export default function EventCard({ event }) {
     >
       <Link
         to={`/events/${event.id}`}
-        className="relative block aspect-[16/10] overflow-hidden bg-linear-to-br from-primary-200 via-primary-100 to-secondary-200 dark:from-primary-900/60 dark:via-slate-800 dark:to-secondary-900/60"
+        className="relative block aspect-[16/10] overflow-hidden bg-primary-200 dark:bg-primary-900/60"
       >
         {img ? (
           <motion.img
@@ -39,7 +39,7 @@ export default function EventCard({ event }) {
             <Calendar className="h-10 w-10 text-primary-600/60 dark:text-primary-300/60 sm:h-12 sm:w-12" />
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-slate-900/60 to-transparent" />
 
         {/* Badges */}
         <div className="absolute left-2 top-2 flex max-w-[calc(100%-1rem)] flex-wrap gap-1.5 sm:left-4 sm:top-4 sm:gap-2">
@@ -54,7 +54,7 @@ export default function EventCard({ event }) {
           </motion.span>
           {event.is_full && (
             <motion.span
-              className="inline-flex items-center gap-1 rounded-full bg-rose-500/90 px-2 py-1 text-[10px] font-bold text-white shadow-lg backdrop-blur-sm sm:px-3 sm:py-1.5 sm:text-xs"
+              className="inline-flex items-center gap-1 rounded-full bg-orange-500/90 px-2 py-1 text-[10px] font-bold text-white shadow-lg backdrop-blur-sm sm:px-3 sm:py-1.5 sm:text-xs"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.4, type: 'spring' }}

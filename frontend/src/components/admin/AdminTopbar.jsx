@@ -51,7 +51,7 @@ export default function AdminTopbar({ onMenuClick }) {
         >
           <Bell className="h-5 w-5" />
           {unreadNotifications > 0 && (
-            <span className="absolute right-1.5 top-1.5 inline-flex h-2 w-2 rounded-full bg-rose-500 ring-2 ring-white dark:ring-slate-900" />
+            <span className="absolute right-1.5 top-1.5 inline-flex h-2 w-2 rounded-full bg-orange-500 ring-2 ring-white dark:ring-slate-900" />
           )}
         </Link>
 

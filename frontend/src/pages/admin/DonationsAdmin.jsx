@@ -1,5 +1,17 @@
 import { useEffect, useMemo, useState } from 'react'
 import { DollarSign, Download } from 'lucide-react'
+
+/** Renders the Khmer Riel sign (៛) for KHR, the lucide $ icon otherwise. */
+function CurrencyIcon({ currency = 'USD', className = '' }) {
+  if (String(currency).toUpperCase() === 'KHR') {
+    return (
+      <span className={`inline-flex items-center justify-center font-bold leading-none ${className}`}>
+        ៛
+      </span>
+    )
+  }
+  return <DollarSign className={className} />
+}
 import Button from '../../components/ui/Button'
 import {
   PageHeader,
@@ -52,6 +64,11 @@ export default function DonationsAdmin() {
       .sort((a, b) => (a.code === 'USD' ? -1 : b.code === 'USD' ? 1 : a.code.localeCompare(b.code)))
   }, [filtered])
 
+  // Pick the currency with the most donations to drive the stat-card icon.
+  const primaryCurrency =
+    [...byCurrency].sort((a, b) => b.count - a.count)[0]?.code ?? 'USD'
+  const StatIcon = (props) => <CurrencyIcon currency={primaryCurrency} {...props} />
+
   function formatAmount(code, amount) {
     if (code === 'USD') {
       return `$${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
@@ -95,7 +112,7 @@ export default function DonationsAdmin() {
       {/* Quick stats */}
       <div className="mb-6 grid gap-4 sm:grid-cols-3">
         <StatCard
-          icon={DollarSign}
+          icon={StatIcon}
           label="Total raised"
           value={
             byCurrency.length === 0 ? (
@@ -112,7 +129,7 @@ export default function DonationsAdmin() {
           iconClass="bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400"
         />
         <StatCard
-          icon={DollarSign}
+          icon={StatIcon}
           label="Average gift"
           value={
             byCurrency.length === 0 ? (
@@ -129,7 +146,7 @@ export default function DonationsAdmin() {
           iconClass="bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
         />
         <StatCard
-          icon={DollarSign}
+          icon={StatIcon}
           label="Donations"
           value={loading ? '—' : filtered.length}
           hint="In current view"
@@ -158,7 +175,7 @@ export default function DonationsAdmin() {
                 <tr>
                   <td colSpan={3} className="p-8">
                     <EmptyState
-                      icon={DollarSign}
+                      icon={StatIcon}
                       title={search ? 'No donations match your search' : 'No donations yet'}
                       description={
                         search
