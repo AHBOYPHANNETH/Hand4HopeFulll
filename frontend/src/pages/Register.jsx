@@ -45,12 +45,12 @@ export default function Register() {
                 Make an account in <span className="gradient-text">two minutes</span>.
               </h2>
               <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-                Once you&apos;re signed up you can RSVP to any Saturday on the calendar. We email a reminder a couple of days before each one.
+                Once you&apos;re signed up you can RSVP to any volunteer event on the calendar. We email a reminder a couple of days before each one.
               </p>
 
               <ul className="space-y-3 pt-2">
                 {[
-                  { icon: HandHeart, text: 'Sign up for whichever Saturdays you can make' },
+                  { icon: HandHeart, text: 'Sign up for whichever volunteer events you can make' },
                   { icon: GraduationCap, text: 'Short safety briefing at the start of each event' },
                   { icon: Star, text: 'See the photos and receipts from past events' },
                 ].map((item, i) => (

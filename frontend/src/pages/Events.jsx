@@ -19,7 +19,7 @@ export default function Events() {
     <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
       <header className="max-w-3xl space-y-4">
         <p className="text-sm font-semibold uppercase tracking-wide text-teal-700">Calendar</p>
-        <h1 className="text-4xl font-semibold text-white-900">Saturdays we&apos;ve got coming up</h1>
+        <h1 className="text-4xl font-semibold text-white-900">Volunteer events we&apos;ve got coming up</h1>
         <p className="text-lg text-white-600">
           Pick one. After you log in you can RSVP and we&apos;ll send the meeting spot a couple of days before.
         </p>

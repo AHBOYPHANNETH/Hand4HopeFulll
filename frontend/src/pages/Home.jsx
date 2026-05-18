@@ -43,7 +43,7 @@ export default function Home() {
     return () => { cancelled = true }
   }, [])
 
-  const heroTitle    = contents?.hero_title    || 'Spend a Saturday. Help your neighbourhood.'
+  const heroTitle    = contents?.hero_title    || 'Volunteer a day. Help your neighbourhood.'
   const heroSubtitle = contents?.hero_subtitle || 'Hand4Hope runs small, weekend-friendly volunteer events around Phnom Penh. Bring yourself, bring a friend, leave a place a bit better than you found it.'
   const mission      = contents?.mission_text  || ''
   const preview      = useMemo(() => events || [], [events])
@@ -225,7 +225,7 @@ export default function Home() {
                 { icon: Users,      number: 120,   label: 'Kids reached',         suffix: '' },
                 { icon: Heart,      number: 85,    label: 'Regular volunteers',   suffix: '' },
                 { icon: TrendingUp, number: 6400,  label: 'Donated by you',       prefix: '$', suffix: '' },
-                { icon: Zap,        number: 38,    label: 'Saturdays out so far', suffix: '' },
+                { icon: Zap,        number: 38,    label: 'Volunteer events run',  suffix: '' },
               ].map((stat, i) => (
                 <StaggerItem key={i}>
                   <motion.div
@@ -257,7 +257,7 @@ export default function Home() {
           <FadeInUp>
             <div className="mb-8 text-center md:mb-12">
               <h2 className="text-3xl font-display font-bold text-slate-900 dark:text-slate-100 sm:text-4xl md:text-5xl">
-                What a Saturday looks like
+                What a volunteer event looks like
               </h2>
               <p className="mx-auto mt-3 max-w-2xl text-base text-slate-600 dark:text-slate-400 md:mt-4 md:text-lg">
                 Pick one. Show up. Most events are 2–3 hours and we feed you afterwards.
@@ -351,11 +351,11 @@ export default function Home() {
                   Why people come back
                 </h2>
                 <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-400">
-                  We're not slick. We're not big. There's a Telegram group, a list of next Saturdays, and a few people who'll text you a reminder. That's basically it. Most volunteers come for one event, like the people, and stick around.
+                  We're not slick. We're not big. There's a Telegram group, a list of upcoming volunteer events, and a few people who'll text you a reminder. That's basically it. Most volunteers come for one event, like the people, and stick around.
                 </p>
                 <StaggerContainer delay={0.2}>
                   {[
-                    { icon: Check, title: 'Come when you can', desc: 'One Saturday a month is plenty. No pressure to do more.' },
+                    { icon: Check, title: 'Come when you can', desc: 'One volunteer event a month is plenty. No pressure to do more.' },
                     { icon: Check, title: 'Nothing to prepare',  desc: 'We bring the gloves, bin bags, water, snacks.' },
                     { icon: Check, title: 'You\'ll know someone', desc: 'After two events you\'ll see familiar faces every time.' },
                     { icon: Check, title: 'You\'ll see the work', desc: 'Photos before and after, every event, posted within a day.' },
@@ -440,7 +440,7 @@ export default function Home() {
             <div className="grid gap-4 sm:gap-6 md:grid-cols-3 md:gap-8">
               {[
                 { price: 25,  title: 'Gloves & bin bags',  desc: 'Enough for one clean-up morning of about 15 people', icon: BookOpen },
-                { price: 100, title: 'A whole Saturday',   desc: 'Supplies, water, snacks, tuk-tuk hire for one event',  icon: Target, popular: true },
+                { price: 100, title: 'A whole volunteer event', desc: 'Supplies, water, snacks, tuk-tuk hire for one event',  icon: Target, popular: true },
                 { price: 500, title: 'A whole quarter',    desc: 'Roughly three months of weekend events',               icon: Heart },
               ].map((plan, i) => (
                 <StaggerItem key={i}>
@@ -491,7 +491,7 @@ export default function Home() {
             <div className="grid gap-4 sm:gap-6 md:grid-cols-3 md:gap-8">
               {[
                 { step: 1, title: 'Make an account',     desc: 'Name, email, password. That\'s it.',                   link: '/register', linkText: 'Sign up' },
-                { step: 2, title: 'Pick a Saturday',     desc: 'Look at the calendar, pick one you can make.',         link: '/events',   linkText: 'See events' },
+                { step: 2, title: 'Pick a volunteer event', desc: 'Look at the calendar, pick one you can make.',     link: '/events',   linkText: 'See events' },
                 { step: 3, title: 'Turn up',             desc: 'We\'ll meet at the spot 15 min before and brief you.', link: '/events',   linkText: 'Find one near you' },
               ].map((item, i) => (
                 <StaggerItem key={i}>
@@ -537,7 +537,7 @@ export default function Home() {
               {[
                 { name: 'Sophea Chan',    role: 'Volunteer, Tuol Kork',   quote: 'Honestly the first one I came to mostly because a friend dragged me. By the end I was the one organising water for everyone.' },
                 { name: 'Borey Khun',     role: 'First-timer last month', quote: 'I thought it would be awkward. It wasn\'t. Show up, somebody hands you a bin bag, you start walking.' },
-                { name: 'Channary Sok',   role: 'Monthly donor',          quote: 'I can\'t make it most Saturdays so I just send money instead. They send the receipts to the group, which I appreciate.' },
+                { name: 'Channary Sok',   role: 'Monthly donor',          quote: 'I can\'t make it most volunteer events so I just send money instead. They send the receipts to the group, which I appreciate.' },
               ].map((t, i) => (
                 <StaggerItem key={i}>
                   <motion.div className="card p-4 sm:p-6 md:p-8" whileHover={{ y: -5 }}>
@@ -597,7 +597,7 @@ export default function Home() {
         <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <FadeInUp>
             <h2 className="text-3xl font-display font-bold text-white sm:text-4xl md:text-5xl">
-              See you on Saturday?
+              See you at the next volunteer event?
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-white/90">
               Either come help, or chip in a bit for the next one. Both are useful.

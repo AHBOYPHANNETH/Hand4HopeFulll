@@ -18,7 +18,7 @@ export default function About() {
     <div className="mx-auto max-w-4xl space-y-12 px-4 py-14 md:py-20">
       <header className="space-y-4">
         <p className="text-sm font-semibold uppercase tracking-wide text-teal-700">About us</p>
-        <h1 className="text-4xl font-semibold text-white-900">Four friends, one street, a lot of Saturdays since.</h1>
+        <h1 className="text-4xl font-semibold text-white-900">Four friends, one street, a lot of volunteer events since.</h1>
         <p className="text-lg leading-relaxed text-white-600">{contents?.about_story}</p>
       </header>
 

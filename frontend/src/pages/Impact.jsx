@@ -32,7 +32,7 @@ export default function Impact() {
     <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
       <header className="max-w-3xl space-y-4">
         <p className="text-sm font-semibold uppercase tracking-wide text-teal-700">What we&apos;ve done</p>
-        <h1 className="text-4xl font-semibold text-stone-900">A pile of Saturdays adds up</h1>
+        <h1 className="text-4xl font-semibold text-stone-900">A pile of volunteer events adds up</h1>
         <p className="text-lg text-stone-600">
           We don&apos;t love putting things in numbers. But people ask, so here you go. Behind each one is a specific morning, a specific street, and specific people who showed up.
         </p>

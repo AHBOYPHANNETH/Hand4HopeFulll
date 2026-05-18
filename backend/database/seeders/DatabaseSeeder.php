@@ -25,11 +25,11 @@ class DatabaseSeeder extends Seeder
         );
 
         $defaults = [
-            'hero_title' => 'Spend a Saturday. Help your neighbourhood.',
+            'hero_title' => 'Volunteer a day. Help your neighbourhood.',
             'hero_subtitle' => 'Hand4Hope runs small, weekend-friendly volunteer events around Phnom Penh. Bring yourself, bring a friend, leave a place a bit better than you found it.',
             'mission_text' => 'We pick one street, one park, one community at a time, and we do something useful there. The work is small. We just do a lot of it.',
             'vision_text' => 'We want every part of Phnom Penh to have a few people who say "yeah, that\'s my neighbourhood" and mean it.',
-            'about_story' => 'Hand4Hope started in 2023 when four of us got tired of complaining about the rubbish on our own street and went out one Sunday to clean it. We posted about it, a few neighbours came the next week, and it kept growing. We\'re still run entirely by volunteers. There\'s no head office, just a Telegram group and a Saturday calendar.',
+            'about_story' => 'Hand4Hope started in 2023 when four of us got tired of complaining about the rubbish on our own street and went out one Sunday to clean it. We posted about it, a few neighbours came the next week, and it kept growing. We\'re still run entirely by volunteers. There\'s no head office, just a Telegram group and a volunteer calendar.',
             'impact_stat_children' => '120',
             'impact_stat_volunteers' => '85',
             'impact_stat_sessions' => '2400',

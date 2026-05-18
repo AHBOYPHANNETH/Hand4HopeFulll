@@ -38,7 +38,7 @@ export default function Login() {
               </div>
 
               <h2 className="font-display text-4xl font-bold leading-tight text-slate-900 dark:text-slate-100">
-                Sign in and pick a <span className="gradient-text">Saturday</span>.
+                Sign in and pick a <span className="gradient-text">volunteer event</span>.
               </h2>
               <p className="text-lg leading-relaxed text-slate-600 dark:text-slate-300">
                 Log in to sign up for events, see what you&apos;ve been to, and stay in the loop.

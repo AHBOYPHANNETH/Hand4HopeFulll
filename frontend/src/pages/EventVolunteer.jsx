@@ -177,7 +177,7 @@ export default function EventVolunteer() {
           {event.is_full && !event.signups_closed && !msg && (
             <div className="mt-5">
               <Alert type="error">
-                This one&apos;s full. Try another Saturday on the calendar.
+                This one&apos;s full. Try another volunteer event on the calendar.
               </Alert>
             </div>
           )}
